@@ -1,0 +1,8 @@
+//
+// Prefix header for all source files of the 'pdfplugin' target in the 'pdfplugin' project.
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+    #import <Quartz/Quartz.h>
+#endif

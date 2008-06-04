@@ -1,0 +1,561 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		9415EE390DECEBA700DB1334 /* install */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 9415EE690DECEC1D00DB1334 /* Build configuration list for PBXAggregateTarget "install" */;
+			buildPhases = (
+				9415EE3F0DECEBC000DB1334 /* ShellScript */,
+			);
+			dependencies = (
+				9415EE3D0DECEBAB00DB1334 /* PBXTargetDependency */,
+			);
+			name = install;
+			productName = install;
+		};
+		942F6B1F0DEF8FFA0000EFAC /* create xpi */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 942F6B2B0DEF900C0000EFAC /* Build configuration list for PBXAggregateTarget "create xpi" */;
+			buildPhases = (
+				942F6B1E0DEF8FFA0000EFAC /* ShellScript */,
+			);
+			dependencies = (
+				947023710DF4ECBF009B6417 /* PBXTargetDependency */,
+			);
+			name = "create xpi";
+			productName = "create xpi";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
+		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+		9455ADDB0DEA916F0059FED3 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9455ADDA0DEA916F0059FED3 /* Quartz.framework */; };
+		9455AE300DEB25F20059FED3 /* pdfplugin.r in Rez */ = {isa = PBXBuildFile; fileRef = 9455AE2E0DEB25B60059FED3 /* pdfplugin.r */; };
+		949DE1490DF4FBF200922723 /* PluginInstance.mm in Sources */ = {isa = PBXBuildFile; fileRef = 949DE1440DF4FBF200922723 /* PluginInstance.mm */; };
+		949DE14A0DF4FBF200922723 /* PluginPDFView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 949DE1460DF4FBF200922723 /* PluginPDFView.mm */; };
+		949DE14B0DF4FBF200922723 /* SelectionController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 949DE1480DF4FBF200922723 /* SelectionController.mm */; };
+		949DE1500DF4FC0400922723 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 949DE14C0DF4FC0400922723 /* main.cpp */; };
+		949DE1510DF4FC0400922723 /* pdfplugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = 949DE14F0DF4FC0400922723 /* pdfplugin.mm */; };
+		949DE1530DF4FC1100922723 /* npn_bindings.cc in Sources */ = {isa = PBXBuildFile; fileRef = 949DE1520DF4FC1100922723 /* npn_bindings.cc */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9415EE3C0DECEBAB00DB1334 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D5B49AC048680CD000E48DA;
+			remoteInfo = pdfplugin;
+		};
+		947023700DF4ECBF009B6417 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9415EE390DECEBA700DB1334;
+			remoteInfo = install;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		32DBCF630370AF2F00C91783 /* pdfplugin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pdfplugin_Prefix.pch; sourceTree = "<group>"; };
+		8D5B49B6048680CD000E48DA /* pdfplugin.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pdfplugin.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9415EEBD0DECEE3C00DB1334 /* pdfplugin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = pdfplugin.js; sourceTree = "<group>"; };
+		9415EEBE0DECEE3C00DB1334 /* pdfplugin.xul */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pdfplugin.xul; sourceTree = "<group>"; };
+		9415EEC00DECEE3C00DB1334 /* chrome.manifest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chrome.manifest; sourceTree = "<group>"; };
+		9415EEC10DECEE3C00DB1334 /* install.rdf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.rdf; sourceTree = "<group>"; };
+		9455ADDA0DEA916F0059FED3 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
+		9455AE2C0DEB24D10059FED3 /* npapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = npapi.h; sourceTree = "<group>"; };
+		9455AE2D0DEB24D10059FED3 /* npruntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = npruntime.h; sourceTree = "<group>"; };
+		9455AE2E0DEB25B60059FED3 /* pdfplugin.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = pdfplugin.r; sourceTree = "<group>"; };
+		9455AF250DEB37010059FED3 /* npfunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = npfunctions.h; sourceTree = "<group>"; };
+		949DE1430DF4FBF200922723 /* PluginInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginInstance.h; path = src/PluginInstance.h; sourceTree = "<group>"; };
+		949DE1440DF4FBF200922723 /* PluginInstance.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PluginInstance.mm; path = src/PluginInstance.mm; sourceTree = "<group>"; };
+		949DE1450DF4FBF200922723 /* PluginPDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginPDFView.h; path = src/PluginPDFView.h; sourceTree = "<group>"; };
+		949DE1460DF4FBF200922723 /* PluginPDFView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PluginPDFView.mm; path = src/PluginPDFView.mm; sourceTree = "<group>"; };
+		949DE1470DF4FBF200922723 /* SelectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectionController.h; path = src/SelectionController.h; sourceTree = "<group>"; };
+		949DE1480DF4FBF200922723 /* SelectionController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SelectionController.mm; path = src/SelectionController.mm; sourceTree = "<group>"; };
+		949DE14C0DF4FC0400922723 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
+		949DE14D0DF4FC0400922723 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = main.h; path = src/main.h; sourceTree = "<group>"; };
+		949DE14E0DF4FC0400922723 /* mozincludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mozincludes.h; path = src/mozincludes.h; sourceTree = "<group>"; };
+		949DE14F0DF4FC0400922723 /* pdfplugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = pdfplugin.mm; path = src/pdfplugin.mm; sourceTree = "<group>"; };
+		949DE1520DF4FC1100922723 /* npn_bindings.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = npn_bindings.cc; sourceTree = "<group>"; };
+		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D5B49B3048680CD000E48DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */,
+				9455ADDB0DEA916F0059FED3 /* Quartz.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* pdfplugin */ = {
+			isa = PBXGroup;
+			children = (
+				9415EEB90DECEE3C00DB1334 /* prebuilt */,
+				948363390DEB643000E610F2 /* Classes */,
+				08FB77AFFE84173DC02AAC07 /* Source */,
+				32C88E010371C26100C91783 /* Other Sources */,
+				9455AE2B0DEB24D10059FED3 /* npapi */,
+				089C167CFE841241C02AAC07 /* Resources */,
+				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
+				19C28FB8FE9D52D311CA2CBB /* Products */,
+			);
+			name = pdfplugin;
+			sourceTree = "<group>";
+		};
+		089C1671FE841209C02AAC07 /* Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */,
+				1058C7AEFEA557BF11CA2CBB /* Other Frameworks */,
+			);
+			name = "Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		089C167CFE841241C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9455AE2E0DEB25B60059FED3 /* pdfplugin.r */,
+				8D5B49B7048680CD000E48DA /* Info.plist */,
+				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		08FB77AFFE84173DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				949DE14C0DF4FC0400922723 /* main.cpp */,
+				949DE14D0DF4FC0400922723 /* main.h */,
+				949DE14E0DF4FC0400922723 /* mozincludes.h */,
+				949DE14F0DF4FC0400922723 /* pdfplugin.mm */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
+				9455ADDA0DEA916F0059FED3 /* Quartz.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7AEFEA557BF11CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				089C167FFE841241C02AAC07 /* AppKit.framework */,
+				D2F7E65807B2D6F200F64583 /* CoreData.framework */,
+				089C1672FE841209C02AAC07 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FB8FE9D52D311CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D5B49B6048680CD000E48DA /* pdfplugin.plugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		32C88E010371C26100C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32DBCF630370AF2F00C91783 /* pdfplugin_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		9415EEB90DECEE3C00DB1334 /* prebuilt */ = {
+			isa = PBXGroup;
+			children = (
+				9415EEBA0DECEE3C00DB1334 /* extension */,
+			);
+			path = prebuilt;
+			sourceTree = "<group>";
+		};
+		9415EEBA0DECEE3C00DB1334 /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				9415EEBB0DECEE3C00DB1334 /* chrome */,
+				9415EEC00DECEE3C00DB1334 /* chrome.manifest */,
+				9415EEC10DECEE3C00DB1334 /* install.rdf */,
+				9415EEC20DECEE3C00DB1334 /* plugins */,
+			);
+			path = extension;
+			sourceTree = "<group>";
+		};
+		9415EEBB0DECEE3C00DB1334 /* chrome */ = {
+			isa = PBXGroup;
+			children = (
+				9415EEBC0DECEE3C00DB1334 /* content */,
+				9415EEBF0DECEE3C00DB1334 /* skin */,
+			);
+			path = chrome;
+			sourceTree = "<group>";
+		};
+		9415EEBC0DECEE3C00DB1334 /* content */ = {
+			isa = PBXGroup;
+			children = (
+				9415EEBD0DECEE3C00DB1334 /* pdfplugin.js */,
+				9415EEBE0DECEE3C00DB1334 /* pdfplugin.xul */,
+			);
+			path = content;
+			sourceTree = "<group>";
+		};
+		9415EEBF0DECEE3C00DB1334 /* skin */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = skin;
+			sourceTree = "<group>";
+		};
+		9415EEC20DECEE3C00DB1334 /* plugins */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = plugins;
+			sourceTree = "<group>";
+		};
+		9455AE2B0DEB24D10059FED3 /* npapi */ = {
+			isa = PBXGroup;
+			children = (
+				949DE1520DF4FC1100922723 /* npn_bindings.cc */,
+				9455AF250DEB37010059FED3 /* npfunctions.h */,
+				9455AE2C0DEB24D10059FED3 /* npapi.h */,
+				9455AE2D0DEB24D10059FED3 /* npruntime.h */,
+			);
+			path = npapi;
+			sourceTree = "<group>";
+		};
+		948363390DEB643000E610F2 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				949DE1430DF4FBF200922723 /* PluginInstance.h */,
+				949DE1440DF4FBF200922723 /* PluginInstance.mm */,
+				949DE1450DF4FBF200922723 /* PluginPDFView.h */,
+				949DE1460DF4FBF200922723 /* PluginPDFView.mm */,
+				949DE1470DF4FBF200922723 /* SelectionController.h */,
+				949DE1480DF4FBF200922723 /* SelectionController.mm */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D5B49AC048680CD000E48DA /* pdfplugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB913A08733D840010E9CD /* Build configuration list for PBXNativeTarget "pdfplugin" */;
+			buildPhases = (
+				8D5B49AF048680CD000E48DA /* Resources */,
+				8D5B49B1048680CD000E48DA /* Sources */,
+				8D5B49B3048680CD000E48DA /* Frameworks */,
+				9455AE350DEB25FF0059FED3 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = pdfplugin;
+			productInstallPath = "$(HOME)/Library/Bundles";
+			productName = pdfplugin;
+			productReference = 8D5B49B6048680CD000E48DA /* pdfplugin.plugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "pdfplugin" */;
+			compatibilityVersion = "Xcode 2.4";
+			hasScannedForEncodings = 1;
+			mainGroup = 089C166AFE841209C02AAC07 /* pdfplugin */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D5B49AC048680CD000E48DA /* pdfplugin */,
+				9415EE390DECEBA700DB1334 /* install */,
+				942F6B1F0DEF8FFA0000EFAC /* create xpi */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D5B49AF048680CD000E48DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		9455AE350DEB25FF0059FED3 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9455AE300DEB25F20059FED3 /* pdfplugin.r in Rez */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9415EE3F0DECEBC000DB1334 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/pdfplugin.plugin",
+			);
+			outputPaths = (
+				"$(SRCROOT)/prebuilt/extension/plugins/pdfplugin.plugin",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rm -rf $SRCROOT/prebuilt/extension/plugins/pdfplugin.plugin\ncp -r $BUILT_PRODUCTS_DIR/pdfplugin.plugin $SRCROOT/prebuilt/extension/plugins/pdfplugin.plugin";
+		};
+		942F6B1E0DEF8FFA0000EFAC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/prebuilt/extension/",
+			);
+			outputPaths = (
+				"$(SRCROOT)/prebuilt/fx-quartz-pdf.xpi",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd $SRCROOT/prebuilt/extension\nrm -f $SRCROOT/prebuilt/fx-quartz-pdf.xpi\nzip -r -D -9 -o $SRCROOT/prebuilt/fx-quartz-pdf.xpi * -x '*/.svn/*'";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D5B49B1048680CD000E48DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				949DE1490DF4FBF200922723 /* PluginInstance.mm in Sources */,
+				949DE14A0DF4FBF200922723 /* PluginPDFView.mm in Sources */,
+				949DE14B0DF4FBF200922723 /* SelectionController.mm in Sources */,
+				949DE1500DF4FC0400922723 /* main.cpp in Sources */,
+				949DE1510DF4FC0400922723 /* pdfplugin.mm in Sources */,
+				949DE1530DF4FC1100922723 /* npn_bindings.cc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9415EE3D0DECEBAB00DB1334 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D5B49AC048680CD000E48DA /* pdfplugin */;
+			targetProxy = 9415EE3C0DECEBAB00DB1334 /* PBXContainerItemProxy */;
+		};
+		947023710DF4ECBF009B6417 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9415EE390DECEBA700DB1334 /* install */;
+			targetProxy = 947023700DF4ECBF009B6417 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		089C167DFE841241C02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C167EFE841241C02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB913B08733D840010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = pdfplugin_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_CFLAGS = (
+					"-DXP_MACOSX",
+					"-DXP_UNIX",
+				);
+				PRODUCT_NAME = pdfplugin;
+				WRAPPER_EXTENSION = plugin;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		1DEB913C08733D840010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = pdfplugin_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_CFLAGS = (
+					"-DXP_MACOSX",
+					"-DXP_UNIX",
+				);
+				PRODUCT_NAME = pdfplugin;
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Release;
+		};
+		1DEB913F08733D840010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_CFLAGS = (
+					"-DXP_MACOSX",
+					"-DXP_UNIX",
+				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Debug;
+		};
+		1DEB914008733D840010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				DEPLOYMENT_LOCATION = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_CFLAGS = (
+					"-DXP_MACOSX",
+					"-DXP_UNIX",
+				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Release;
+		};
+		9415EE3A0DECEBA700DB1334 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = install;
+			};
+			name = Debug;
+		};
+		9415EE3B0DECEBA700DB1334 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = install;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		942F6B200DEF8FFA0000EFAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "create xpi";
+			};
+			name = Debug;
+		};
+		942F6B210DEF8FFA0000EFAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = "create xpi";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB913A08733D840010E9CD /* Build configuration list for PBXNativeTarget "pdfplugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB913B08733D840010E9CD /* Debug */,
+				1DEB913C08733D840010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "pdfplugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB913F08733D840010E9CD /* Debug */,
+				1DEB914008733D840010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9415EE690DECEC1D00DB1334 /* Build configuration list for PBXAggregateTarget "install" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9415EE3A0DECEBA700DB1334 /* Debug */,
+				9415EE3B0DECEBA700DB1334 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		942F6B2B0DEF900C0000EFAC /* Build configuration list for PBXAggregateTarget "create xpi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				942F6B200DEF8FFA0000EFAC /* Debug */,
+				942F6B210DEF8FFA0000EFAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}
