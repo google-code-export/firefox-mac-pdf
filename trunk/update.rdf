@@ -2,10 +2,8 @@
 
 <RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:em="http://www.mozilla.org/2004/em-rdf#">
-  <!-- This Description resource includes all the update and compatibility information for
-       a single add-on with the id foobar@developer.mozilla.org. You can list multiple
-       add-ons information in the same RDF file. -->
-  <RDF:Description about="urn:mozilla:extension:foobar@developer.mozilla.org">
+  <RDF:Description about="urn:mozilla:extension:colesbury@gmail.com">
+    <em:signature>MIGTMA0GCSqGSIb3DQEBDQUAA4GBADEto1p+YZLZ7WToa+6TT6xi0fCxr5jCiO6lDzVUmskmJrAZKB+NrpgQO1n9sxIfqZxFlFoWzkajlZmgxEib/kZjOWNHQ6y91l8D6C1uG9F/BdX//KbzxbWcjKH6ucvtMyM+JTdl1/b67wjRgpD9n26cvOu5QlYUk5ExpnfnNq1g</em:signature>
     <em:updates>
       <RDF:Seq>
         <RDF:li>
@@ -17,7 +15,8 @@
                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
                 <em:minVersion>3.0</em:minVersion>
                 <em:maxVersion>3.0.0.*</em:maxVersion>
-                <em:updateLink>https://firefox-mac-pdf.googlecode.com/files/fx-quartz-pdf-0.9.xpi</em:updateLink>
+                <em:updateLink>http://firefox-mac-pdf.googlecode.com/files/fx-quartz-pdf-0.9.xpi</em:updateLink>
+                <em:updateHash>sha1:1c8d4e9330e3d5dc73d7851e1b9bb8060e3e1e56</em:updateHash>
                 <!--<em:updateInfoURL>http://www.mysite.com/updateinfo2.2.xhtml</em:updateInfoURL>-->
               </RDF:Description>
             </em:targetApplication>
