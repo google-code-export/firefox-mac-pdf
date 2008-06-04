@@ -3,7 +3,9 @@
 <RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <RDF:Description about="urn:mozilla:extension:colesbury@gmail.com">
-    <em:signature>MIGTMA0GCSqGSIb3DQEBDQUAA4GBAFV4wKVYIbJEuVYfe5uWthKhk+xrVwywkOpHCOH/lyZ02IVYx5diQEgZMntcVsIdkPMEZndav/kp1gBZY7zROvZiol8V00F8b7a0a0JikOufgorMW9Xv/EYVQnKZhFSvqYwznd4WB/uyn0F95FyTEgV5q3B4JU9smHzLRnO5Dnhn</em:signature>
+    <em:signature>
+MIGTMA0GCSqGSIb3DQEBDQUAA4GBAC13fPuLn1Ptl+uxvHThqdLzh8LDmGeLo2EuD0azTpMDrq0hQdHy56eSFDgnFjIEK8kf4EF/MhKZkioXj20fRlzWOBJ42lFvD6GO1SXre444fnP5Ide7l+jRyFCt1GZL27glnT6KBIT9d6WDR2laLDmb/oqUvZtNOZbGwD3g3vaL
+    </em:signature>
     <em:updates>
       <RDF:Seq>
         <RDF:li>
@@ -16,7 +18,7 @@
                 <em:minVersion>3.0</em:minVersion>
                 <em:maxVersion>3.0.0.*</em:maxVersion>
                 <em:updateLink>http://firefox-mac-pdf.googlecode.com/files/fx-quartz-pdf-0.9.1.xpi</em:updateLink>
-                <em:updateHash>sha1:a527b4db0dd84d22bf020ec091434072d97334c4</em:updateHash>
+                <em:updateHash>sha1:d85e6865214b2020d912fa5122d152e9f2c249ce</em:updateHash>
                 <!--<em:updateInfoURL>http://www.mysite.com/updateinfo2.2.xhtml</em:updateInfoURL>-->
               </RDF:Description>
             </em:targetApplication>
