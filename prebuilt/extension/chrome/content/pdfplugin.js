@@ -219,24 +219,10 @@ function createStateChangeHandler(o) {
   }
 }
 
-// TODO(sgross): it looks like this is always followed by a call to onStateChange
-function createLocationChangeHandler(o) {
-  return function(aWebProgress, aRequest, aLocationURI) {
-    // remove the attribute to force a change if disabled is set
-    document.getElementById('isImage').removeAttribute('disabled');
-    o.call(this, aWebProgress, aRequest, aLocationURI);
-    if (getPluginElement()) {
-      cmdFind.removeAttribute('disabled');
-      cmdFindAgain.removeAttribute('disabled');
-    }
-  }
-}
-
 // enable/disable find menu items correctly
 var proto = nsBrowserStatusHandler.prototype;
-// these need to be set before the plugin is loaded
+// this needs to be set before the plugin is loaded
 proto.onStateChange = createStateChangeHandler(proto.onStateChange);
-proto.onLocationChange = createLocationChangeHandler(proto.onLocationChange);
 
 // We have to use the load event since DOMContentLoaded isn't called for pages
 // handled by a plugin.
