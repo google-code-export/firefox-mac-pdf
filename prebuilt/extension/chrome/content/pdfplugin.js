@@ -21,13 +21,25 @@
  */
 (function() {
 
-var ConsSrv = Components.classes['@mozilla.org/consoleservice;1'].getService(Components.interfaces.nsIConsoleService);
-function log(s) {
-  ConsSrv.logStringMessage(s);
-}
+// The XUL browser element (set in init())
+var browser;
+var cmdFind;
+var cmdFindAgain;
 
-// The XUL browser element
-var browser = document.getElementById('content');
+function init() {
+  browser = document.getElementById('content');
+  cmdFind = document.getElementById('cmd_find');
+  cmdFindAgain = document.getElementById('cmd_findAgain');
+
+  // enable/disable find menu items correctly
+  var proto = nsBrowserStatusHandler.prototype;
+  // this needs to be set before the plugin is loaded
+  proto.onStateChange = createStateChangeHandler(proto.onStateChange);
+  
+  // We have to use the load event since DOMContentLoaded isn't called for pages
+  // handled by a plugin.
+  browser.addEventListener("load", onPageLoad, false);
+}
 
 var mimeTypes = {
  "application/pdf" : true,
@@ -204,9 +216,6 @@ function goHistory(offset) {
   }
 }
 
-var cmdFind = document.getElementById('cmd_find');
-var cmdFindAgain = document.getElementById('cmd_findAgain');
-
 function createStateChangeHandler(o) {
   return function(aWebProgress, aRequest, aStateFlags, aStatus) {
     // remove the attribute to force a change if disabled is set
@@ -219,13 +228,6 @@ function createStateChangeHandler(o) {
   }
 }
 
-// enable/disable find menu items correctly
-var proto = nsBrowserStatusHandler.prototype;
-// this needs to be set before the plugin is loaded
-proto.onStateChange = createStateChangeHandler(proto.onStateChange);
-
-// We have to use the load event since DOMContentLoaded isn't called for pages
-// handled by a plugin.
-browser.addEventListener("load", onPageLoad, false);
+addEventListener('load', init, false);
 
 })();

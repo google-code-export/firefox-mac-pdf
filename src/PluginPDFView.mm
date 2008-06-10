@@ -7,7 +7,7 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ *f
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
  *
@@ -20,14 +20,29 @@
  * THE SOFTWARE.
  */
 #import "PluginPDFView.h"
+#import "Preferences.h"
 
 @implementation PluginPDFView
+
+- (void)onScaleChanged:(NSNotification*)notification
+{
+  NSLog(@"scale changed");
+  [Preferences setFloatPreference:"scaleFactor" value:[self scaleFactor]];
+}
 
 - (id)initWithPlugin:(PluginInstance*)plugin
 {
   if (self = [super init]) {
     _plugin = plugin;
-    [self setAutoScales:YES];
+    [self setDelegate:self];
+    [self setDisplayMode:[Preferences getIntPreference:"displayMode"]];
+    if ([Preferences getBoolPreference:"autoScales"]) {
+      [self setAutoScales:YES];
+    } else {
+      [self setScaleFactor:[Preferences getFloatPreference:"scaleFactor"]];
+    }
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+        selector:@selector(onScaleChanged:) name:PDFViewScaleChangedNotification object:self];
   }
   return self;
 }
@@ -99,6 +114,18 @@
     }
   }
   return YES;
+}
+
+- (void)setAutoScales:(BOOL)newAuto
+{
+  [super setAutoScales:newAuto];
+  [Preferences setBoolPreference:"autoScales" value:newAuto];
+}
+
+- (void)setDisplayMode:(PDFDisplayMode)mode
+{
+  [super setDisplayMode:mode];
+  [Preferences setIntPreference:"displayMode" value:mode];
 }
 
 @end

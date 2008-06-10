@@ -67,6 +67,8 @@ static NPClass pluginNPClass = {
   NULL   // RemoveProperty
 };
 
+
+
 @implementation PluginInstance
 
 - (BOOL)attached
@@ -86,24 +88,25 @@ static NPClass pluginNPClass = {
 - (void)dealloc
 {
   [_pdfView release];
-  [_searchResults release];
   [selectionController release];
-  if (_scriptableObject  != NULL) {
+  [_searchResults release];
+  if (_scriptableObject) {
     NPN_ReleaseObject(_scriptableObject);
   }
-  if (_tabCallback != NULL) {
+  if (_tabCallback) {
     NPN_ReleaseObject(_tabCallback);
+  }
+  if (_historyCallback) {
+    NPN_ReleaseObject(_historyCallback);
   }
   [super dealloc];
 }
 
-- (id)initWithNPP:(NPP)npp;
+- (id)initWithNPP:(NPP)npp
 {
   if (self = [super init]) {
     _pdfView = [[PluginPDFView alloc] initWithPlugin:self];
     selectionController = [[SelectionController forPDFView:_pdfView] retain];
-    _scriptableObject = NULL;
-    _tabCallback = NULL;
     _npp = npp;
     IDENT_FIND = NPN_GetStringIdentifier("find");
     IDENT_FINDALL = NPN_GetStringIdentifier("findAll");
@@ -114,7 +117,6 @@ static NPClass pluginNPClass = {
   }
   return self;
 }
-
 
 - (void)print 
 {
