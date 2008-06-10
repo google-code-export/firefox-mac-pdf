@@ -1,0 +1,3 @@
+Obtained from http://ftp.mozilla.org/pub/mozilla.org/xulrunner/nightly/latest-trunk/ May, 2008
+
+The PowerPC and Intel binaries were combined to form universal binaries using the instructions at http://www.danns.co.uk/HowToBuildUniversalSDK

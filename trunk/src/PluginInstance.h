@@ -24,6 +24,12 @@
 #import "SelectionController.h"
 #include "mozincludes.h";
 
+typedef struct _SavedState {
+  BOOL autoScales;
+  float zoom;
+  PDFDisplayMode displayMode;
+} SavedState;
+
 @interface PluginInstance : NSObject {
   NPIdentifier IDENT_FIND;
   NPIdentifier IDENT_FINDALL;

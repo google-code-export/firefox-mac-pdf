@@ -45,7 +45,7 @@ NPError NPP_New(NPMIMEType pluginType, NPP instance, uint16 mode, int16 argc, ch
   if (err != NPERR_NO_ERROR) {
     return NPERR_INCOMPATIBLE_VERSION_ERROR;
   }
-  
+
   // allocate the plugin
   instance->pdata = [[PluginInstance alloc] initWithNPP:instance];
 
