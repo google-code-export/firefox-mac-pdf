@@ -150,6 +150,7 @@ function onPageLoad(event) {
     FullZoom.reduce = createZoom(FullZoom.reduce, -1);
     FullZoom.reset = createZoom(FullZoom.reset, 0);
     FullZoom.enlarge = createZoom(FullZoom.enlarge, 1);
+    goDoCommand = createGoDoCommand(goDoCommand);
   }
   // remove the XPCOM safety wrapper
   var plugin = elem.wrappedJSObject;
@@ -224,6 +225,17 @@ function createStateChangeHandler(o) {
     if (getPluginElement()) {
       cmdFind.removeAttribute('disabled');
       cmdFindAgain.removeAttribute('disabled');
+    }
+  }
+}
+
+function createGoDoCommand(orig) {
+  return function(cmd) {
+    var elem;
+    if (cmd == 'cmd_copy' && (elem = getPluginElement())) {
+      elem.wrappedJSObject.copy();
+    } else {
+      return orig.call(this, cmd);
     }
   }
 }
