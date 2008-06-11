@@ -31,6 +31,7 @@ typedef struct _SavedState {
 } SavedState;
 
 @interface PluginInstance : NSObject {
+  NPIdentifier IDENT_COPY;
   NPIdentifier IDENT_FIND;
   NPIdentifier IDENT_FINDALL;
   NPIdentifier IDENT_ZOOM;

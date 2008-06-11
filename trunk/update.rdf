@@ -4,10 +4,26 @@
          xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <RDF:Description about="urn:mozilla:extension:colesbury@gmail.com">
     <em:signature>
-MIGTMA0GCSqGSIb3DQEBDQUAA4GBAJFaY0l3n2KjEuht8uDXQbmScEAn3cB8eQY+/aNjr3c9iv+mfC/m6d/Ew3TgaNtDvdDYZRxJ/O0M/t2Jqebi5FKcYwk6Hs7CMLH/QewZjjJQLkLAy8Jl1tKLUAAc5Tz4Agkjo8I+ECX0wISP1AkJZmH6JBWr5qpPDixaxJDqYEAU
+MIGTMA0GCSqGSIb3DQEBDQUAA4GBAMs64ZGOqfDFWBjb7RVtGfA7p1wyJgudDT40QFjT/prto/QzB81LXKdu2itB5amZ5F2m9RXXqfojrC0i9fE0KcwpteOamJBGlprFyi12n1SCsOb8pi4JyMWQOauaMwlqeb3btfrRZtj7oOqtuNNytgy5m/u9C7yNkiXjGUNMXD72
     </em:signature>
     <em:updates>
       <RDF:Seq>
+        <RDF:li>
+          <RDF:Description>
+            <em:version>0.9.5</em:version>
+            <!-- One targetApplication for each application the add-on is compatible with -->
+            <em:targetApplication>
+              <RDF:Description>
+                <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+                <em:minVersion>3.0</em:minVersion>
+                <em:maxVersion>3.0.*</em:maxVersion>
+                <em:updateLink>http://firefox-mac-pdf.googlecode.com/files/fx-quartz-pdf-0.9.5.xpi</em:updateLink>
+                <em:updateHash>sha1:4c5ada5056f560026a8871ad43a80871619da99e</em:updateHash>
+                <!--<em:updateInfoURL>http://www.mysite.com/updateinfo2.2.xhtml</em:updateInfoURL>-->
+              </RDF:Description>
+            </em:targetApplication>
+          </RDF:Description>
+        </RDF:li>
         <RDF:li>
           <RDF:Description>
             <em:version>0.9.4</em:version>

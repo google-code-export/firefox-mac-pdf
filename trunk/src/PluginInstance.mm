@@ -108,6 +108,7 @@ static NPClass pluginNPClass = {
     _pdfView = [[PluginPDFView alloc] initWithPlugin:self];
     selectionController = [[SelectionController forPDFView:_pdfView] retain];
     _npp = npp;
+    IDENT_COPY = NPN_GetStringIdentifier("copy");
     IDENT_FIND = NPN_GetStringIdentifier("find");
     IDENT_FINDALL = NPN_GetStringIdentifier("findAll");
     IDENT_ZOOM = NPN_GetStringIdentifier("zoom");
@@ -312,8 +313,8 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
 
 - (BOOL)hasMethod:(NPIdentifier)name
 {
-  return name == IDENT_FIND || name == IDENT_FINDALL || name == IDENT_ZOOM || name == IDENT_REMOVEHIGHLIGHTS
-      || name == IDENT_SETHISTORYCALLBACK || name == IDENT_SETTABCALLBACK;
+  return name == IDENT_COPY || name == IDENT_FIND || name == IDENT_FINDALL || name == IDENT_ZOOM 
+      || name == IDENT_REMOVEHIGHLIGHTS || name == IDENT_SETHISTORYCALLBACK || name == IDENT_SETTABCALLBACK;
 }
 
 static NSString* variantToNSString(NPVariant variant) {
@@ -327,6 +328,13 @@ static NSString* variantToNSString(NPVariant variant) {
 
 - (BOOL)invokeMethod:(NPIdentifier)name args:(const NPVariant*)args len:(uint32_t)num_args result:(NPVariant*)result
 {
+  if (name == IDENT_COPY) {
+    if (num_args != 0) {
+      return NO;
+    }
+    [_pdfView copy:nil];
+    return YES;
+  }
   if (name == IDENT_FIND) {
     if (num_args != 3 || !NPVARIANT_IS_STRING(args[0]) || !NPVARIANT_IS_BOOLEAN(args[1])
         || !NPVARIANT_IS_BOOLEAN(args[2])) {
