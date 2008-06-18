@@ -24,10 +24,7 @@
 
 #include "../npapi/npapi.h"
 #include "../npapi/npruntime.h"
-#include "../npapi/npfunctions.h"
-
-typedef void (* NP_LOADDS NPP_ShutdownUPP)(void); // from npupp.h
-void SetNPNFuncs(NPNetscapeFuncs* npnFuncs);
-const NPNetscapeFuncs& GetNPNFuncs();
+#include "../npapi/npupp.h"
+//#include "../npapi/npfunctions.h"
 
 #endif
