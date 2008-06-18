@@ -36,6 +36,7 @@
 /* Begin PBXBuildFile section */
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+		9410EA950E089F8700CA7F4A /* npmac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9410EA940E089F8700CA7F4A /* npmac.cpp */; };
 		9455ADDB0DEA916F0059FED3 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9455ADDA0DEA916F0059FED3 /* Quartz.framework */; };
 		9455AE300DEB25F20059FED3 /* pdfplugin.r in Rez */ = {isa = PBXBuildFile; fileRef = 9455AE2E0DEB25B60059FED3 /* pdfplugin.r */; };
 		949DE1490DF4FBF200922723 /* PluginInstance.mm in Sources */ = {isa = PBXBuildFile; fileRef = 949DE1440DF4FBF200922723 /* PluginInstance.mm */; };
@@ -43,7 +44,6 @@
 		949DE14B0DF4FBF200922723 /* SelectionController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 949DE1480DF4FBF200922723 /* SelectionController.mm */; };
 		949DE1500DF4FC0400922723 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 949DE14C0DF4FC0400922723 /* main.cpp */; };
 		949DE1510DF4FC0400922723 /* pdfplugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = 949DE14F0DF4FC0400922723 /* pdfplugin.mm */; };
-		949DE1530DF4FC1100922723 /* npn_bindings.cc in Sources */ = {isa = PBXBuildFile; fileRef = 949DE1520DF4FC1100922723 /* npn_bindings.cc */; };
 		94AF622D0DFE162B00BED136 /* Preferences.mm in Sources */ = {isa = PBXBuildFile; fileRef = 94AF622C0DFE162B00BED136 /* Preferences.mm */; };
 		94AF62EC0DFE184D00BED136 /* libnspr4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AF62240DFE151700BED136 /* libnspr4.dylib */; };
 		94AF62ED0DFE184E00BED136 /* libxpcomglue_s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AF62260DFE151700BED136 /* libxpcomglue_s.a */; };
@@ -75,6 +75,9 @@
 		32DBCF630370AF2F00C91783 /* pdfplugin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pdfplugin_Prefix.pch; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* pdfplugin.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pdfplugin.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9410EA940E089F8700CA7F4A /* npmac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = npmac.cpp; sourceTree = "<group>"; };
+		9410EAB00E08A0F300CA7F4A /* npupp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = npupp.h; sourceTree = "<group>"; };
+		9410EB3D0E08B93800CA7F4A /* npruntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = npruntime.h; sourceTree = "<group>"; };
 		9415EEC00DECEE3C00DB1334 /* chrome.manifest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chrome.manifest; sourceTree = "<group>"; };
 		9415EEC10DECEE3C00DB1334 /* install.rdf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.rdf; sourceTree = "<group>"; };
 		943E18440DFD0966002456E5 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
@@ -491,9 +494,7 @@
 		943E1A040DFD0966002456E5 /* xpcom-config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "xpcom-config.h"; sourceTree = "<group>"; };
 		9455ADDA0DEA916F0059FED3 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
 		9455AE2C0DEB24D10059FED3 /* npapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = npapi.h; sourceTree = "<group>"; };
-		9455AE2D0DEB24D10059FED3 /* npruntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = npruntime.h; sourceTree = "<group>"; };
 		9455AE2E0DEB25B60059FED3 /* pdfplugin.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = pdfplugin.r; sourceTree = "<group>"; };
-		9455AF250DEB37010059FED3 /* npfunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = npfunctions.h; sourceTree = "<group>"; };
 		949DE1430DF4FBF200922723 /* PluginInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginInstance.h; path = src/PluginInstance.h; sourceTree = "<group>"; };
 		949DE1440DF4FBF200922723 /* PluginInstance.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PluginInstance.mm; path = src/PluginInstance.mm; sourceTree = "<group>"; };
 		949DE1450DF4FBF200922723 /* PluginPDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginPDFView.h; path = src/PluginPDFView.h; sourceTree = "<group>"; };
@@ -504,7 +505,6 @@
 		949DE14D0DF4FC0400922723 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = main.h; path = src/main.h; sourceTree = "<group>"; };
 		949DE14E0DF4FC0400922723 /* mozincludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mozincludes.h; path = src/mozincludes.h; sourceTree = "<group>"; };
 		949DE14F0DF4FC0400922723 /* pdfplugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = pdfplugin.mm; path = src/pdfplugin.mm; sourceTree = "<group>"; };
-		949DE1520DF4FC1100922723 /* npn_bindings.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = npn_bindings.cc; sourceTree = "<group>"; };
 		94AF61840DFE132C00BED136 /* pdfplugin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = pdfplugin.js; sourceTree = "<group>"; };
 		94AF61850DFE132C00BED136 /* pdfplugin.xul */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pdfplugin.xul; sourceTree = "<group>"; };
 		94AF61870DFE132C00BED136 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -1089,10 +1089,10 @@
 		9455AE2B0DEB24D10059FED3 /* npapi */ = {
 			isa = PBXGroup;
 			children = (
-				949DE1520DF4FC1100922723 /* npn_bindings.cc */,
-				9455AF250DEB37010059FED3 /* npfunctions.h */,
+				9410EAB00E08A0F300CA7F4A /* npupp.h */,
+				9410EA940E089F8700CA7F4A /* npmac.cpp */,
 				9455AE2C0DEB24D10059FED3 /* npapi.h */,
-				9455AE2D0DEB24D10059FED3 /* npruntime.h */,
+				9410EB3D0E08B93800CA7F4A /* npruntime.h */,
 			);
 			path = npapi;
 			sourceTree = "<group>";
@@ -1270,8 +1270,8 @@
 				949DE14B0DF4FBF200922723 /* SelectionController.mm in Sources */,
 				949DE1500DF4FC0400922723 /* main.cpp in Sources */,
 				949DE1510DF4FC0400922723 /* pdfplugin.mm in Sources */,
-				949DE1530DF4FC1100922723 /* npn_bindings.cc in Sources */,
 				94AF622D0DFE162B00BED136 /* Preferences.mm in Sources */,
+				9410EA950E089F8700CA7F4A /* npmac.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

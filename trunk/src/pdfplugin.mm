@@ -24,11 +24,6 @@
 
 NPError NPP_New(NPMIMEType pluginType, NPP instance, uint16 mode, int16 argc, char* argn[], char* argv[], NPSavedData* saved) {
   printf("NPP_New(instance=%8p,mode=%d,argc=%d)\n", instance, mode, argc);
-  // only run in Firefox 3.0
-  if (GetNPNFuncs().version < 19) {
-    printf("browser-<version < 19\n");
-    return NPERR_INVALID_INSTANCE_ERROR;
-  }
   if (instance == NULL) {
     return NPERR_INVALID_INSTANCE_ERROR;
   }

@@ -21,26 +21,21 @@
  */
 #include "main.h"
 
-extern "C" {
-#pragma export on
-  NPError NP_Initialize(NPNetscapeFuncs* browserFuncs);
-  NPError NP_GetEntryPoints(NPPluginFuncs* pluginFuncs);
-  char *NP_GetMIMEDescription();
-  void NP_Shutdown(void);
-#pragma export off
-}
-
-NPError NP_Initialize(NPNetscapeFuncs* browserFuncs) {
-  SetNPNFuncs(browserFuncs);
+NPError NPP_Initialize() {
+  printf("NPP_Initialize called\n");
   return NPERR_NO_ERROR;
 }
 
 NPError NP_GetEntryPoints(NPPluginFuncs* pluginFuncs) {
+  printf("Get Entry Points called\n");
   if (pluginFuncs->size < sizeof(NPPluginFuncs)) {
     return NPERR_INVALID_FUNCTABLE_ERROR;
   }
+  printf("setting version\n");
   pluginFuncs->version       = (NP_VERSION_MAJOR << 8) | NP_VERSION_MINOR;
+  printf("setting newp\n");
   pluginFuncs->newp          = NPP_New;
+  printf("setting destroy\n");
   pluginFuncs->destroy       = NPP_Destroy;
   pluginFuncs->setwindow     = NPP_SetWindow;
   pluginFuncs->newstream     = NPP_NewStream;
@@ -54,13 +49,15 @@ NPError NP_GetEntryPoints(NPPluginFuncs* pluginFuncs) {
   pluginFuncs->getvalue      = NPP_GetValue;
   pluginFuncs->setvalue      = NPP_SetValue;
   pluginFuncs->javaClass     = NULL;
+  printf("returning\n");
   return NPERR_NO_ERROR;
 }
 
 char *NP_GetMIMEDescription() {
+  printf("NP_GetMIMEDescription called\n");
   return "application/pdf:pdf:PDF document";
 }
 
-void NP_Shutdown(void) {
+void NPP_Shutdown(void) {
   return;
 }
