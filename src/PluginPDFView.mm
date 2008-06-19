@@ -79,13 +79,13 @@
       break;
     case 123: // CMD+ALT+<LEFT>
     case 124: // CMD+ALT+<RIGHT>
-      int offset = ([theEvent keyCode] == 124 ? 1 : -1);
-      if ((flags & NSAlternateKeyMask) && !(flags & NSShiftKeyMask) && !(flags & NSControlKeyMask)) {
-        [_plugin advanceTab:offset];
-        return YES;
-      }
-      if (!(flags & NSAlternateKeyMask) && !(flags & NSShiftKeyMask) && !(flags & NSControlKeyMask)) {
-        [_plugin advanceHistory:offset];
+      if (!(flags & NSShiftKeyMask) && !(flags & NSControlKeyMask) && (flags & NSCommandKeyMask)) {
+        int offset = ([theEvent keyCode] == 124 ? 1 : -1);
+        if ((flags & NSAlternateKeyMask)) {
+          [_plugin advanceTab:offset];
+        } else {
+          [_plugin advanceHistory:offset];
+        }
         return YES;
       }
       break;
@@ -112,6 +112,7 @@
       // TODO: is this ever called?
       [[NSApp mainMenu] performKeyEquivalent:theEvent];
     }
+    return NO;
   }
   return YES;
 }
