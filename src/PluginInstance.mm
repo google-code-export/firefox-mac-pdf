@@ -21,6 +21,7 @@
  */
 #import "PluginInstance.h"
 #import "PluginPDFView.h"
+#import "SelectionController.h"
 
 typedef struct PluginNPObject : NPObject {
   PluginInstance* plugin;
