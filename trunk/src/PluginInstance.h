@@ -21,8 +21,9 @@
  */
 #import <Cocoa/Cocoa.h>
 #import <Quartz/Quartz.h>
-#import "SelectionController.h"
 #include "mozincludes.h";
+
+@class SelectionController;
 
 typedef struct _SavedState {
   BOOL autoScales;

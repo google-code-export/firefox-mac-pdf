@@ -89,6 +89,14 @@
         return YES;
       }
       break;
+    case 13:
+      if ((flags & NSCommandKeyMask) && !(flags & NSAlternateKeyMask) && !(flags & NSControlKeyMask)
+          /*&& !(flags & NSShiftKeyMask)*/) {
+        [[self window] makeFirstResponder:[self superview]];
+        [[self superview] performKeyEquivalent:theEvent];
+        return YES;
+      }
+      break;
   }
   return NO;
 }
