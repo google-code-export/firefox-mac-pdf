@@ -24,6 +24,7 @@
 #import "Swizzle.h"
 
 static BOOL retValuePerformKeyEquivalent;
+static BOOL swizzled = NO;
 
 @interface NSMenu (PDFAltMethod)
 - (BOOL)altPerformKeyEquivalent:(NSEvent*)theEvent;
@@ -132,13 +133,17 @@ static BOOL retValuePerformKeyEquivalent;
     if ([[menu class] instancesRespondToSelector:sel]) {
       void (*actOnKeyEquivalent)(id, SEL, NSEvent*);
       actOnKeyEquivalent = (void (*)(id, SEL, NSEvent*))[[menu class] instanceMethodForSelector:sel];
-      MethodSwizzle([menu class],
-                  @selector(performKeyEquivalent:),
-                  @selector(altPerformKeyEquivalent:));
+      if (!swizzled) {
+        MethodSwizzle([menu class],
+                    @selector(performKeyEquivalent:),
+                    @selector(altPerformKeyEquivalent:));
+        swizzled = YES;
+      }
       actOnKeyEquivalent(menu, sel, theEvent);
-      MethodSwizzle([menu class],
-                  @selector(performKeyEquivalent:),
-                  @selector(altPerformKeyEquivalent:));
+//      MethodSwizzle([menu class],
+//                  @selector(performKeyEquivalent:),
+//                  @selector(altPerformKeyEquivalent:));
+//      NSLog(@"retValuePerformKeyEquivalent = %d", (int) retValuePerformKeyEquivalent);
       return retValuePerformKeyEquivalent;
     } else {
       // TODO: is this ever called?
