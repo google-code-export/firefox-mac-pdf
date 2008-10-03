@@ -21,6 +21,22 @@
  */
 #import "PluginPDFView.h"
 #import "Preferences.h"
+#import "Swizzle.h"
+
+static BOOL retValuePerformKeyEquivalent;
+
+@interface NSMenu (PDFAltMethod)
+- (BOOL)altPerformKeyEquivalent:(NSEvent*)theEvent;
+@end
+
+@implementation NSMenu (PDFAltMethod)
+- (BOOL)altPerformKeyEquivalent:(NSEvent*)theEvent
+{
+  retValuePerformKeyEquivalent = [self altPerformKeyEquivalent:theEvent];
+  return retValuePerformKeyEquivalent;
+}
+@end
+
 
 @implementation PluginPDFView
 
@@ -116,10 +132,17 @@
     if ([[menu class] instancesRespondToSelector:sel]) {
       void (*actOnKeyEquivalent)(id, SEL, NSEvent*);
       actOnKeyEquivalent = (void (*)(id, SEL, NSEvent*))[[menu class] instanceMethodForSelector:sel];
+      MethodSwizzle([menu class],
+                  @selector(performKeyEquivalent:),
+                  @selector(altPerformKeyEquivalent:));
       actOnKeyEquivalent(menu, sel, theEvent);
+      MethodSwizzle([menu class],
+                  @selector(performKeyEquivalent:),
+                  @selector(altPerformKeyEquivalent:));
+      return retValuePerformKeyEquivalent;
     } else {
       // TODO: is this ever called?
-      [[NSApp mainMenu] performKeyEquivalent:theEvent];
+      return [[NSApp mainMenu] performKeyEquivalent:theEvent];
     }
   }
   return YES;

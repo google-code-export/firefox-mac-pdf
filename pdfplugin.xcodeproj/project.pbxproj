@@ -51,6 +51,7 @@
 		94AF62EC0DFE184D00BED136 /* libnspr4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AF62240DFE151700BED136 /* libnspr4.dylib */; };
 		94AF62ED0DFE184E00BED136 /* libxpcomglue_s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AF62260DFE151700BED136 /* libxpcomglue_s.a */; };
 		94AF62EE0DFE184E00BED136 /* libxpcom.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AF62250DFE151700BED136 /* libxpcom.dylib */; };
+		94FAF61D0E96B02A008336A1 /* Swizzle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 94FAF61C0E96B02A008336A1 /* Swizzle.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -723,6 +724,8 @@
 		94AF622B0DFE162B00BED136 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Preferences.h; path = src/Preferences.h; sourceTree = "<group>"; };
 		94AF622C0DFE162B00BED136 /* Preferences.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Preferences.mm; path = src/Preferences.mm; sourceTree = "<group>"; };
 		94CA1B940E73412900197383 /* PDFService.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = PDFService.js; sourceTree = "<group>"; };
+		94FAF61B0E96B02A008336A1 /* Swizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Swizzle.h; path = src/Swizzle.h; sourceTree = "<group>"; };
+		94FAF61C0E96B02A008336A1 /* Swizzle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Swizzle.mm; path = src/Swizzle.mm; sourceTree = "<group>"; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -1546,6 +1549,8 @@
 		948363390DEB643000E610F2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				94FAF61B0E96B02A008336A1 /* Swizzle.h */,
+				94FAF61C0E96B02A008336A1 /* Swizzle.mm */,
 				949DE1430DF4FBF200922723 /* PluginInstance.h */,
 				949DE1440DF4FBF200922723 /* PluginInstance.mm */,
 				949DE1450DF4FBF200922723 /* PluginPDFView.h */,
@@ -1768,6 +1773,7 @@
 				94AF622D0DFE162B00BED136 /* Preferences.mm in Sources */,
 				9410EA950E089F8700CA7F4A /* npmac.cpp in Sources */,
 				945CA6D00E9583D500202FE4 /* PluginPDFViewMenu.mm in Sources */,
+				94FAF61D0E96B02A008336A1 /* Swizzle.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
