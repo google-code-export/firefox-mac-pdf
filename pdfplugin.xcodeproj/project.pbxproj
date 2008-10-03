@@ -37,8 +37,11 @@
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		9410EA950E089F8700CA7F4A /* npmac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9410EA940E089F8700CA7F4A /* npmac.cpp */; };
+		94276FC40E7324910005E3E9 /* PDFService.idl in Resources */ = {isa = PBXBuildFile; fileRef = 94276FC30E7324910005E3E9 /* PDFService.idl */; };
 		9455ADDB0DEA916F0059FED3 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9455ADDA0DEA916F0059FED3 /* Quartz.framework */; };
 		9455AE300DEB25F20059FED3 /* pdfplugin.r in Rez */ = {isa = PBXBuildFile; fileRef = 9455AE2E0DEB25B60059FED3 /* pdfplugin.r */; };
+		945ABD260E8F457400FC83E6 /* PDFPlugin.idl in Resources */ = {isa = PBXBuildFile; fileRef = 945ABD250E8F457400FC83E6 /* PDFPlugin.idl */; };
+		945CA6D00E9583D500202FE4 /* PluginPDFViewMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 945CA6CF0E9583D500202FE4 /* PluginPDFViewMenu.mm */; };
 		949DE1490DF4FBF200922723 /* PluginInstance.mm in Sources */ = {isa = PBXBuildFile; fileRef = 949DE1440DF4FBF200922723 /* PluginInstance.mm */; };
 		949DE14A0DF4FBF200922723 /* PluginPDFView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 949DE1460DF4FBF200922723 /* PluginPDFView.mm */; };
 		949DE14B0DF4FBF200922723 /* SelectionController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 949DE1480DF4FBF200922723 /* SelectionController.mm */; };
@@ -80,6 +83,7 @@
 		9410EB3D0E08B93800CA7F4A /* npruntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = npruntime.h; sourceTree = "<group>"; };
 		9415EEC00DECEE3C00DB1334 /* chrome.manifest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chrome.manifest; sourceTree = "<group>"; };
 		9415EEC10DECEE3C00DB1334 /* install.rdf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.rdf; sourceTree = "<group>"; };
+		94276FC30E7324910005E3E9 /* PDFService.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PDFService.idl; sourceTree = "<group>"; };
 		943E18440DFD0966002456E5 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
 		943E18450DFD0966002456E5 /* blapit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blapit.h; sourceTree = "<group>"; };
 		943E18460DFD0966002456E5 /* cert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cert.h; sourceTree = "<group>"; };
@@ -495,6 +499,8 @@
 		9455ADDA0DEA916F0059FED3 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
 		9455AE2C0DEB24D10059FED3 /* npapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = npapi.h; sourceTree = "<group>"; };
 		9455AE2E0DEB25B60059FED3 /* pdfplugin.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = pdfplugin.r; sourceTree = "<group>"; };
+		945ABD250E8F457400FC83E6 /* PDFPlugin.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PDFPlugin.idl; sourceTree = "<group>"; };
+		945CA6CF0E9583D500202FE4 /* PluginPDFViewMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PluginPDFViewMenu.mm; path = src/PluginPDFViewMenu.mm; sourceTree = "<group>"; };
 		949DE1430DF4FBF200922723 /* PluginInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginInstance.h; path = src/PluginInstance.h; sourceTree = "<group>"; };
 		949DE1440DF4FBF200922723 /* PluginInstance.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PluginInstance.mm; path = src/PluginInstance.mm; sourceTree = "<group>"; };
 		949DE1450DF4FBF200922723 /* PluginPDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginPDFView.h; path = src/PluginPDFView.h; sourceTree = "<group>"; };
@@ -514,6 +520,7 @@
 		94AF62260DFE151700BED136 /* libxpcomglue_s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libxpcomglue_s.a; path = gecko_api/lib/libxpcomglue_s.a; sourceTree = "<group>"; };
 		94AF622B0DFE162B00BED136 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Preferences.h; path = src/Preferences.h; sourceTree = "<group>"; };
 		94AF622C0DFE162B00BED136 /* Preferences.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Preferences.mm; path = src/Preferences.mm; sourceTree = "<group>"; };
+		94CA1B940E73412900197383 /* PDFService.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = PDFService.js; sourceTree = "<group>"; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -538,6 +545,7 @@
 			children = (
 				943E18430DFD0965002456E5 /* gecko api */,
 				9415EEB90DECEE3C00DB1334 /* prebuilt */,
+				94276FC20E7324910005E3E9 /* idl */,
 				948363390DEB643000E610F2 /* Classes */,
 				08FB77AFFE84173DC02AAC07 /* Source */,
 				32C88E010371C26100C91783 /* Other Sources */,
@@ -627,6 +635,7 @@
 			isa = PBXGroup;
 			children = (
 				94AF61820DFE132C00BED136 /* chrome */,
+				94CA1B920E73412900197383 /* components */,
 				94AF61880DFE132C00BED136 /* defaults */,
 				9415EEC00DECEE3C00DB1334 /* chrome.manifest */,
 				9415EEC10DECEE3C00DB1334 /* install.rdf */,
@@ -640,6 +649,15 @@
 			children = (
 			);
 			path = plugins;
+			sourceTree = "<group>";
+		};
+		94276FC20E7324910005E3E9 /* idl */ = {
+			isa = PBXGroup;
+			children = (
+				945ABD250E8F457400FC83E6 /* PDFPlugin.idl */,
+				94276FC30E7324910005E3E9 /* PDFService.idl */,
+			);
+			path = idl;
 			sourceTree = "<group>";
 		};
 		943E18430DFD0965002456E5 /* gecko api */ = {
@@ -1104,6 +1122,7 @@
 				949DE1440DF4FBF200922723 /* PluginInstance.mm */,
 				949DE1450DF4FBF200922723 /* PluginPDFView.h */,
 				949DE1460DF4FBF200922723 /* PluginPDFView.mm */,
+				945CA6CF0E9583D500202FE4 /* PluginPDFViewMenu.mm */,
 				949DE1470DF4FBF200922723 /* SelectionController.h */,
 				949DE1480DF4FBF200922723 /* SelectionController.mm */,
 				94AF622B0DFE162B00BED136 /* Preferences.h */,
@@ -1164,6 +1183,14 @@
 			name = "Linked Libraries";
 			sourceTree = "<group>";
 		};
+		94CA1B920E73412900197383 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				94CA1B940E73412900197383 /* PDFService.js */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1172,6 +1199,8 @@
 			buildConfigurationList = 1DEB913A08733D840010E9CD /* Build configuration list for PBXNativeTarget "pdfplugin" */;
 			buildPhases = (
 				8D5B49AF048680CD000E48DA /* Resources */,
+				94276FEB0E733EF80005E3E9 /* Compile XPI Header */,
+				94276FC80E7324BB0005E3E9 /* Compile Typelib */,
 				8D5B49B1048680CD000E48DA /* Sources */,
 				8D5B49B3048680CD000E48DA /* Frameworks */,
 				9455AE350DEB25FF0059FED3 /* Rez */,
@@ -1211,6 +1240,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */,
+				94276FC40E7324910005E3E9 /* PDFService.idl in Resources */,
+				945ABD260E8F457400FC83E6 /* PDFPlugin.idl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1243,6 +1274,42 @@
 			shellPath = /bin/sh;
 			shellScript = "rm -rf $SRCROOT/prebuilt/extension/plugins/pdfplugin.plugin\ncp -r $BUILT_PRODUCTS_DIR/pdfplugin.plugin $SRCROOT/prebuilt/extension/plugins/pdfplugin.plugin";
 		};
+		94276FC80E7324BB0005E3E9 /* Compile Typelib */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/idl/PDFService.idl",
+				"$(SRCROOT)/idl/PDFPlugin.idl",
+			);
+			name = "Compile Typelib";
+			outputPaths = (
+				"$(SRCROOT)/prebuilt/extension/components/PDFSerivce.xpt",
+				"$(SRCROOT)/prebuilt/extension/components/PDFPlugin.xpt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Users/sgross/Downloads/xulrunner-i386-sdk/bin/xpidl -m typelib -w -I /Users/sgross/Downloads/xulrunner-i386-sdk/idl -e $SRCROOT/prebuilt/extension/components/PDFSerivce.xpt $SRCROOT/idl/PDFService.idl\n/Users/sgross/Downloads/xulrunner-i386-sdk/bin/xpidl -m typelib -w -I /Users/sgross/Downloads/xulrunner-i386-sdk/idl -e $SRCROOT/prebuilt/extension/components/PDFPlugin.xpt $SRCROOT/idl/PDFPlugin.idl";
+		};
+		94276FEB0E733EF80005E3E9 /* Compile XPI Header */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/idl/PDFService.idl",
+				"$(SRCROOT)/idl/PDFPlugin.idl",
+			);
+			name = "Compile XPI Header";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/PDFService.h",
+				"$(DERIVED_FILE_DIR)/PDFPlugin.h",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Users/sgross/Downloads/xulrunner-i386-sdk/bin/xpidl -m header -w -I /Users/sgross/Downloads/xulrunner-i386-sdk/idl -e $DERIVED_FILE_DIR/PDFService.h $SRCROOT/idl/PDFService.idl\n/Users/sgross/Downloads/xulrunner-i386-sdk/bin/xpidl -m header -w -I /Users/sgross/Downloads/xulrunner-i386-sdk/idl -e $DERIVED_FILE_DIR/PDFPlugin.h $SRCROOT/idl/PDFPlugin.idl";
+		};
 		942F6B1E0DEF8FFA0000EFAC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1272,6 +1339,7 @@
 				949DE1510DF4FC0400922723 /* pdfplugin.mm in Sources */,
 				94AF622D0DFE162B00BED136 /* Preferences.mm in Sources */,
 				9410EA950E089F8700CA7F4A /* npmac.cpp in Sources */,
+				945CA6D00E9583D500202FE4 /* PluginPDFViewMenu.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1326,10 +1394,6 @@
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/gecko_api/lib\"";
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/gecko_api/lib\"";
-				OTHER_CFLAGS = (
-					"-DXP_MACOSX",
-					"-DXP_UNIX",
-				);
 				PRODUCT_NAME = pdfplugin;
 				WRAPPER_EXTENSION = plugin;
 				ZERO_LINK = YES;
@@ -1357,10 +1421,6 @@
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/gecko_api/lib\"";
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/gecko_api/lib\"";
-				OTHER_CFLAGS = (
-					"-DXP_MACOSX",
-					"-DXP_UNIX",
-				);
 				PRODUCT_NAME = pdfplugin;
 				WRAPPER_EXTENSION = plugin;
 			};
@@ -1374,6 +1434,7 @@
 				OTHER_CFLAGS = (
 					"-DXP_MACOSX",
 					"-DXP_UNIX",
+					"-fshort-wchar",
 				);
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = "-Wl,-executable_path,$(SRCROOT)/gecko_api/bin";
@@ -1395,6 +1456,7 @@
 				OTHER_CFLAGS = (
 					"-DXP_MACOSX",
 					"-DXP_UNIX",
+					"-fshort-wchar",
 				);
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = "-Wl,-executable_path,$(SRCROOT)/gecko_api/bin";

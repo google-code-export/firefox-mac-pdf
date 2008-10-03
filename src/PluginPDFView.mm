@@ -120,7 +120,6 @@
       // TODO: is this ever called?
       [[NSApp mainMenu] performKeyEquivalent:theEvent];
     }
-    return NO;
   }
   return YES;
 }

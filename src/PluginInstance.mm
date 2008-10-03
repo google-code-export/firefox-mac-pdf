@@ -23,6 +23,11 @@
 #import "PluginPDFView.h"
 #import "SelectionController.h"
 
+#include "nsCOMPtr.h"
+#include "nsServiceManagerUtils.h"
+#include "nsStringAPI.h"
+#include "PDFService.h"
+
 typedef struct PluginNPObject : NPObject {
   PluginInstance* plugin;
 } PluginNPObject;
@@ -68,8 +73,6 @@ static NPClass pluginNPClass = {
   NULL   // RemoveProperty
 };
 
-
-
 @implementation PluginInstance
 
 - (BOOL)attached
@@ -94,11 +97,11 @@ static NPClass pluginNPClass = {
   if (_scriptableObject) {
     NPN_ReleaseObject(_scriptableObject);
   }
-  if (_tabCallback) {
-    NPN_ReleaseObject(_tabCallback);
-  }
-  if (_historyCallback) {
-    NPN_ReleaseObject(_historyCallback);
+  nsCOMPtr<PDFService> pdfService(do_GetService("@sgross.mit.edu/pdfservice;1"));
+  if (pdfService) {
+    pdfService->CleanUp(_pluginElement);
+  } else {
+    printf("No pdfservice?\n");
   }
   [super dealloc];
 }
@@ -114,8 +117,23 @@ static NPClass pluginNPClass = {
     IDENT_FINDALL = NPN_GetStringIdentifier("findAll");
     IDENT_ZOOM = NPN_GetStringIdentifier("zoom");
     IDENT_REMOVEHIGHLIGHTS = NPN_GetStringIdentifier("removeHighlights");
-    IDENT_SETTABCALLBACK = NPN_GetStringIdentifier("setTabCallback");
-    IDENT_SETHISTORYCALLBACK = NPN_GetStringIdentifier("setHistoryCallback");
+    // We don't addref _window, but I think it's ok since life of window > life of plugin
+    NPError err = NPN_GetValue(npp, NPNVDOMWindow, &_window);
+    if (err != NPERR_NO_ERROR) {
+      printf("this is bad: window\n");
+      // TODO do something? help!
+    }
+    err = NPN_GetValue(npp, NPNVDOMElement, &_pluginElement);
+    if (err != NPERR_NO_ERROR) {
+      printf("this is bad: plugin\n");
+      // TODO do something? help!
+    }
+    nsCOMPtr<PDFService> pdfService(do_GetService("@sgross.mit.edu/pdfservice;1"));
+    if (pdfService) {
+      pdfService->Init(_window, _pluginElement);
+    } else {
+      printf("No pdfservice?\n");
+    }
   }
   return self;
 }
@@ -125,13 +143,25 @@ static NPClass pluginNPClass = {
   [_pdfView print:self];
 }
 
-- (void)setFile:(const char*)filename
+- (void)save
+{
+  nsCOMPtr<PDFService> pdfService(do_GetService("@sgross.mit.edu/pdfservice;1"));
+  if (pdfService) {
+    nsCString urlString(_url);
+    pdfService->Save(_window, urlString);
+  } else {
+    printf("No pdfservice?\n");
+  }
+}
+
+- (void)setFile:(const char*)filename url:(const char*)url;
 {
   // create PDF document
-  NSURL* url = [NSURL fileURLWithPath:[NSString stringWithUTF8String:filename]];
-  PDFDocument* document = [[[PDFDocument alloc] initWithURL:url] autorelease];
+  NSURL* fileURL = [NSURL fileURLWithPath:[NSString stringWithUTF8String:filename]];
+  PDFDocument* document = [[[PDFDocument alloc] initWithURL:fileURL] autorelease];
   [document setDelegate:self];
   [_pdfView setDocument:document];
+  _url = url;
 }
 
 - (void)setFrameSize:(NSSize)size
@@ -227,46 +257,24 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
   return ret;
 }
 
-- (void)setTabCallback:(NPObject*)callback
-{
-  NPN_RetainObject(callback);
-  if (_tabCallback) {
-    NPN_ReleaseObject(_tabCallback);
-  }
-  _tabCallback = callback;
-}
-
 - (void)advanceTab:(int)offset
 {
-  if (_tabCallback) {
-    NPVariant arg;
-    INT32_TO_NPVARIANT(offset, arg);
-    NPVariant result;
-    NPN_InvokeDefault(_npp, _tabCallback, &arg, 1, &result);
-    NPN_ReleaseVariantValue(&arg);
-    NPN_ReleaseVariantValue(&result);
-  }
-}
-
-- (void)setHistoryCallback:(NPObject*)callback
-{
-  NPN_RetainObject(callback);
-  if (_historyCallback) {
-    NPN_ReleaseObject(_historyCallback);
-  }
-  _historyCallback = callback;
+  NSLog(@"Advancing tab %d", offset);
+  nsCOMPtr<PDFService> pdfService(do_GetService("@sgross.mit.edu/pdfservice;1"));
+  if (pdfService) {
+    pdfService->InspectWindow(_window);
+    pdfService->AdvanceTab(_window, offset);
+  } else
+    printf("WARNING: pdfservice not found\n");
 }
 
 - (void)advanceHistory:(int)offset
 {
-  if (_historyCallback) {
-    NPVariant arg;
-    INT32_TO_NPVARIANT(offset, arg);
-    NPVariant result;
-    NPN_InvokeDefault(_npp, _historyCallback, &arg, 1, &result);
-    NPN_ReleaseVariantValue(&arg);
-    NPN_ReleaseVariantValue(&result);
-  }
+  nsCOMPtr<PDFService> pdfService = do_GetService("@sgross.mit.edu/pdfservice;1");
+  if (pdfService)
+    pdfService->GoHistory(_window, offset);
+  else
+    printf("WARNING: pdfservice not found\n");
 }
 
 - (void)findAll:(NSString*)string caseSensitive:(bool)caseSensitive
@@ -315,7 +323,7 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
 - (BOOL)hasMethod:(NPIdentifier)name
 {
   return name == IDENT_COPY || name == IDENT_FIND || name == IDENT_FINDALL || name == IDENT_ZOOM 
-      || name == IDENT_REMOVEHIGHLIGHTS || name == IDENT_SETHISTORYCALLBACK || name == IDENT_SETTABCALLBACK;
+      || name == IDENT_REMOVEHIGHLIGHTS;
 }
 
 static NSString* variantToNSString(NPVariant variant) {
@@ -383,20 +391,6 @@ static NSString* variantToNSString(NPVariant variant) {
       return NO;
     }
     [self removeHighlights];
-    return YES;
-  }
-  if (name == IDENT_SETTABCALLBACK) {
-    if (num_args != 1 || !NPVARIANT_IS_OBJECT(args[0])) {
-      return NO;
-    }
-    [self setTabCallback:NPVARIANT_TO_OBJECT(args[0])];
-    return YES;
-  }
-  if (name == IDENT_SETHISTORYCALLBACK) {
-    if (num_args != 1 || !NPVARIANT_IS_OBJECT(args[0])) {
-      return NO;
-    }
-    [self setHistoryCallback:NPVARIANT_TO_OBJECT(args[0])];
     return YES;
   }
   return NO;
