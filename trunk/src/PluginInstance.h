@@ -23,8 +23,11 @@
 #import <Quartz/Quartz.h>
 #include "mozincludes.h";
 
-@class SelectionController;
+class nsIDOMWindow;
+class nsIDOMElement;
 
+@class SelectionController;
+ 
 typedef struct _SavedState {
   BOOL autoScales;
   float zoom;
@@ -37,16 +40,15 @@ typedef struct _SavedState {
   NPIdentifier IDENT_FINDALL;
   NPIdentifier IDENT_ZOOM;
   NPIdentifier IDENT_REMOVEHIGHLIGHTS;
-  NPIdentifier IDENT_SETTABCALLBACK;
-  NPIdentifier IDENT_SETHISTORYCALLBACK;
   BOOL _attached;
   PDFView* _pdfView;
   NPP _npp;
   SelectionController* selectionController;
   NSMutableArray* _searchResults;
   NPObject* _scriptableObject;
-  NPObject* _tabCallback;
-  NPObject* _historyCallback;
+  nsIDOMWindow* _window;
+  nsIDOMElement* _pluginElement;
+  const char* _url;
 }
 - (BOOL)attached;
 - (void)advanceTab:(int)offset;
@@ -57,13 +59,12 @@ typedef struct _SavedState {
 - (BOOL)invokeMethod:(NPIdentifier)name args:(const NPVariant*)args len:(uint32_t)num_args result:(NPVariant*)result;
 - (id)initWithNPP:(NPP)npp;
 - (void)print;
-- (void)setFile:(const char*)filename;
+- (void)save;
+- (void)setFile:(const char*)filename url:(const char*)url;
 - (void)setFrameSize:(NSSize)size;
 - (NPObject*)getScriptableObject;
 - (int)find:(NSString*)string caseSensitive:(bool)caseSensitive forwards:(bool)forwards;
 - (void)findAll:(NSString*)string caseSensitive:(bool)caseSensitive;
-- (void)setTabCallback:(NPObject*)callback;
-- (void)setHistoryCallback:(NPObject*)callback;
 - (void)removeHighlights;
 - (PDFView*)pdfView;
 @end

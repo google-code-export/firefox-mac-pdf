@@ -19,6 +19,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+const pdfUtility = {
+  _initialized: false,
+
+  init: function() {
+    if (_initialized) {
+      return;
+    }
+    
+    _initialized = true;
+  },
+
+};
+document.getElementById('content').sam = 'sam i am';
+var sam = 'i am sam';
+//this.sam = 'i am sam i am';
 (function() {
 
 // The XUL browser element (set in init())
@@ -38,7 +53,7 @@ function init() {
   
   // We have to use the load event since DOMContentLoaded isn't called for pages
   // handled by a plugin.
-  browser.addEventListener("load", onPageLoad, false);
+  //browser.addEventListener("load", onPageLoad, false);
 }
 
 var mimeTypes = {
@@ -152,12 +167,6 @@ function onPageLoad(event) {
     FullZoom.enlarge = createZoom(FullZoom.enlarge, 1);
     goDoCommand = createGoDoCommand(goDoCommand);
   }
-  // remove the XPCOM safety wrapper
-  var plugin = elem.wrappedJSObject;
-  // set the plugin's callback to switch tabs
-  plugin.setTabCallback(advanceTab);
-  // set the plugin's callback to go forward/back
-  plugin.setHistoryCallback(goHistory);
 }
 
 /**
@@ -202,18 +211,6 @@ function createZoom(orig, arg) {
     } else {
       orig.call(this);
     }
-  }
-}
-
-function advanceTab(offset) {
-  browser.mTabContainer.advanceSelectedTab(offset, true);
-}
-
-function goHistory(offset) {
-  if (offset == -1) {
-    browser.goBack();
-  } else {
-    browser.goForward();
   }
 }
 

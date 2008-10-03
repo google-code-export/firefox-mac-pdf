@@ -1,0 +1,10 @@
+#include "nsISupports.idl"
+
+[scriptable, uuid(77dc4cd3-1bba-44d4-a34b-169b728f588e)]
+interface PDFPlugin : nsISupports
+{
+  void Copy();
+  boolean Find( in ACString str, in boolean caseSensitive, in boolean forward );
+  boolean FindAll( in ACString str, in boolean caseSensitive );
+  void RemoveHighlights();
+};

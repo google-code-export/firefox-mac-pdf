@@ -1,0 +1,13 @@
+#include "nsISupports.idl"
+#include "nsIDOMWindow.idl"
+
+[scriptable, uuid(862827b0-98ac-4b68-a0c9-4ccd8ff35a02)]
+interface PDFService : nsISupports
+{
+  void AdvanceTab( in nsIDOMWindow window, in long offset );
+  void GoHistory( in nsIDOMWindow window, in long direction );
+  void Init( in nsIDOMWindow window, in nsIDOMElement plugin );
+  void CleanUp ( in nsIDOMElement plugin );
+  void InspectWindow (in nsIDOMWindow window );
+  void Save (in nsIDOMWindow window, in ACString url );
+};
