@@ -37,6 +37,7 @@
     [self setDelegate:self];
     [self setDisplayMode:[Preferences getIntPreference:"displayMode"]];
     if ([Preferences getBoolPreference:"autoScales"]) {
+      [self setScaleFactor:1];
       [self setAutoScales:YES];
     } else {
       [self setScaleFactor:[Preferences getFloatPreference:"scaleFactor"]];
