@@ -5,7 +5,7 @@
   <Description about="urn:mozilla:install-manifest">
     <em:id>colesbury@gmail.com</em:id>
     <em:name>Quartz PDF Plugin</em:name>
-    <em:version>0.9.9</em:version>
+    <em:version>0.9.9.2</em:version>
     <em:type>2</em:type>
 
     <em:targetApplication>
