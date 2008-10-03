@@ -501,6 +501,208 @@
 		9455AE2E0DEB25B60059FED3 /* pdfplugin.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = pdfplugin.r; sourceTree = "<group>"; };
 		945ABD250E8F457400FC83E6 /* PDFPlugin.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PDFPlugin.idl; sourceTree = "<group>"; };
 		945CA6CF0E9583D500202FE4 /* PluginPDFViewMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PluginPDFViewMenu.mm; path = src/PluginPDFViewMenu.mm; sourceTree = "<group>"; };
+		945CA8860E95E33000202FE4 /* regxpcom */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = regxpcom; sourceTree = "<group>"; };
+		945CA8870E95E33000202FE4 /* xpidl */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = xpidl; sourceTree = "<group>"; };
+		945CA8880E95E33000202FE4 /* xpt_dump */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = xpt_dump; sourceTree = "<group>"; };
+		945CA8890E95E33000202FE4 /* xpt_link */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = xpt_link; sourceTree = "<group>"; };
+		945CA88B0E95E33000202FE4 /* domstubs.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = domstubs.idl; sourceTree = "<group>"; };
+		945CA88C0E95E33000202FE4 /* mozIJSSubScriptLoader.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mozIJSSubScriptLoader.idl; sourceTree = "<group>"; };
+		945CA88D0E95E33000202FE4 /* nsIArray.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIArray.idl; sourceTree = "<group>"; };
+		945CA88E0E95E33000202FE4 /* nsIASN1Object.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIASN1Object.idl; sourceTree = "<group>"; };
+		945CA88F0E95E33000202FE4 /* nsIASN1Sequence.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIASN1Sequence.idl; sourceTree = "<group>"; };
+		945CA8900E95E33000202FE4 /* nsICategoryManager.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsICategoryManager.idl; sourceTree = "<group>"; };
+		945CA8910E95E33000202FE4 /* nsICertificateDialogs.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsICertificateDialogs.idl; sourceTree = "<group>"; };
+		945CA8920E95E33000202FE4 /* nsIChannel.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIChannel.idl; sourceTree = "<group>"; };
+		945CA8930E95E33000202FE4 /* nsIClassInfo.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIClassInfo.idl; sourceTree = "<group>"; };
+		945CA8940E95E33000202FE4 /* nsIClipboardCommands.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIClipboardCommands.idl; sourceTree = "<group>"; };
+		945CA8950E95E33000202FE4 /* nsIComponentManager.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIComponentManager.idl; sourceTree = "<group>"; };
+		945CA8960E95E33000202FE4 /* nsIComponentRegistrar.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIComponentRegistrar.idl; sourceTree = "<group>"; };
+		945CA8970E95E33000202FE4 /* nsIContextMenuListener.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIContextMenuListener.idl; sourceTree = "<group>"; };
+		945CA8980E95E33000202FE4 /* nsICookie.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsICookie.idl; sourceTree = "<group>"; };
+		945CA8990E95E33000202FE4 /* nsICookieManager.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsICookieManager.idl; sourceTree = "<group>"; };
+		945CA89A0E95E33000202FE4 /* nsICRLInfo.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsICRLInfo.idl; sourceTree = "<group>"; };
+		945CA89B0E95E33000202FE4 /* nsIDebug.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDebug.idl; sourceTree = "<group>"; };
+		945CA89C0E95E33000202FE4 /* nsIDirectoryService.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDirectoryService.idl; sourceTree = "<group>"; };
+		945CA89D0E95E33000202FE4 /* nsIDOM3DocumentEvent.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOM3DocumentEvent.idl; sourceTree = "<group>"; };
+		945CA89E0E95E33000202FE4 /* nsIDOM3EventTarget.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOM3EventTarget.idl; sourceTree = "<group>"; };
+		945CA89F0E95E33000202FE4 /* nsIDOMAbstractView.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMAbstractView.idl; sourceTree = "<group>"; };
+		945CA8A00E95E33000202FE4 /* nsIDOMAttr.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMAttr.idl; sourceTree = "<group>"; };
+		945CA8A10E95E33000202FE4 /* nsIDOMBarProp.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMBarProp.idl; sourceTree = "<group>"; };
+		945CA8A20E95E33000202FE4 /* nsIDOMCDATASection.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMCDATASection.idl; sourceTree = "<group>"; };
+		945CA8A30E95E33000202FE4 /* nsIDOMCharacterData.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMCharacterData.idl; sourceTree = "<group>"; };
+		945CA8A40E95E33000202FE4 /* nsIDOMComment.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMComment.idl; sourceTree = "<group>"; };
+		945CA8A50E95E33000202FE4 /* nsIDOMCSSPrimitiveValue.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMCSSPrimitiveValue.idl; sourceTree = "<group>"; };
+		945CA8A60E95E33000202FE4 /* nsIDOMCSSRule.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMCSSRule.idl; sourceTree = "<group>"; };
+		945CA8A70E95E33000202FE4 /* nsIDOMCSSRuleList.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMCSSRuleList.idl; sourceTree = "<group>"; };
+		945CA8A80E95E33000202FE4 /* nsIDOMCSSStyleDeclaration.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMCSSStyleDeclaration.idl; sourceTree = "<group>"; };
+		945CA8A90E95E33000202FE4 /* nsIDOMCSSStyleSheet.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMCSSStyleSheet.idl; sourceTree = "<group>"; };
+		945CA8AA0E95E33000202FE4 /* nsIDOMCSSValue.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMCSSValue.idl; sourceTree = "<group>"; };
+		945CA8AB0E95E33000202FE4 /* nsIDOMCSSValueList.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMCSSValueList.idl; sourceTree = "<group>"; };
+		945CA8AC0E95E33000202FE4 /* nsIDOMCustomEvent.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMCustomEvent.idl; sourceTree = "<group>"; };
+		945CA8AD0E95E33000202FE4 /* nsIDOMDocument.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMDocument.idl; sourceTree = "<group>"; };
+		945CA8AE0E95E33000202FE4 /* nsIDOMDocumentEvent.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMDocumentEvent.idl; sourceTree = "<group>"; };
+		945CA8AF0E95E33000202FE4 /* nsIDOMDocumentFragment.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMDocumentFragment.idl; sourceTree = "<group>"; };
+		945CA8B00E95E33000202FE4 /* nsIDOMDocumentRange.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMDocumentRange.idl; sourceTree = "<group>"; };
+		945CA8B10E95E33000202FE4 /* nsIDOMDocumentStyle.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMDocumentStyle.idl; sourceTree = "<group>"; };
+		945CA8B20E95E33000202FE4 /* nsIDOMDocumentType.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMDocumentType.idl; sourceTree = "<group>"; };
+		945CA8B30E95E33000202FE4 /* nsIDOMDocumentView.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMDocumentView.idl; sourceTree = "<group>"; };
+		945CA8B40E95E33000202FE4 /* nsIDOMDOMException.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMDOMException.idl; sourceTree = "<group>"; };
+		945CA8B50E95E33000202FE4 /* nsIDOMDOMImplementation.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMDOMImplementation.idl; sourceTree = "<group>"; };
+		945CA8B60E95E33000202FE4 /* nsIDOMElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMElement.idl; sourceTree = "<group>"; };
+		945CA8B70E95E33000202FE4 /* nsIDOMElementCSSInlineStyle.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMElementCSSInlineStyle.idl; sourceTree = "<group>"; };
+		945CA8B80E95E33000202FE4 /* nsIDOMEntity.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMEntity.idl; sourceTree = "<group>"; };
+		945CA8B90E95E33000202FE4 /* nsIDOMEntityReference.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMEntityReference.idl; sourceTree = "<group>"; };
+		945CA8BA0E95E33000202FE4 /* nsIDOMEvent.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMEvent.idl; sourceTree = "<group>"; };
+		945CA8BB0E95E33000202FE4 /* nsIDOMEventGroup.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMEventGroup.idl; sourceTree = "<group>"; };
+		945CA8BC0E95E33000202FE4 /* nsIDOMEventListener.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMEventListener.idl; sourceTree = "<group>"; };
+		945CA8BD0E95E33000202FE4 /* nsIDOMEventTarget.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMEventTarget.idl; sourceTree = "<group>"; };
+		945CA8BE0E95E33000202FE4 /* nsIDOMHTMLAnchorElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLAnchorElement.idl; sourceTree = "<group>"; };
+		945CA8BF0E95E33000202FE4 /* nsIDOMHTMLAppletElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLAppletElement.idl; sourceTree = "<group>"; };
+		945CA8C00E95E33000202FE4 /* nsIDOMHTMLAreaElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLAreaElement.idl; sourceTree = "<group>"; };
+		945CA8C10E95E33000202FE4 /* nsIDOMHTMLBaseElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLBaseElement.idl; sourceTree = "<group>"; };
+		945CA8C20E95E33000202FE4 /* nsIDOMHTMLBaseFontElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLBaseFontElement.idl; sourceTree = "<group>"; };
+		945CA8C30E95E33000202FE4 /* nsIDOMHTMLBodyElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLBodyElement.idl; sourceTree = "<group>"; };
+		945CA8C40E95E33000202FE4 /* nsIDOMHTMLBRElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLBRElement.idl; sourceTree = "<group>"; };
+		945CA8C50E95E33000202FE4 /* nsIDOMHTMLButtonElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLButtonElement.idl; sourceTree = "<group>"; };
+		945CA8C60E95E33000202FE4 /* nsIDOMHTMLCollection.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLCollection.idl; sourceTree = "<group>"; };
+		945CA8C70E95E33000202FE4 /* nsIDOMHTMLDirectoryElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLDirectoryElement.idl; sourceTree = "<group>"; };
+		945CA8C80E95E33000202FE4 /* nsIDOMHTMLDivElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLDivElement.idl; sourceTree = "<group>"; };
+		945CA8C90E95E33000202FE4 /* nsIDOMHTMLDListElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLDListElement.idl; sourceTree = "<group>"; };
+		945CA8CA0E95E33000202FE4 /* nsIDOMHTMLDocument.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLDocument.idl; sourceTree = "<group>"; };
+		945CA8CB0E95E33000202FE4 /* nsIDOMHTMLElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLElement.idl; sourceTree = "<group>"; };
+		945CA8CC0E95E33000202FE4 /* nsIDOMHTMLEmbedElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLEmbedElement.idl; sourceTree = "<group>"; };
+		945CA8CD0E95E33000202FE4 /* nsIDOMHTMLFieldSetElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLFieldSetElement.idl; sourceTree = "<group>"; };
+		945CA8CE0E95E33000202FE4 /* nsIDOMHTMLFontElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLFontElement.idl; sourceTree = "<group>"; };
+		945CA8CF0E95E33000202FE4 /* nsIDOMHTMLFormElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLFormElement.idl; sourceTree = "<group>"; };
+		945CA8D00E95E33000202FE4 /* nsIDOMHTMLFrameElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLFrameElement.idl; sourceTree = "<group>"; };
+		945CA8D10E95E33000202FE4 /* nsIDOMHTMLFrameSetElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLFrameSetElement.idl; sourceTree = "<group>"; };
+		945CA8D20E95E33000202FE4 /* nsIDOMHTMLHeadElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLHeadElement.idl; sourceTree = "<group>"; };
+		945CA8D30E95E33000202FE4 /* nsIDOMHTMLHeadingElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLHeadingElement.idl; sourceTree = "<group>"; };
+		945CA8D40E95E33000202FE4 /* nsIDOMHTMLHRElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLHRElement.idl; sourceTree = "<group>"; };
+		945CA8D50E95E33000202FE4 /* nsIDOMHTMLHtmlElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLHtmlElement.idl; sourceTree = "<group>"; };
+		945CA8D60E95E33000202FE4 /* nsIDOMHTMLIFrameElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLIFrameElement.idl; sourceTree = "<group>"; };
+		945CA8D70E95E33000202FE4 /* nsIDOMHTMLImageElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLImageElement.idl; sourceTree = "<group>"; };
+		945CA8D80E95E33000202FE4 /* nsIDOMHTMLInputElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLInputElement.idl; sourceTree = "<group>"; };
+		945CA8D90E95E33000202FE4 /* nsIDOMHTMLIsIndexElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLIsIndexElement.idl; sourceTree = "<group>"; };
+		945CA8DA0E95E33000202FE4 /* nsIDOMHTMLLabelElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLLabelElement.idl; sourceTree = "<group>"; };
+		945CA8DB0E95E33000202FE4 /* nsIDOMHTMLLegendElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLLegendElement.idl; sourceTree = "<group>"; };
+		945CA8DC0E95E33000202FE4 /* nsIDOMHTMLLIElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLLIElement.idl; sourceTree = "<group>"; };
+		945CA8DD0E95E33000202FE4 /* nsIDOMHTMLLinkElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLLinkElement.idl; sourceTree = "<group>"; };
+		945CA8DE0E95E33000202FE4 /* nsIDOMHTMLMapElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLMapElement.idl; sourceTree = "<group>"; };
+		945CA8DF0E95E33000202FE4 /* nsIDOMHTMLMenuElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLMenuElement.idl; sourceTree = "<group>"; };
+		945CA8E00E95E33000202FE4 /* nsIDOMHTMLMetaElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLMetaElement.idl; sourceTree = "<group>"; };
+		945CA8E10E95E33000202FE4 /* nsIDOMHTMLModElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLModElement.idl; sourceTree = "<group>"; };
+		945CA8E20E95E33000202FE4 /* nsIDOMHTMLObjectElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLObjectElement.idl; sourceTree = "<group>"; };
+		945CA8E30E95E33000202FE4 /* nsIDOMHTMLOListElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLOListElement.idl; sourceTree = "<group>"; };
+		945CA8E40E95E33000202FE4 /* nsIDOMHTMLOptGroupElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLOptGroupElement.idl; sourceTree = "<group>"; };
+		945CA8E50E95E33000202FE4 /* nsIDOMHTMLOptionElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLOptionElement.idl; sourceTree = "<group>"; };
+		945CA8E60E95E33000202FE4 /* nsIDOMHTMLOptionsCollection.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLOptionsCollection.idl; sourceTree = "<group>"; };
+		945CA8E70E95E33000202FE4 /* nsIDOMHTMLParagraphElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLParagraphElement.idl; sourceTree = "<group>"; };
+		945CA8E80E95E33000202FE4 /* nsIDOMHTMLParamElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLParamElement.idl; sourceTree = "<group>"; };
+		945CA8E90E95E33000202FE4 /* nsIDOMHTMLPreElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLPreElement.idl; sourceTree = "<group>"; };
+		945CA8EA0E95E33000202FE4 /* nsIDOMHTMLQuoteElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLQuoteElement.idl; sourceTree = "<group>"; };
+		945CA8EB0E95E33000202FE4 /* nsIDOMHTMLScriptElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLScriptElement.idl; sourceTree = "<group>"; };
+		945CA8EC0E95E33000202FE4 /* nsIDOMHTMLSelectElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLSelectElement.idl; sourceTree = "<group>"; };
+		945CA8ED0E95E33000202FE4 /* nsIDOMHTMLStyleElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLStyleElement.idl; sourceTree = "<group>"; };
+		945CA8EE0E95E33000202FE4 /* nsIDOMHTMLTableCaptionElem.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLTableCaptionElem.idl; sourceTree = "<group>"; };
+		945CA8EF0E95E33000202FE4 /* nsIDOMHTMLTableCellElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLTableCellElement.idl; sourceTree = "<group>"; };
+		945CA8F00E95E33000202FE4 /* nsIDOMHTMLTableColElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLTableColElement.idl; sourceTree = "<group>"; };
+		945CA8F10E95E33000202FE4 /* nsIDOMHTMLTableElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLTableElement.idl; sourceTree = "<group>"; };
+		945CA8F20E95E33000202FE4 /* nsIDOMHTMLTableRowElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLTableRowElement.idl; sourceTree = "<group>"; };
+		945CA8F30E95E33000202FE4 /* nsIDOMHTMLTableSectionElem.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLTableSectionElem.idl; sourceTree = "<group>"; };
+		945CA8F40E95E33000202FE4 /* nsIDOMHTMLTextAreaElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLTextAreaElement.idl; sourceTree = "<group>"; };
+		945CA8F50E95E33000202FE4 /* nsIDOMHTMLTitleElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLTitleElement.idl; sourceTree = "<group>"; };
+		945CA8F60E95E33000202FE4 /* nsIDOMHTMLUListElement.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMHTMLUListElement.idl; sourceTree = "<group>"; };
+		945CA8F70E95E33000202FE4 /* nsIDOMMediaList.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMMediaList.idl; sourceTree = "<group>"; };
+		945CA8F80E95E33000202FE4 /* nsIDOMMouseEvent.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMMouseEvent.idl; sourceTree = "<group>"; };
+		945CA8F90E95E33000202FE4 /* nsIDOMNamedNodeMap.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMNamedNodeMap.idl; sourceTree = "<group>"; };
+		945CA8FA0E95E33000202FE4 /* nsIDOMNode.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMNode.idl; sourceTree = "<group>"; };
+		945CA8FB0E95E33000202FE4 /* nsIDOMNodeList.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMNodeList.idl; sourceTree = "<group>"; };
+		945CA8FC0E95E33000202FE4 /* nsIDOMNotation.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMNotation.idl; sourceTree = "<group>"; };
+		945CA8FD0E95E33000202FE4 /* nsIDOMProcessingInstruction.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMProcessingInstruction.idl; sourceTree = "<group>"; };
+		945CA8FE0E95E33000202FE4 /* nsIDOMRange.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMRange.idl; sourceTree = "<group>"; };
+		945CA8FF0E95E33000202FE4 /* nsIDOMStorage.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMStorage.idl; sourceTree = "<group>"; };
+		945CA9000E95E33000202FE4 /* nsIDOMStorageEvent.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMStorageEvent.idl; sourceTree = "<group>"; };
+		945CA9010E95E33000202FE4 /* nsIDOMStorageItem.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMStorageItem.idl; sourceTree = "<group>"; };
+		945CA9020E95E33000202FE4 /* nsIDOMStorageList.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMStorageList.idl; sourceTree = "<group>"; };
+		945CA9030E95E33000202FE4 /* nsIDOMStorageWindow.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMStorageWindow.idl; sourceTree = "<group>"; };
+		945CA9040E95E33000202FE4 /* nsIDOMStyleSheet.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMStyleSheet.idl; sourceTree = "<group>"; };
+		945CA9050E95E33000202FE4 /* nsIDOMStyleSheetList.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMStyleSheetList.idl; sourceTree = "<group>"; };
+		945CA9060E95E33000202FE4 /* nsIDOMText.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMText.idl; sourceTree = "<group>"; };
+		945CA9070E95E33000202FE4 /* nsIDOMUIEvent.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMUIEvent.idl; sourceTree = "<group>"; };
+		945CA9080E95E33000202FE4 /* nsIDOMWindow.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMWindow.idl; sourceTree = "<group>"; };
+		945CA9090E95E33000202FE4 /* nsIDOMWindow2.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMWindow2.idl; sourceTree = "<group>"; };
+		945CA90A0E95E33000202FE4 /* nsIDOMWindowCollection.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMWindowCollection.idl; sourceTree = "<group>"; };
+		945CA90B0E95E33000202FE4 /* nsIDOMWindowUtils.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIDOMWindowUtils.idl; sourceTree = "<group>"; };
+		945CA90C0E95E33000202FE4 /* nsIEmbeddingSiteWindow.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIEmbeddingSiteWindow.idl; sourceTree = "<group>"; };
+		945CA90D0E95E33000202FE4 /* nsIFactory.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIFactory.idl; sourceTree = "<group>"; };
+		945CA90E0E95E33000202FE4 /* nsIFile.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIFile.idl; sourceTree = "<group>"; };
+		945CA90F0E95E33000202FE4 /* nsIFileURL.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIFileURL.idl; sourceTree = "<group>"; };
+		945CA9100E95E33000202FE4 /* nsIGlobalHistory.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIGlobalHistory.idl; sourceTree = "<group>"; };
+		945CA9110E95E33000202FE4 /* nsIHashable.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIHashable.idl; sourceTree = "<group>"; };
+		945CA9120E95E33000202FE4 /* nsIHistoryEntry.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIHistoryEntry.idl; sourceTree = "<group>"; };
+		945CA9130E95E33000202FE4 /* nsIHttpChannel.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIHttpChannel.idl; sourceTree = "<group>"; };
+		945CA9140E95E33000202FE4 /* nsIHttpHeaderVisitor.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIHttpHeaderVisitor.idl; sourceTree = "<group>"; };
+		945CA9150E95E33000202FE4 /* nsIInputStream.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIInputStream.idl; sourceTree = "<group>"; };
+		945CA9160E95E33000202FE4 /* nsIInterfaceRequestor.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIInterfaceRequestor.idl; sourceTree = "<group>"; };
+		945CA9170E95E33000202FE4 /* nsIIOService.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIIOService.idl; sourceTree = "<group>"; };
+		945CA9180E95E33000202FE4 /* nsIJSON.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIJSON.idl; sourceTree = "<group>"; };
+		945CA9190E95E33000202FE4 /* nsILoadGroup.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsILoadGroup.idl; sourceTree = "<group>"; };
+		945CA91A0E95E33000202FE4 /* nsILocalFile.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsILocalFile.idl; sourceTree = "<group>"; };
+		945CA91B0E95E33000202FE4 /* nsIMemory.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIMemory.idl; sourceTree = "<group>"; };
+		945CA91C0E95E33000202FE4 /* nsIModule.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIModule.idl; sourceTree = "<group>"; };
+		945CA91D0E95E33000202FE4 /* nsIMutableArray.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIMutableArray.idl; sourceTree = "<group>"; };
+		945CA91E0E95E33000202FE4 /* nsIObserver.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIObserver.idl; sourceTree = "<group>"; };
+		945CA91F0E95E33000202FE4 /* nsIObserverService.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIObserverService.idl; sourceTree = "<group>"; };
+		945CA9200E95E33000202FE4 /* nsIOutputStream.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIOutputStream.idl; sourceTree = "<group>"; };
+		945CA9210E95E33000202FE4 /* nsIPrefBranch.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIPrefBranch.idl; sourceTree = "<group>"; };
+		945CA9220E95E33000202FE4 /* nsIPrefBranch2.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIPrefBranch2.idl; sourceTree = "<group>"; };
+		945CA9230E95E33000202FE4 /* nsIPrefLocalizedString.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIPrefLocalizedString.idl; sourceTree = "<group>"; };
+		945CA9240E95E33000202FE4 /* nsIPrefService.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIPrefService.idl; sourceTree = "<group>"; };
+		945CA9250E95E33000202FE4 /* nsIProfile.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIProfile.idl; sourceTree = "<group>"; };
+		945CA9260E95E33000202FE4 /* nsIProfileChangeStatus.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIProfileChangeStatus.idl; sourceTree = "<group>"; };
+		945CA9270E95E33000202FE4 /* nsIProgrammingLanguage.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIProgrammingLanguage.idl; sourceTree = "<group>"; };
+		945CA9280E95E33000202FE4 /* nsIPromptService.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIPromptService.idl; sourceTree = "<group>"; };
+		945CA9290E95E33000202FE4 /* nsIProperties.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIProperties.idl; sourceTree = "<group>"; };
+		945CA92A0E95E33000202FE4 /* nsIProtocolHandler.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIProtocolHandler.idl; sourceTree = "<group>"; };
+		945CA92B0E95E33000202FE4 /* nsIRequest.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIRequest.idl; sourceTree = "<group>"; };
+		945CA92C0E95E33000202FE4 /* nsIRequestObserver.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIRequestObserver.idl; sourceTree = "<group>"; };
+		945CA92D0E95E33000202FE4 /* nsIScriptableInputStream.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIScriptableInputStream.idl; sourceTree = "<group>"; };
+		945CA92E0E95E33000202FE4 /* nsISecurityWarningDialogs.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsISecurityWarningDialogs.idl; sourceTree = "<group>"; };
+		945CA92F0E95E33000202FE4 /* nsISelection.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsISelection.idl; sourceTree = "<group>"; };
+		945CA9300E95E33000202FE4 /* nsIServiceManager.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIServiceManager.idl; sourceTree = "<group>"; };
+		945CA9310E95E33000202FE4 /* nsISHistory.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsISHistory.idl; sourceTree = "<group>"; };
+		945CA9320E95E33000202FE4 /* nsISHistoryListener.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsISHistoryListener.idl; sourceTree = "<group>"; };
+		945CA9330E95E33000202FE4 /* nsISimpleEnumerator.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsISimpleEnumerator.idl; sourceTree = "<group>"; };
+		945CA9340E95E33000202FE4 /* nsIStreamListener.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIStreamListener.idl; sourceTree = "<group>"; };
+		945CA9350E95E33000202FE4 /* nsISupports.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsISupports.idl; sourceTree = "<group>"; };
+		945CA9360E95E33000202FE4 /* nsISupportsPrimitives.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsISupportsPrimitives.idl; sourceTree = "<group>"; };
+		945CA9370E95E33000202FE4 /* nsITooltipListener.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsITooltipListener.idl; sourceTree = "<group>"; };
+		945CA9380E95E33000202FE4 /* nsITooltipTextProvider.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsITooltipTextProvider.idl; sourceTree = "<group>"; };
+		945CA9390E95E33000202FE4 /* nsITraceRefcnt.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsITraceRefcnt.idl; sourceTree = "<group>"; };
+		945CA93A0E95E33000202FE4 /* nsIUnicharStreamListener.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIUnicharStreamListener.idl; sourceTree = "<group>"; };
+		945CA93B0E95E33000202FE4 /* nsIUploadChannel.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIUploadChannel.idl; sourceTree = "<group>"; };
+		945CA93C0E95E33000202FE4 /* nsIURI.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIURI.idl; sourceTree = "<group>"; };
+		945CA93D0E95E33000202FE4 /* nsIURIContentListener.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIURIContentListener.idl; sourceTree = "<group>"; };
+		945CA93E0E95E33000202FE4 /* nsIURL.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIURL.idl; sourceTree = "<group>"; };
+		945CA93F0E95E33000202FE4 /* nsIWeakReference.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIWeakReference.idl; sourceTree = "<group>"; };
+		945CA9400E95E33000202FE4 /* nsIWebBrowser.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIWebBrowser.idl; sourceTree = "<group>"; };
+		945CA9410E95E33000202FE4 /* nsIWebBrowserChrome.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIWebBrowserChrome.idl; sourceTree = "<group>"; };
+		945CA9420E95E33000202FE4 /* nsIWebBrowserChromeFocus.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIWebBrowserChromeFocus.idl; sourceTree = "<group>"; };
+		945CA9430E95E33000202FE4 /* nsIWebBrowserFind.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIWebBrowserFind.idl; sourceTree = "<group>"; };
+		945CA9440E95E33000202FE4 /* nsIWebBrowserFocus.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIWebBrowserFocus.idl; sourceTree = "<group>"; };
+		945CA9450E95E33000202FE4 /* nsIWebBrowserPrint.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIWebBrowserPrint.idl; sourceTree = "<group>"; };
+		945CA9460E95E33000202FE4 /* nsIWebBrowserSetup.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIWebBrowserSetup.idl; sourceTree = "<group>"; };
+		945CA9470E95E33000202FE4 /* nsIWebBrowserStream.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIWebBrowserStream.idl; sourceTree = "<group>"; };
+		945CA9480E95E33000202FE4 /* nsIWebProgress.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIWebProgress.idl; sourceTree = "<group>"; };
+		945CA9490E95E33000202FE4 /* nsIWebProgressListener.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIWebProgressListener.idl; sourceTree = "<group>"; };
+		945CA94A0E95E33000202FE4 /* nsIWindowCreator.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIWindowCreator.idl; sourceTree = "<group>"; };
+		945CA94B0E95E33000202FE4 /* nsIWindowWatcher.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIWindowWatcher.idl; sourceTree = "<group>"; };
+		945CA94C0E95E33000202FE4 /* nsIX509Cert.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIX509Cert.idl; sourceTree = "<group>"; };
+		945CA94D0E95E33000202FE4 /* nsIX509CertDB.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIX509CertDB.idl; sourceTree = "<group>"; };
+		945CA94E0E95E33000202FE4 /* nsIX509CertValidity.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIX509CertValidity.idl; sourceTree = "<group>"; };
+		945CA94F0E95E33000202FE4 /* nsrootidl.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsrootidl.idl; sourceTree = "<group>"; };
+		945CA9500E95E33000202FE4 /* README.sgross */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.sgross; sourceTree = "<group>"; };
 		949DE1430DF4FBF200922723 /* PluginInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginInstance.h; path = src/PluginInstance.h; sourceTree = "<group>"; };
 		949DE1440DF4FBF200922723 /* PluginInstance.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PluginInstance.mm; path = src/PluginInstance.mm; sourceTree = "<group>"; };
 		949DE1450DF4FBF200922723 /* PluginPDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginPDFView.h; path = src/PluginPDFView.h; sourceTree = "<group>"; };
@@ -543,6 +745,7 @@
 		089C166AFE841209C02AAC07 /* pdfplugin */ = {
 			isa = PBXGroup;
 			children = (
+				945CA8840E95E33000202FE4 /* gecko_sdk */,
 				943E18430DFD0965002456E5 /* gecko api */,
 				9415EEB90DECEE3C00DB1334 /* prebuilt */,
 				94276FC20E7324910005E3E9 /* idl */,
@@ -1115,6 +1318,231 @@
 			path = npapi;
 			sourceTree = "<group>";
 		};
+		945CA8840E95E33000202FE4 /* gecko_sdk */ = {
+			isa = PBXGroup;
+			children = (
+				945CA8850E95E33000202FE4 /* bin */,
+				945CA88A0E95E33000202FE4 /* idl */,
+				945CA9500E95E33000202FE4 /* README.sgross */,
+			);
+			path = gecko_sdk;
+			sourceTree = "<group>";
+		};
+		945CA8850E95E33000202FE4 /* bin */ = {
+			isa = PBXGroup;
+			children = (
+				945CA8860E95E33000202FE4 /* regxpcom */,
+				945CA8870E95E33000202FE4 /* xpidl */,
+				945CA8880E95E33000202FE4 /* xpt_dump */,
+				945CA8890E95E33000202FE4 /* xpt_link */,
+			);
+			path = bin;
+			sourceTree = "<group>";
+		};
+		945CA88A0E95E33000202FE4 /* idl */ = {
+			isa = PBXGroup;
+			children = (
+				945CA88B0E95E33000202FE4 /* domstubs.idl */,
+				945CA88C0E95E33000202FE4 /* mozIJSSubScriptLoader.idl */,
+				945CA88D0E95E33000202FE4 /* nsIArray.idl */,
+				945CA88E0E95E33000202FE4 /* nsIASN1Object.idl */,
+				945CA88F0E95E33000202FE4 /* nsIASN1Sequence.idl */,
+				945CA8900E95E33000202FE4 /* nsICategoryManager.idl */,
+				945CA8910E95E33000202FE4 /* nsICertificateDialogs.idl */,
+				945CA8920E95E33000202FE4 /* nsIChannel.idl */,
+				945CA8930E95E33000202FE4 /* nsIClassInfo.idl */,
+				945CA8940E95E33000202FE4 /* nsIClipboardCommands.idl */,
+				945CA8950E95E33000202FE4 /* nsIComponentManager.idl */,
+				945CA8960E95E33000202FE4 /* nsIComponentRegistrar.idl */,
+				945CA8970E95E33000202FE4 /* nsIContextMenuListener.idl */,
+				945CA8980E95E33000202FE4 /* nsICookie.idl */,
+				945CA8990E95E33000202FE4 /* nsICookieManager.idl */,
+				945CA89A0E95E33000202FE4 /* nsICRLInfo.idl */,
+				945CA89B0E95E33000202FE4 /* nsIDebug.idl */,
+				945CA89C0E95E33000202FE4 /* nsIDirectoryService.idl */,
+				945CA89D0E95E33000202FE4 /* nsIDOM3DocumentEvent.idl */,
+				945CA89E0E95E33000202FE4 /* nsIDOM3EventTarget.idl */,
+				945CA89F0E95E33000202FE4 /* nsIDOMAbstractView.idl */,
+				945CA8A00E95E33000202FE4 /* nsIDOMAttr.idl */,
+				945CA8A10E95E33000202FE4 /* nsIDOMBarProp.idl */,
+				945CA8A20E95E33000202FE4 /* nsIDOMCDATASection.idl */,
+				945CA8A30E95E33000202FE4 /* nsIDOMCharacterData.idl */,
+				945CA8A40E95E33000202FE4 /* nsIDOMComment.idl */,
+				945CA8A50E95E33000202FE4 /* nsIDOMCSSPrimitiveValue.idl */,
+				945CA8A60E95E33000202FE4 /* nsIDOMCSSRule.idl */,
+				945CA8A70E95E33000202FE4 /* nsIDOMCSSRuleList.idl */,
+				945CA8A80E95E33000202FE4 /* nsIDOMCSSStyleDeclaration.idl */,
+				945CA8A90E95E33000202FE4 /* nsIDOMCSSStyleSheet.idl */,
+				945CA8AA0E95E33000202FE4 /* nsIDOMCSSValue.idl */,
+				945CA8AB0E95E33000202FE4 /* nsIDOMCSSValueList.idl */,
+				945CA8AC0E95E33000202FE4 /* nsIDOMCustomEvent.idl */,
+				945CA8AD0E95E33000202FE4 /* nsIDOMDocument.idl */,
+				945CA8AE0E95E33000202FE4 /* nsIDOMDocumentEvent.idl */,
+				945CA8AF0E95E33000202FE4 /* nsIDOMDocumentFragment.idl */,
+				945CA8B00E95E33000202FE4 /* nsIDOMDocumentRange.idl */,
+				945CA8B10E95E33000202FE4 /* nsIDOMDocumentStyle.idl */,
+				945CA8B20E95E33000202FE4 /* nsIDOMDocumentType.idl */,
+				945CA8B30E95E33000202FE4 /* nsIDOMDocumentView.idl */,
+				945CA8B40E95E33000202FE4 /* nsIDOMDOMException.idl */,
+				945CA8B50E95E33000202FE4 /* nsIDOMDOMImplementation.idl */,
+				945CA8B60E95E33000202FE4 /* nsIDOMElement.idl */,
+				945CA8B70E95E33000202FE4 /* nsIDOMElementCSSInlineStyle.idl */,
+				945CA8B80E95E33000202FE4 /* nsIDOMEntity.idl */,
+				945CA8B90E95E33000202FE4 /* nsIDOMEntityReference.idl */,
+				945CA8BA0E95E33000202FE4 /* nsIDOMEvent.idl */,
+				945CA8BB0E95E33000202FE4 /* nsIDOMEventGroup.idl */,
+				945CA8BC0E95E33000202FE4 /* nsIDOMEventListener.idl */,
+				945CA8BD0E95E33000202FE4 /* nsIDOMEventTarget.idl */,
+				945CA8BE0E95E33000202FE4 /* nsIDOMHTMLAnchorElement.idl */,
+				945CA8BF0E95E33000202FE4 /* nsIDOMHTMLAppletElement.idl */,
+				945CA8C00E95E33000202FE4 /* nsIDOMHTMLAreaElement.idl */,
+				945CA8C10E95E33000202FE4 /* nsIDOMHTMLBaseElement.idl */,
+				945CA8C20E95E33000202FE4 /* nsIDOMHTMLBaseFontElement.idl */,
+				945CA8C30E95E33000202FE4 /* nsIDOMHTMLBodyElement.idl */,
+				945CA8C40E95E33000202FE4 /* nsIDOMHTMLBRElement.idl */,
+				945CA8C50E95E33000202FE4 /* nsIDOMHTMLButtonElement.idl */,
+				945CA8C60E95E33000202FE4 /* nsIDOMHTMLCollection.idl */,
+				945CA8C70E95E33000202FE4 /* nsIDOMHTMLDirectoryElement.idl */,
+				945CA8C80E95E33000202FE4 /* nsIDOMHTMLDivElement.idl */,
+				945CA8C90E95E33000202FE4 /* nsIDOMHTMLDListElement.idl */,
+				945CA8CA0E95E33000202FE4 /* nsIDOMHTMLDocument.idl */,
+				945CA8CB0E95E33000202FE4 /* nsIDOMHTMLElement.idl */,
+				945CA8CC0E95E33000202FE4 /* nsIDOMHTMLEmbedElement.idl */,
+				945CA8CD0E95E33000202FE4 /* nsIDOMHTMLFieldSetElement.idl */,
+				945CA8CE0E95E33000202FE4 /* nsIDOMHTMLFontElement.idl */,
+				945CA8CF0E95E33000202FE4 /* nsIDOMHTMLFormElement.idl */,
+				945CA8D00E95E33000202FE4 /* nsIDOMHTMLFrameElement.idl */,
+				945CA8D10E95E33000202FE4 /* nsIDOMHTMLFrameSetElement.idl */,
+				945CA8D20E95E33000202FE4 /* nsIDOMHTMLHeadElement.idl */,
+				945CA8D30E95E33000202FE4 /* nsIDOMHTMLHeadingElement.idl */,
+				945CA8D40E95E33000202FE4 /* nsIDOMHTMLHRElement.idl */,
+				945CA8D50E95E33000202FE4 /* nsIDOMHTMLHtmlElement.idl */,
+				945CA8D60E95E33000202FE4 /* nsIDOMHTMLIFrameElement.idl */,
+				945CA8D70E95E33000202FE4 /* nsIDOMHTMLImageElement.idl */,
+				945CA8D80E95E33000202FE4 /* nsIDOMHTMLInputElement.idl */,
+				945CA8D90E95E33000202FE4 /* nsIDOMHTMLIsIndexElement.idl */,
+				945CA8DA0E95E33000202FE4 /* nsIDOMHTMLLabelElement.idl */,
+				945CA8DB0E95E33000202FE4 /* nsIDOMHTMLLegendElement.idl */,
+				945CA8DC0E95E33000202FE4 /* nsIDOMHTMLLIElement.idl */,
+				945CA8DD0E95E33000202FE4 /* nsIDOMHTMLLinkElement.idl */,
+				945CA8DE0E95E33000202FE4 /* nsIDOMHTMLMapElement.idl */,
+				945CA8DF0E95E33000202FE4 /* nsIDOMHTMLMenuElement.idl */,
+				945CA8E00E95E33000202FE4 /* nsIDOMHTMLMetaElement.idl */,
+				945CA8E10E95E33000202FE4 /* nsIDOMHTMLModElement.idl */,
+				945CA8E20E95E33000202FE4 /* nsIDOMHTMLObjectElement.idl */,
+				945CA8E30E95E33000202FE4 /* nsIDOMHTMLOListElement.idl */,
+				945CA8E40E95E33000202FE4 /* nsIDOMHTMLOptGroupElement.idl */,
+				945CA8E50E95E33000202FE4 /* nsIDOMHTMLOptionElement.idl */,
+				945CA8E60E95E33000202FE4 /* nsIDOMHTMLOptionsCollection.idl */,
+				945CA8E70E95E33000202FE4 /* nsIDOMHTMLParagraphElement.idl */,
+				945CA8E80E95E33000202FE4 /* nsIDOMHTMLParamElement.idl */,
+				945CA8E90E95E33000202FE4 /* nsIDOMHTMLPreElement.idl */,
+				945CA8EA0E95E33000202FE4 /* nsIDOMHTMLQuoteElement.idl */,
+				945CA8EB0E95E33000202FE4 /* nsIDOMHTMLScriptElement.idl */,
+				945CA8EC0E95E33000202FE4 /* nsIDOMHTMLSelectElement.idl */,
+				945CA8ED0E95E33000202FE4 /* nsIDOMHTMLStyleElement.idl */,
+				945CA8EE0E95E33000202FE4 /* nsIDOMHTMLTableCaptionElem.idl */,
+				945CA8EF0E95E33000202FE4 /* nsIDOMHTMLTableCellElement.idl */,
+				945CA8F00E95E33000202FE4 /* nsIDOMHTMLTableColElement.idl */,
+				945CA8F10E95E33000202FE4 /* nsIDOMHTMLTableElement.idl */,
+				945CA8F20E95E33000202FE4 /* nsIDOMHTMLTableRowElement.idl */,
+				945CA8F30E95E33000202FE4 /* nsIDOMHTMLTableSectionElem.idl */,
+				945CA8F40E95E33000202FE4 /* nsIDOMHTMLTextAreaElement.idl */,
+				945CA8F50E95E33000202FE4 /* nsIDOMHTMLTitleElement.idl */,
+				945CA8F60E95E33000202FE4 /* nsIDOMHTMLUListElement.idl */,
+				945CA8F70E95E33000202FE4 /* nsIDOMMediaList.idl */,
+				945CA8F80E95E33000202FE4 /* nsIDOMMouseEvent.idl */,
+				945CA8F90E95E33000202FE4 /* nsIDOMNamedNodeMap.idl */,
+				945CA8FA0E95E33000202FE4 /* nsIDOMNode.idl */,
+				945CA8FB0E95E33000202FE4 /* nsIDOMNodeList.idl */,
+				945CA8FC0E95E33000202FE4 /* nsIDOMNotation.idl */,
+				945CA8FD0E95E33000202FE4 /* nsIDOMProcessingInstruction.idl */,
+				945CA8FE0E95E33000202FE4 /* nsIDOMRange.idl */,
+				945CA8FF0E95E33000202FE4 /* nsIDOMStorage.idl */,
+				945CA9000E95E33000202FE4 /* nsIDOMStorageEvent.idl */,
+				945CA9010E95E33000202FE4 /* nsIDOMStorageItem.idl */,
+				945CA9020E95E33000202FE4 /* nsIDOMStorageList.idl */,
+				945CA9030E95E33000202FE4 /* nsIDOMStorageWindow.idl */,
+				945CA9040E95E33000202FE4 /* nsIDOMStyleSheet.idl */,
+				945CA9050E95E33000202FE4 /* nsIDOMStyleSheetList.idl */,
+				945CA9060E95E33000202FE4 /* nsIDOMText.idl */,
+				945CA9070E95E33000202FE4 /* nsIDOMUIEvent.idl */,
+				945CA9080E95E33000202FE4 /* nsIDOMWindow.idl */,
+				945CA9090E95E33000202FE4 /* nsIDOMWindow2.idl */,
+				945CA90A0E95E33000202FE4 /* nsIDOMWindowCollection.idl */,
+				945CA90B0E95E33000202FE4 /* nsIDOMWindowUtils.idl */,
+				945CA90C0E95E33000202FE4 /* nsIEmbeddingSiteWindow.idl */,
+				945CA90D0E95E33000202FE4 /* nsIFactory.idl */,
+				945CA90E0E95E33000202FE4 /* nsIFile.idl */,
+				945CA90F0E95E33000202FE4 /* nsIFileURL.idl */,
+				945CA9100E95E33000202FE4 /* nsIGlobalHistory.idl */,
+				945CA9110E95E33000202FE4 /* nsIHashable.idl */,
+				945CA9120E95E33000202FE4 /* nsIHistoryEntry.idl */,
+				945CA9130E95E33000202FE4 /* nsIHttpChannel.idl */,
+				945CA9140E95E33000202FE4 /* nsIHttpHeaderVisitor.idl */,
+				945CA9150E95E33000202FE4 /* nsIInputStream.idl */,
+				945CA9160E95E33000202FE4 /* nsIInterfaceRequestor.idl */,
+				945CA9170E95E33000202FE4 /* nsIIOService.idl */,
+				945CA9180E95E33000202FE4 /* nsIJSON.idl */,
+				945CA9190E95E33000202FE4 /* nsILoadGroup.idl */,
+				945CA91A0E95E33000202FE4 /* nsILocalFile.idl */,
+				945CA91B0E95E33000202FE4 /* nsIMemory.idl */,
+				945CA91C0E95E33000202FE4 /* nsIModule.idl */,
+				945CA91D0E95E33000202FE4 /* nsIMutableArray.idl */,
+				945CA91E0E95E33000202FE4 /* nsIObserver.idl */,
+				945CA91F0E95E33000202FE4 /* nsIObserverService.idl */,
+				945CA9200E95E33000202FE4 /* nsIOutputStream.idl */,
+				945CA9210E95E33000202FE4 /* nsIPrefBranch.idl */,
+				945CA9220E95E33000202FE4 /* nsIPrefBranch2.idl */,
+				945CA9230E95E33000202FE4 /* nsIPrefLocalizedString.idl */,
+				945CA9240E95E33000202FE4 /* nsIPrefService.idl */,
+				945CA9250E95E33000202FE4 /* nsIProfile.idl */,
+				945CA9260E95E33000202FE4 /* nsIProfileChangeStatus.idl */,
+				945CA9270E95E33000202FE4 /* nsIProgrammingLanguage.idl */,
+				945CA9280E95E33000202FE4 /* nsIPromptService.idl */,
+				945CA9290E95E33000202FE4 /* nsIProperties.idl */,
+				945CA92A0E95E33000202FE4 /* nsIProtocolHandler.idl */,
+				945CA92B0E95E33000202FE4 /* nsIRequest.idl */,
+				945CA92C0E95E33000202FE4 /* nsIRequestObserver.idl */,
+				945CA92D0E95E33000202FE4 /* nsIScriptableInputStream.idl */,
+				945CA92E0E95E33000202FE4 /* nsISecurityWarningDialogs.idl */,
+				945CA92F0E95E33000202FE4 /* nsISelection.idl */,
+				945CA9300E95E33000202FE4 /* nsIServiceManager.idl */,
+				945CA9310E95E33000202FE4 /* nsISHistory.idl */,
+				945CA9320E95E33000202FE4 /* nsISHistoryListener.idl */,
+				945CA9330E95E33000202FE4 /* nsISimpleEnumerator.idl */,
+				945CA9340E95E33000202FE4 /* nsIStreamListener.idl */,
+				945CA9350E95E33000202FE4 /* nsISupports.idl */,
+				945CA9360E95E33000202FE4 /* nsISupportsPrimitives.idl */,
+				945CA9370E95E33000202FE4 /* nsITooltipListener.idl */,
+				945CA9380E95E33000202FE4 /* nsITooltipTextProvider.idl */,
+				945CA9390E95E33000202FE4 /* nsITraceRefcnt.idl */,
+				945CA93A0E95E33000202FE4 /* nsIUnicharStreamListener.idl */,
+				945CA93B0E95E33000202FE4 /* nsIUploadChannel.idl */,
+				945CA93C0E95E33000202FE4 /* nsIURI.idl */,
+				945CA93D0E95E33000202FE4 /* nsIURIContentListener.idl */,
+				945CA93E0E95E33000202FE4 /* nsIURL.idl */,
+				945CA93F0E95E33000202FE4 /* nsIWeakReference.idl */,
+				945CA9400E95E33000202FE4 /* nsIWebBrowser.idl */,
+				945CA9410E95E33000202FE4 /* nsIWebBrowserChrome.idl */,
+				945CA9420E95E33000202FE4 /* nsIWebBrowserChromeFocus.idl */,
+				945CA9430E95E33000202FE4 /* nsIWebBrowserFind.idl */,
+				945CA9440E95E33000202FE4 /* nsIWebBrowserFocus.idl */,
+				945CA9450E95E33000202FE4 /* nsIWebBrowserPrint.idl */,
+				945CA9460E95E33000202FE4 /* nsIWebBrowserSetup.idl */,
+				945CA9470E95E33000202FE4 /* nsIWebBrowserStream.idl */,
+				945CA9480E95E33000202FE4 /* nsIWebProgress.idl */,
+				945CA9490E95E33000202FE4 /* nsIWebProgressListener.idl */,
+				945CA94A0E95E33000202FE4 /* nsIWindowCreator.idl */,
+				945CA94B0E95E33000202FE4 /* nsIWindowWatcher.idl */,
+				945CA94C0E95E33000202FE4 /* nsIX509Cert.idl */,
+				945CA94D0E95E33000202FE4 /* nsIX509CertDB.idl */,
+				945CA94E0E95E33000202FE4 /* nsIX509CertValidity.idl */,
+				945CA94F0E95E33000202FE4 /* nsrootidl.idl */,
+			);
+			path = idl;
+			sourceTree = "<group>";
+		};
 		948363390DEB643000E610F2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -1290,7 +1718,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/Users/sgross/Downloads/xulrunner-i386-sdk/bin/xpidl -m typelib -w -I /Users/sgross/Downloads/xulrunner-i386-sdk/idl -e $SRCROOT/prebuilt/extension/components/PDFSerivce.xpt $SRCROOT/idl/PDFService.idl\n/Users/sgross/Downloads/xulrunner-i386-sdk/bin/xpidl -m typelib -w -I /Users/sgross/Downloads/xulrunner-i386-sdk/idl -e $SRCROOT/prebuilt/extension/components/PDFPlugin.xpt $SRCROOT/idl/PDFPlugin.idl";
+			shellScript = "$SRCROOT/gecko_sdk/bin/xpidl -m typelib -w -I $SRCROOT/gecko_sdk/idl -e $SRCROOT/prebuilt/extension/components/PDFSerivce.xpt $SRCROOT/idl/PDFService.idl\n$SRCROOT/gecko_sdk/bin/xpidl -m typelib -w -I $SRCROOT/gecko_sdk/idl -e $SRCROOT/prebuilt/extension/components/PDFPlugin.xpt $SRCROOT/idl/PDFPlugin.idl";
 		};
 		94276FEB0E733EF80005E3E9 /* Compile XPI Header */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1308,7 +1736,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/Users/sgross/Downloads/xulrunner-i386-sdk/bin/xpidl -m header -w -I /Users/sgross/Downloads/xulrunner-i386-sdk/idl -e $DERIVED_FILE_DIR/PDFService.h $SRCROOT/idl/PDFService.idl\n/Users/sgross/Downloads/xulrunner-i386-sdk/bin/xpidl -m header -w -I /Users/sgross/Downloads/xulrunner-i386-sdk/idl -e $DERIVED_FILE_DIR/PDFPlugin.h $SRCROOT/idl/PDFPlugin.idl";
+			shellScript = "$SRCROOT/gecko_sdk/bin/xpidl -m header -w -I $SRCROOT/gecko_sdk/idl -e $DERIVED_FILE_DIR/PDFService.h $SRCROOT/idl/PDFService.idl\n$SRCROOT/gecko_sdk/bin/xpidl -m header -w -I $SRCROOT/gecko_sdk/idl -e $DERIVED_FILE_DIR/PDFPlugin.h $SRCROOT/idl/PDFPlugin.idl";
 		};
 		942F6B1E0DEF8FFA0000EFAC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
