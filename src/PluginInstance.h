@@ -24,7 +24,7 @@
 #include "mozincludes.h";
 
 class nsIDOMWindow;
-class nsIDOMElement;
+class PDFService;
 class PDFPluginShim;
 
 @class SelectionController;
@@ -36,23 +36,16 @@ typedef struct _SavedState {
 } SavedState;
 
 @interface PluginInstance : NSObject {
-  NPIdentifier IDENT_COPY;
-  NPIdentifier IDENT_FIND;
-  NPIdentifier IDENT_FINDALL;
-  NPIdentifier IDENT_ZOOM;
-  NPIdentifier IDENT_REMOVEHIGHLIGHTS;
   BOOL _attached;
   PDFView* _pdfView;
-  NPP _npp;
   SelectionController* selectionController;
   NSMutableArray* _searchResults;
-  NPObject* _scriptableObject;
   nsIDOMWindow* _window;
-  nsIDOMElement* _pluginElement;
   const char* _url;
   BOOL written;
   NSString *path;
   PDFPluginShim* _shim;
+  PDFService* _pdfService;
 }
 - (void)copy;
 - (BOOL)zoom:(int)zoomArg;
@@ -61,14 +54,11 @@ typedef struct _SavedState {
 - (void)advanceHistory:(int)offset;
 - (void)attachToWindow:(NSWindow*)window at:(NSPoint)point;
 - (void)dealloc;
-- (BOOL)hasMethod:(NPIdentifier)name;
-- (BOOL)invokeMethod:(NPIdentifier)name args:(const NPVariant*)args len:(uint32_t)num_args result:(NPVariant*)result;
-- (id)initWithNPP:(NPP)npp;
+- (id)initWithService:(PDFService*)pdfService window:(nsIDOMWindow*)window;
 - (void)print;
 - (void)save;
 - (void)setFile:(const char*)filename url:(const char*)url;
 - (void)setFrameSize:(NSSize)size;
-- (NPObject*)getScriptableObject;
 - (int)find:(NSString*)string caseSensitive:(bool)caseSensitive forwards:(bool)forwards;
 - (void)findAll:(NSString*)string caseSensitive:(bool)caseSensitive;
 - (void)removeHighlights;
