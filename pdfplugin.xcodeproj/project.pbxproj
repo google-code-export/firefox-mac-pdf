@@ -37,6 +37,7 @@
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		9410EA950E089F8700CA7F4A /* npmac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9410EA940E089F8700CA7F4A /* npmac.cpp */; };
+		941F8D280E980C1400B39F71 /* PluginInstanceOpenWithFinder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 941F8D270E980C1400B39F71 /* PluginInstanceOpenWithFinder.mm */; };
 		94276FC40E7324910005E3E9 /* PDFService.idl in Resources */ = {isa = PBXBuildFile; fileRef = 94276FC30E7324910005E3E9 /* PDFService.idl */; };
 		9455ADDB0DEA916F0059FED3 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9455ADDA0DEA916F0059FED3 /* Quartz.framework */; };
 		9455AE300DEB25F20059FED3 /* pdfplugin.r in Rez */ = {isa = PBXBuildFile; fileRef = 9455AE2E0DEB25B60059FED3 /* pdfplugin.r */; };
@@ -84,6 +85,7 @@
 		9410EB3D0E08B93800CA7F4A /* npruntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = npruntime.h; sourceTree = "<group>"; };
 		9415EEC00DECEE3C00DB1334 /* chrome.manifest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chrome.manifest; sourceTree = "<group>"; };
 		9415EEC10DECEE3C00DB1334 /* install.rdf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.rdf; sourceTree = "<group>"; };
+		941F8D270E980C1400B39F71 /* PluginInstanceOpenWithFinder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PluginInstanceOpenWithFinder.mm; path = src/PluginInstanceOpenWithFinder.mm; sourceTree = "<group>"; };
 		94276FC30E7324910005E3E9 /* PDFService.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PDFService.idl; sourceTree = "<group>"; };
 		943E18440DFD0966002456E5 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
 		943E18450DFD0966002456E5 /* blapit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blapit.h; sourceTree = "<group>"; };
@@ -1553,6 +1555,7 @@
 				94FAF61C0E96B02A008336A1 /* Swizzle.mm */,
 				949DE1430DF4FBF200922723 /* PluginInstance.h */,
 				949DE1440DF4FBF200922723 /* PluginInstance.mm */,
+				941F8D270E980C1400B39F71 /* PluginInstanceOpenWithFinder.mm */,
 				949DE1450DF4FBF200922723 /* PluginPDFView.h */,
 				949DE1460DF4FBF200922723 /* PluginPDFView.mm */,
 				945CA6CF0E9583D500202FE4 /* PluginPDFViewMenu.mm */,
@@ -1774,6 +1777,7 @@
 				9410EA950E089F8700CA7F4A /* npmac.cpp in Sources */,
 				945CA6D00E9583D500202FE4 /* PluginPDFViewMenu.mm in Sources */,
 				94FAF61D0E96B02A008336A1 /* Swizzle.mm in Sources */,
+				941F8D280E980C1400B39F71 /* PluginInstanceOpenWithFinder.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

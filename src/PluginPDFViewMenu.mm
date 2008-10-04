@@ -66,7 +66,7 @@ static void _applicationInfoForMIMEType(NSString *type, NSString **name, NSImage
   // To match the PDFKit style, we'll add Open with Preview even when there's no document yet to view, and
   // disable it using validateUserInterfaceItem.
   NSString *title = [NSString stringWithFormat:@"Open with %@", appName];
-  NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:title action:@selector(_openWithFinder:) keyEquivalent:@""];
+  NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:title action:@selector(openWithFinder:) keyEquivalent:@""];
   if (appIcon) {
     [item setImage:appIcon];
   }
@@ -101,7 +101,7 @@ static void _applicationInfoForMIMEType(NSString *type, NSString **name, NSImage
   [menu insertItem:[self menuItemOpenWithFinder] atIndex:insertIndex];
 
   [menu insertItem:[NSMenuItem separatorItem] atIndex:insertIndex];
-  [menu insertItemWithTitle:@"Print Page..." action:@selector(print:) keyEquivalent:@"" atIndex:insertIndex];
+  [menu insertItemWithTitle:@"Print Page..." action:@selector(doPrint:) keyEquivalent:@"" atIndex:insertIndex];
   [menu insertItemWithTitle:@"Save Page As..." action:@selector(saveAs:) keyEquivalent:@"" atIndex:insertIndex];
   
   // Swizzle the search in google
@@ -130,22 +130,19 @@ static void _applicationInfoForMIMEType(NSString *type, NSString **name, NSImage
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:searchurl]];
 }
 
-- (void)_openWithFinder:(id)sender
+- (void)doPrint:(id)sender
 {
-  //Note we force preview to open here, trying to ask the OS to open in the default viewer
-  //so skim could be used instead failed. Sometimes opened the file in acrobat.
-  NSURL* theURL = [[self document] documentURL];
-  if ([theURL isFileURL]) {
-    NSString* app;
-    NSImage* image;
-    _applicationInfoForMIMEType(@"application/pdf", &app, &image);
-    [[NSWorkspace sharedWorkspace] openFile:[theURL path] withApplication:app];
-  }
+  [_plugin print];
 }
 
 - (void)saveAs:(id)sender
 {
   [_plugin save];
+}
+
+- (void)openWithFinder:(id)sender
+{
+  [_plugin openWithFinder];
 }
 
 @end

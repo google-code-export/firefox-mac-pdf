@@ -94,6 +94,7 @@ static NPClass pluginNPClass = {
   [_pdfView release];
   [selectionController release];
   [_searchResults release];
+  [path release];
   if (_scriptableObject) {
     NPN_ReleaseObject(_scriptableObject);
   }
@@ -140,7 +141,7 @@ static NPClass pluginNPClass = {
 
 - (void)print 
 {
-  [_pdfView print:self];
+  [_pdfView printWithInfo:[NSPrintInfo sharedPrintInfo] autoRotate:YES];
 }
 
 - (void)save
@@ -318,7 +319,6 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
 {
   [_searchResults addObject: [instance copy]];
 }
-
 
 - (BOOL)hasMethod:(NPIdentifier)name
 {
