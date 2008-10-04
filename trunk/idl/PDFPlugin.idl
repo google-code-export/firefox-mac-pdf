@@ -5,6 +5,7 @@ interface PDFPlugin : nsISupports
 {
   void Copy();
   boolean Find( in ACString str, in boolean caseSensitive, in boolean forward );
-  boolean FindAll( in ACString str, in boolean caseSensitive );
+  void FindAll( in ACString str, in boolean caseSensitive );
   void RemoveHighlights();
+  void Zoom( in long arg);
 };
