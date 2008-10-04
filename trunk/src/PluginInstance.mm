@@ -24,55 +24,8 @@
 #import "SelectionController.h"
 #import "PDFPluginShim.h"
 
-#include "nsCOMPtr.h"
-#include "nsServiceManagerUtils.h"
-#include "nsStringAPI.h"
 #include "PDFService.h"
-
-typedef struct PluginNPObject : NPObject {
-  PluginInstance* plugin;
-} PluginNPObject;
-
-static NPObject* Allocate(NPP npp, NPClass *npclass) {
-  return (NPObject*) NPN_MemAlloc(sizeof(PluginNPObject));
-}
-
-static void Deallocate(NPObject *npobj) {
-  NPN_MemFree((void*)npobj);
-}
-
-static bool HasMethod(NPObject *npobj, NPIdentifier name) {
-  PluginNPObject* obj = static_cast<PluginNPObject*>(npobj);
-  return [obj->plugin hasMethod:name];
-}
-
-static bool Invoke(NPObject *npobj, NPIdentifier name, const NPVariant *args, uint32_t num_args, NPVariant *result) {
-  VOID_TO_NPVARIANT(*result);
-  PluginNPObject* obj = static_cast<PluginNPObject*>(npobj);
-  return [obj->plugin invokeMethod:name args:args len:num_args result:result];
-}
-
-static bool HasProperty(NPObject *npobj, NPIdentifier name) {
-  return FALSE;
-}  
-
-static bool GetProperty(NPObject *npobj, NPIdentifier name, NPVariant *result) {
-  return FALSE;
-}
-
-static NPClass pluginNPClass = {
-  NP_CLASS_STRUCT_VERSION,
-  Allocate,
-  Deallocate,
-  NULL,  // Invalidate,
-  HasMethod,
-  Invoke,
-  NULL,  // InvokeDefault,
-  HasProperty,
-  GetProperty,
-  NULL,  // SetProperty,
-  NULL   // RemoveProperty
-};
+#include "nsStringAPI.h"
 
 @implementation PluginInstance
 
@@ -96,49 +49,23 @@ static NPClass pluginNPClass = {
   [selectionController release];
   [_searchResults release];
   [path release];
-  if (_scriptableObject) {
-    NPN_ReleaseObject(_scriptableObject);
-  }
-  nsCOMPtr<PDFService> pdfService(do_GetService("@sgross.mit.edu/pdfservice;1"));
-  if (pdfService) {
-    pdfService->CleanUp(_shim);
-  } else {
-    printf("No pdfservice?\n");
-  }
+  _pdfService->CleanUp(_shim);
   _shim->Release();
+  _pdfService->Release();
   [super dealloc];
 }
 
-- (id)initWithNPP:(NPP)npp
+- (id)initWithService:(PDFService*)pdfService window:(nsIDOMWindow*)window
 {
   if (self = [super init]) {
     _pdfView = [[PluginPDFView alloc] initWithPlugin:self];
     selectionController = [[SelectionController forPDFView:_pdfView] retain];
-    _npp = npp;
+    _pdfService = pdfService;
+    _pdfService->AddRef();
+    _window = window;
     _shim = new PDFPluginShim(self);
     _shim->AddRef();
-    IDENT_COPY = NPN_GetStringIdentifier("copy");
-    IDENT_FIND = NPN_GetStringIdentifier("find");
-    IDENT_FINDALL = NPN_GetStringIdentifier("findAll");
-    IDENT_ZOOM = NPN_GetStringIdentifier("zoom");
-    IDENT_REMOVEHIGHLIGHTS = NPN_GetStringIdentifier("removeHighlights");
-    // We don't addref _window, but I think it's ok since life of window > life of plugin
-    NPError err = NPN_GetValue(npp, NPNVDOMWindow, &_window);
-    if (err != NPERR_NO_ERROR) {
-      printf("this is bad: window\n");
-      // TODO do something? help!
-    }
-    err = NPN_GetValue(npp, NPNVDOMElement, &_pluginElement);
-    if (err != NPERR_NO_ERROR) {
-      printf("this is bad: plugin\n");
-      // TODO do something? help!
-    }
-    nsCOMPtr<PDFService> pdfService(do_GetService("@sgross.mit.edu/pdfservice;1"));
-    if (pdfService) {
-      pdfService->Init(_window, _shim);
-    } else {
-      printf("No pdfservice?\n");
-    }
+    _pdfService->Init(_window, _shim);
   }
   return self;
 }
@@ -150,13 +77,8 @@ static NPClass pluginNPClass = {
 
 - (void)save
 {
-  nsCOMPtr<PDFService> pdfService(do_GetService("@sgross.mit.edu/pdfservice;1"));
-  if (pdfService) {
-    nsCString urlString(_url);
-    pdfService->Save(_window, urlString);
-  } else {
-    printf("No pdfservice?\n");
-  }
+  nsCString urlString(_url);
+  _pdfService->Save(_window, urlString);
 }
 
 - (void)setFile:(const char*)filename url:(const char*)url;
@@ -172,18 +94,6 @@ static NPClass pluginNPClass = {
 - (void)setFrameSize:(NSSize)size
 {
   [_pdfView setFrameSize:size];
-}
-
-- (NPObject*)getScriptableObject
-{
-  if (_scriptableObject == NULL) {
-    PluginNPObject* obj = static_cast<PluginNPObject*>(NPN_CreateObject(_npp, &pluginNPClass));
-    obj->plugin = self;
-    _scriptableObject = obj;
-  }
-  // This is a weird one: I think the browser wants us to increment the ref count for each instance returned
-  NPN_RetainObject(_scriptableObject);
-  return _scriptableObject;
 }
 
 static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
@@ -264,21 +174,12 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
 
 - (void)advanceTab:(int)offset
 {
-  NSLog(@"Advancing tab %d", offset);
-  nsCOMPtr<PDFService> pdfService(do_GetService("@sgross.mit.edu/pdfservice;1"));
-  if (pdfService) {
-    pdfService->AdvanceTab(_window, offset);
-  } else
-    printf("WARNING: pdfservice not found\n");
+  _pdfService->AdvanceTab(_window, offset);
 }
 
 - (void)advanceHistory:(int)offset
 {
-  nsCOMPtr<PDFService> pdfService = do_GetService("@sgross.mit.edu/pdfservice;1");
-  if (pdfService)
-    pdfService->GoHistory(_window, offset);
-  else
-    printf("WARNING: pdfservice not found\n");
+  _pdfService->GoHistory(_window, offset);
 }
 
 - (void)findAll:(NSString*)string caseSensitive:(bool)caseSensitive
@@ -323,21 +224,6 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
   [_searchResults addObject: [instance copy]];
 }
 
-- (BOOL)hasMethod:(NPIdentifier)name
-{
-  return name == IDENT_COPY || name == IDENT_FIND || name == IDENT_FINDALL || name == IDENT_ZOOM 
-      || name == IDENT_REMOVEHIGHLIGHTS;
-}
-
-static NSString* variantToNSString(NPVariant variant) {
-  NPString str = NPVARIANT_TO_STRING(variant);
-  // copy the data and add a null terminating character
-  char data[str.utf8length+1];
-  memcpy(data, str.utf8characters, str.utf8length);
-  data[str.utf8length] = '\0';
-  return [NSString stringWithUTF8String:data];
-}
-
 - (void)copy
 {
   [_pdfView copy:nil];
@@ -359,54 +245,6 @@ static NSString* variantToNSString(NPVariant variant) {
       return NO;
   }
   return YES;
-}
-
-- (BOOL)invokeMethod:(NPIdentifier)name args:(const NPVariant*)args len:(uint32_t)num_args result:(NPVariant*)result
-{
-  if (name == IDENT_COPY) {
-    if (num_args != 0) {
-      return NO;
-    }
-    [_pdfView copy:nil];
-    return YES;
-  }
-  if (name == IDENT_FIND) {
-    if (num_args != 3 || !NPVARIANT_IS_STRING(args[0]) || !NPVARIANT_IS_BOOLEAN(args[1])
-        || !NPVARIANT_IS_BOOLEAN(args[2])) {
-      return NO;
-    }
-    NSString* str = variantToNSString(args[0]);    
-    bool caseSensitive = NPVARIANT_TO_BOOLEAN(args[1]);
-    bool forwards = NPVARIANT_TO_BOOLEAN(args[2]);
-    int res = [self find:str caseSensitive:caseSensitive forwards:forwards];
-    INT32_TO_NPVARIANT(res, *result);
-    return YES;
-  }
-  if (name == IDENT_FINDALL) {
-    if (num_args != 2 || !NPVARIANT_IS_STRING(args[0]) || !NPVARIANT_IS_BOOLEAN(args[1])) {
-      return NO;
-    }
-    NSString* str = variantToNSString(args[0]);
-    bool caseSensitive = NPVARIANT_TO_BOOLEAN(args[1]);
-    [self findAll:str caseSensitive:caseSensitive];
-    return YES;
-  }
-  if (name == IDENT_ZOOM) {
-    if (num_args != 1 || !NPVARIANT_IS_INT32(args[0])) {
-      return NO;
-    }
-    // -1: zoom out, 1: zoom in, 0: reset
-    int zoomArg = NPVARIANT_TO_INT32(args[0]);
-    return [self zoom:zoomArg];
-  }
-  if (name == IDENT_REMOVEHIGHLIGHTS) {
-    if (num_args != 0) {
-      return NO;
-    }
-    [self removeHighlights];
-    return YES;
-  }
-  return NO;
 }
 
 @end

@@ -23,8 +23,6 @@
 #define _MOZINCLUDES_H_
 
 #include "../npapi/npapi.h"
-#include "../npapi/npruntime.h"
 #include "../npapi/npupp.h"
-//#include "../npapi/npfunctions.h"
 
 #endif

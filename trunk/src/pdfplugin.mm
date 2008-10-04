@@ -22,6 +22,10 @@
 #import "PluginInstance.h"
 #include "main.h"
 
+#include "PDFService.h"
+#include "nsCOMPtr.h"
+#include "nsServiceManagerUtils.h"
+
 NPError NPP_New(NPMIMEType pluginType, NPP instance, uint16 mode, int16 argc, char* argn[], char* argv[], NPSavedData* saved) {
   printf("NPP_New(instance=%8p,mode=%d,argc=%d)\n", instance, mode, argc);
   if (instance == NULL) {
@@ -32,17 +36,33 @@ NPError NPP_New(NPMIMEType pluginType, NPP instance, uint16 mode, int16 argc, ch
   NPBool supportsCoreGraphics = FALSE;
   NPError err = NPN_GetValue(instance, NPNVsupportsCoreGraphicsBool, &supportsCoreGraphics);
   if (err != NPERR_NO_ERROR || !supportsCoreGraphics) {
+    NSLog(@"firefox-mac-pdf: does not support core graphics");
     return NPERR_INCOMPATIBLE_VERSION_ERROR;
   }
   
   // Set the drawing model
   err = NPN_SetValue(instance, NPPVpluginDrawingModel, (void*) NPDrawingModelCoreGraphics);
   if (err != NPERR_NO_ERROR) {
+    NSLog(@"firefox-mac-pdf: does not support drawing model");
     return NPERR_INCOMPATIBLE_VERSION_ERROR;
+  }
+  
+  nsIDOMWindow* window;
+  err = NPN_GetValue(instance, NPNVDOMWindow, &window);
+  if (err != NPERR_NO_ERROR) {
+    NSLog(@"firefox-mac-pdf: could not get DOM window");
+    return NPERR_GENERIC_ERROR;
+  }
+  
+  nsCOMPtr<PDFService> pdfService(do_GetService("@sgross.mit.edu/pdfservice;1"));
+  if (!pdfService) {
+    NSLog(@"firefox-mac-pdf: could not get PDF service");
+    return NPERR_GENERIC_ERROR;
   }
 
   // allocate the plugin
-  instance->pdata = [[PluginInstance alloc] initWithNPP:instance];
+  instance->pdata = [[PluginInstance alloc] initWithService:pdfService.get()
+                                            window:window];
 
   return NPERR_NO_ERROR;
 }
@@ -127,9 +147,6 @@ NPError NPP_GetValue(NPP npp, NPPVariable variable, void *value) {
   // I don't think NPP_GetValue is ever called with NPPVpluginNameString or NPPVpluginDescriptionString.
   // Those properties are retrieved from the resource file.
   switch (variable) {
-      case NPPVpluginScriptableNPObject:
-      *static_cast<NPObject**>(value) = [(PluginInstance*)npp->pdata getScriptableObject];
-      break;
     case NPPVpluginNameString:
       *((char **)value) = "Quartz PDF Plugin";
       break;
