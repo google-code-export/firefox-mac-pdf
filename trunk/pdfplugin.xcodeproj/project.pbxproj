@@ -38,6 +38,7 @@
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		9410EA950E089F8700CA7F4A /* npmac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9410EA940E089F8700CA7F4A /* npmac.cpp */; };
 		941F8D280E980C1400B39F71 /* PluginInstanceOpenWithFinder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 941F8D270E980C1400B39F71 /* PluginInstanceOpenWithFinder.mm */; };
+		941F8D520E98111900B39F71 /* PDFPluginShim.mm in Sources */ = {isa = PBXBuildFile; fileRef = 941F8D510E98111900B39F71 /* PDFPluginShim.mm */; };
 		94276FC40E7324910005E3E9 /* PDFService.idl in Resources */ = {isa = PBXBuildFile; fileRef = 94276FC30E7324910005E3E9 /* PDFService.idl */; };
 		9455ADDB0DEA916F0059FED3 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9455ADDA0DEA916F0059FED3 /* Quartz.framework */; };
 		9455AE300DEB25F20059FED3 /* pdfplugin.r in Rez */ = {isa = PBXBuildFile; fileRef = 9455AE2E0DEB25B60059FED3 /* pdfplugin.r */; };
@@ -86,6 +87,8 @@
 		9415EEC00DECEE3C00DB1334 /* chrome.manifest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chrome.manifest; sourceTree = "<group>"; };
 		9415EEC10DECEE3C00DB1334 /* install.rdf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.rdf; sourceTree = "<group>"; };
 		941F8D270E980C1400B39F71 /* PluginInstanceOpenWithFinder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PluginInstanceOpenWithFinder.mm; path = src/PluginInstanceOpenWithFinder.mm; sourceTree = "<group>"; };
+		941F8D500E98111900B39F71 /* PDFPluginShim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PDFPluginShim.h; path = src/PDFPluginShim.h; sourceTree = "<group>"; };
+		941F8D510E98111900B39F71 /* PDFPluginShim.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PDFPluginShim.mm; path = src/PDFPluginShim.mm; sourceTree = "<group>"; };
 		94276FC30E7324910005E3E9 /* PDFService.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PDFService.idl; sourceTree = "<group>"; };
 		943E18440DFD0966002456E5 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
 		943E18450DFD0966002456E5 /* blapit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blapit.h; sourceTree = "<group>"; };
@@ -1563,6 +1566,8 @@
 				949DE1480DF4FBF200922723 /* SelectionController.mm */,
 				94AF622B0DFE162B00BED136 /* Preferences.h */,
 				94AF622C0DFE162B00BED136 /* Preferences.mm */,
+				941F8D500E98111900B39F71 /* PDFPluginShim.h */,
+				941F8D510E98111900B39F71 /* PDFPluginShim.mm */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1778,6 +1783,7 @@
 				945CA6D00E9583D500202FE4 /* PluginPDFViewMenu.mm in Sources */,
 				94FAF61D0E96B02A008336A1 /* Swizzle.mm in Sources */,
 				941F8D280E980C1400B39F71 /* PluginInstanceOpenWithFinder.mm in Sources */,
+				941F8D520E98111900B39F71 /* PDFPluginShim.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

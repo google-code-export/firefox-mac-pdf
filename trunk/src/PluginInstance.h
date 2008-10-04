@@ -25,6 +25,7 @@
 
 class nsIDOMWindow;
 class nsIDOMElement;
+class PDFPluginShim;
 
 @class SelectionController;
  
@@ -51,7 +52,10 @@ typedef struct _SavedState {
   const char* _url;
   BOOL written;
   NSString *path;
+  PDFPluginShim* _shim;
 }
+- (void)copy;
+- (BOOL)zoom:(int)zoomArg;
 - (BOOL)attached;
 - (void)advanceTab:(int)offset;
 - (void)advanceHistory:(int)offset;

@@ -22,6 +22,7 @@
 #import "PluginInstance.h"
 #import "PluginPDFView.h"
 #import "SelectionController.h"
+#import "PDFPluginShim.h"
 
 #include "nsCOMPtr.h"
 #include "nsServiceManagerUtils.h"
@@ -100,10 +101,11 @@ static NPClass pluginNPClass = {
   }
   nsCOMPtr<PDFService> pdfService(do_GetService("@sgross.mit.edu/pdfservice;1"));
   if (pdfService) {
-    pdfService->CleanUp(_pluginElement);
+    pdfService->CleanUp(_shim);
   } else {
     printf("No pdfservice?\n");
   }
+  _shim->Release();
   [super dealloc];
 }
 
@@ -113,6 +115,8 @@ static NPClass pluginNPClass = {
     _pdfView = [[PluginPDFView alloc] initWithPlugin:self];
     selectionController = [[SelectionController forPDFView:_pdfView] retain];
     _npp = npp;
+    _shim = new PDFPluginShim(self);
+    _shim->AddRef();
     IDENT_COPY = NPN_GetStringIdentifier("copy");
     IDENT_FIND = NPN_GetStringIdentifier("find");
     IDENT_FINDALL = NPN_GetStringIdentifier("findAll");
@@ -131,7 +135,7 @@ static NPClass pluginNPClass = {
     }
     nsCOMPtr<PDFService> pdfService(do_GetService("@sgross.mit.edu/pdfservice;1"));
     if (pdfService) {
-      pdfService->Init(_window, _pluginElement);
+      pdfService->Init(_window, _shim);
     } else {
       printf("No pdfservice?\n");
     }
@@ -263,7 +267,6 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
   NSLog(@"Advancing tab %d", offset);
   nsCOMPtr<PDFService> pdfService(do_GetService("@sgross.mit.edu/pdfservice;1"));
   if (pdfService) {
-    pdfService->InspectWindow(_window);
     pdfService->AdvanceTab(_window, offset);
   } else
     printf("WARNING: pdfservice not found\n");
@@ -335,6 +338,29 @@ static NSString* variantToNSString(NPVariant variant) {
   return [NSString stringWithUTF8String:data];
 }
 
+- (void)copy
+{
+  [_pdfView copy:nil];
+}
+
+- (BOOL)zoom:(int)zoomArg
+{
+  switch (zoomArg) {
+    case -1:
+      [_pdfView zoomOut:nil];
+      break;
+    case 0:
+      [_pdfView setScaleFactor:1.0];
+      break;
+    case 1:
+      [_pdfView zoomIn:nil];
+      break;
+    default:
+      return NO;
+  }
+  return YES;
+}
+
 - (BOOL)invokeMethod:(NPIdentifier)name args:(const NPVariant*)args len:(uint32_t)num_args result:(NPVariant*)result
 {
   if (name == IDENT_COPY) {
@@ -371,20 +397,7 @@ static NSString* variantToNSString(NPVariant variant) {
     }
     // -1: zoom out, 1: zoom in, 0: reset
     int zoomArg = NPVARIANT_TO_INT32(args[0]);
-    switch (zoomArg) {
-      case -1:
-        [_pdfView zoomOut:nil];
-        break;
-      case 0:
-        [_pdfView setScaleFactor:1.0];
-        break;
-      case 1:
-        [_pdfView zoomIn:nil];
-        break;
-      default:
-        return NO;
-    }
-    return YES;
+    return [self zoom:zoomArg];
   }
   if (name == IDENT_REMOVEHIGHLIGHTS) {
     if (num_args != 0) {
