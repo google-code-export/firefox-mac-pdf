@@ -18,27 +18,13 @@ function getTabBrowserForWindow(window) {
   var chromeWindow = getChromeWindowForWindow(window);
   return chromeWindow && chromeWindow.gBrowser;
 }
-function getPluginElement(chromeWindow) {
+function getPluginShim(chromeWindow) {
   for (var i = 0; i < plugins.length; i++) {
     if (plugins[i].window == chromeWindow.gBrowser.contentWindow) {
       return plugins[i].plugin;
     }
   }
   return null;
-}
-
-function log(string) {
-  var console = Components.classes["@mozilla.org/consoleservice;1"].
-      getService(Components.interfaces.nsIConsoleService);
-  console.logStringMessage(string);
-}
-
-function logInternals(obj) {
-  var str = '';
-  for (var a in obj) {
-   str += a +', ';
-  }
-  log(str);
 }
 
 var plugins = [];
@@ -103,49 +89,6 @@ PDFService.prototype = {
   Save: function(window, url) {
     var chromeWindow = getChromeWindowForWindow(window);
     chromeWindow.saveURL(url,  null, null, true);
-  },
-  
-  InspectWindow: function(window) {
-    var console = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
-    var browser = getTabBrowserForWindow(window);
-    console.logStringMessage('equal: ' + (window == browser.contentWindow));
-    logInternals(getChromeWindowForWindow(window));
-    logInternals(browser);
-    logInternals(browser.getBrowserForDocument(window.document));
-    /*var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
-    var enumerator = wm.getEnumerator('navigator:browser');
-    while(enumerator.hasMoreElements()) {
-      var win = enumerator.getNext(), str;
-      console.logStringMessage('sam: ' + win.sam + ';' + win.gBrowser.sam);
-      console.logStringMessage('browser for doc: ' + win.gBrowser.getBrowserForDocument(window.document));
-      console.logStringMessage('new window:' + win + ' ' + win.gBrowser);
-      str = '';
-      for (var a in win) {
-       str += a +', ';
-      }
-      console.logStringMessage(str);
-      win = window;
-      console.logStringMessage('new window:' + win + ' ' + win.gBrowser);
-      str = '';
-      for (var a in win) {
-       str += a +', ';
-      }
-      console.logStringMessage(str);
-      win = win.wrappedJSObject;
-      console.logStringMessage('new window:' + win + ' ' + win.gBrowser);
-      str = '';
-      for (var a in win) {
-       str += a +', ';
-      }
-      console.logStringMessage(str);
-      win = win.top;
-      console.logStringMessage('new window:' + win + ' ' + win.gBrowser);
-      str = '';
-      for (var a in win) {
-       str += a +', ';
-      }
-      console.logStringMessage(str);
-    }*/
   }
 }
 
@@ -155,7 +98,6 @@ PDFService.prototype = {
 function FastFindShim(chromeWindow, fastfind) {
   this.fastfind = fastfind;
   this.chromeWindow = chromeWindow;
-  log('new fastfindshim chromeWindow: ' + this.chromeWindow);
   for (let prop in fastfind) {
    if (fastfind.__lookupGetter__(prop)) {
      this.__defineGetter__(prop, createDelegateGetter(chromeWindow, this.fastfind, prop));
@@ -170,7 +112,7 @@ function createDelegateGetter(chromeWindow, fastfind, prop) {
   if (prop == 'searchString') {
     return function() {
       // TODO: improve condition based on last search type (PDF versus HTML)
-      return getPluginElement(chromeWindow) ? this.lastSearchString : fastfind[prop];
+      return getPluginShim(chromeWindow) ? this.lastSearchString : fastfind[prop];
     }
   }
   return function() {
@@ -183,9 +125,8 @@ function createDelegateGetter(chromeWindow, fastfind, prop) {
  */
 FastFindShim.prototype.__noSuchMethod__ = function(id, args) {
   if (id == 'find' || id == 'findAgain') {
-    log("FastfindShim." + id + " chromeWindow: " + this.chromeWindow);
-    var elem = getPluginElement(this.chromeWindow);
-    if (elem) {
+    var plugin = getPluginShim(this.chromeWindow);
+    if (plugin) {
       var str, reverse;
       if (id == 'find') {
         str = args[0];
@@ -195,13 +136,11 @@ FastFindShim.prototype.__noSuchMethod__ = function(id, args) {
         reverse = args[0];
       }
       this.lastSearchString = str;
-      // unwrap the plugin; see http://developer.mozilla.org/en/docs/XPCNativeWrapper
-      var plugin = elem.wrappedJSObject;
       // find must take place before findAll because find cancels any current searches
-      var ret = plugin.find(str, this.fastfind.caseSensitive, !reverse);
+      var ret = plugin.Find(str, this.fastfind.caseSensitive, !reverse);
       var findBar = this.chromeWindow.gFindBar;
       if (findBar.getElement("highlight").checked) {
-        plugin.findAll(str, this.fastfind.caseSensitive);
+        plugin.FindAll(str, this.fastfind.caseSensitive);
       }
       return ret;
     }
@@ -214,16 +153,15 @@ FastFindShim.prototype.__noSuchMethod__ = function(id, args) {
  */
 function createFindbarToggleHighlight(chromeWindow, orig) {
   return function(shouldHighlight) {
-    var elem = getPluginElement(chromeWindow);
-    if (elem) {
-      var plugin = elem.wrappedJSObject;
+    var plugin = getPluginShim(chromeWindow);
+    if (plugin) {
       if (shouldHighlight) {
         var word = this._findField.value;
         // TODO: better choice for determining case sensitivity?
         var caseSensitive = this._shouldBeCaseSensitive(word);
-        plugin.findAll(word, caseSensitive);
+        plugin.FindAll(word, caseSensitive);
       } else {
-        plugin.removeHighlights();
+        plugin.RemoveHighlights();
       }
     } else {
       orig.call(this, shouldHighlight);
@@ -237,7 +175,7 @@ function createFindbarToggleHighlight(chromeWindow, orig) {
  */
 function createSetHighlightTimeout(chromeWindow, orig) {
   return function() {
-    if (!getPluginElement(chromeWindow)) {
+    if (!getPluginShim(chromeWindow)) {
       orig.call(this);
     }
   };
@@ -245,9 +183,9 @@ function createSetHighlightTimeout(chromeWindow, orig) {
 
 function createZoom(chromeWindow, orig, arg) {
   return function() {
-    var elem = getPluginElement(chromeWindow);
-    if (elem) {
-      elem.wrappedJSObject.zoom(arg);
+    var plugin = getPluginShim(chromeWindow);
+    if (plugin) {
+      plugin.Zoom(arg);
     } else {
       orig.call(this);
     }
@@ -256,9 +194,9 @@ function createZoom(chromeWindow, orig, arg) {
 
 function createGoDoCommand(chromeWindow, orig) {
   return function(cmd) {
-    var elem;
-    if (cmd == 'cmd_copy' && (elem = getPluginElement(chromeWindow))) {
-      elem.wrappedJSObject.copy();
+    var plugin;
+    if (cmd == 'cmd_copy' && (plugin = getPluginShim(chromeWindow))) {
+      plugin.Copy();
     } else {
       return orig.call(this, cmd);
     }
