@@ -49,6 +49,8 @@ typedef struct _SavedState {
   nsIDOMWindow* _window;
   nsIDOMElement* _pluginElement;
   const char* _url;
+  BOOL written;
+  NSString *path;
 }
 - (BOOL)attached;
 - (void)advanceTab:(int)offset;
@@ -67,4 +69,8 @@ typedef struct _SavedState {
 - (void)findAll:(NSString*)string caseSensitive:(bool)caseSensitive;
 - (void)removeHighlights;
 - (PDFView*)pdfView;
+@end
+
+@interface PluginInstance (OpenWithFinder)
+- (void)openWithFinder;
 @end
