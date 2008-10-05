@@ -38,13 +38,17 @@
 {
   //debugView([window contentView], 0);
   // find the NSView at the point
-  _attached = true;
   NSView* view = [[window contentView] hitTest:NSMakePoint(point.x+1, point.y+1)];
+  if (view == nil || ![[view className] isEqualToString:@"ChildView"]) {
+    return;
+  }
   [view addSubview:_pdfView];
+  _attached = true;
 }
 
 - (void)dealloc
 {
+  [_pdfView removeFromSuperview];
   [_pdfView release];
   [selectionController release];
   [_searchResults release];
@@ -52,12 +56,14 @@
   _pdfService->CleanUp(_shim);
   _shim->Release();
   _pdfService->Release();
+  [_url release];
   [super dealloc];
 }
 
-- (id)initWithService:(PDFService*)pdfService window:(nsIDOMWindow*)window
+- (id)initWithService:(PDFService*)pdfService window:(nsIDOMWindow*)window npp:(NPP)npp;
 {
   if (self = [super init]) {
+    _npp = npp;
     _pdfView = [[PluginPDFView alloc] initWithPlugin:self];
     selectionController = [[SelectionController forPDFView:_pdfView] retain];
     _pdfService = pdfService;
@@ -77,7 +83,7 @@
 
 - (void)save
 {
-  nsCString urlString(_url);
+  nsCAutoString urlString([_url UTF8String]);
   _pdfService->Save(_window, urlString);
 }
 
@@ -85,10 +91,13 @@
 {
   // create PDF document
   NSURL* fileURL = [NSURL fileURLWithPath:[NSString stringWithUTF8String:filename]];
+  
+  [_url release]; 
+  _url = [[NSString stringWithUTF8String:url] retain];
+
   PDFDocument* document = [[[PDFDocument alloc] initWithURL:fileURL] autorelease];
   [document setDelegate:self];
   [_pdfView setDocument:document];
-  _url = url;
 }
 
 - (void)setFrameSize:(NSSize)size
@@ -227,6 +236,11 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
 - (void)copy
 {
   [_pdfView copy:nil];
+}
+
+- (void)loadURL:(NSString*)url
+{
+  NPN_GetURL(_npp, [url UTF8String], "_self");
 }
 
 - (BOOL)zoom:(int)zoomArg

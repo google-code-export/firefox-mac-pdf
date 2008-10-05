@@ -36,12 +36,13 @@ typedef struct _SavedState {
 } SavedState;
 
 @interface PluginInstance : NSObject {
+  NPP _npp;
   BOOL _attached;
   PDFView* _pdfView;
   SelectionController* selectionController;
   NSMutableArray* _searchResults;
   nsIDOMWindow* _window;
-  const char* _url;
+  NSString* _url;
   BOOL written;
   NSString *path;
   PDFPluginShim* _shim;
@@ -54,7 +55,7 @@ typedef struct _SavedState {
 - (void)advanceHistory:(int)offset;
 - (void)attachToWindow:(NSWindow*)window at:(NSPoint)point;
 - (void)dealloc;
-- (id)initWithService:(PDFService*)pdfService window:(nsIDOMWindow*)window;
+- (id)initWithService:(PDFService*)pdfService window:(nsIDOMWindow*)window npp:(NPP)npp;
 - (void)print;
 - (void)save;
 - (void)setFile:(const char*)filename url:(const char*)url;
@@ -62,6 +63,7 @@ typedef struct _SavedState {
 - (int)find:(NSString*)string caseSensitive:(bool)caseSensitive forwards:(bool)forwards;
 - (void)findAll:(NSString*)string caseSensitive:(bool)caseSensitive;
 - (void)removeHighlights;
+- (void)loadURL:(NSString*)url;
 - (PDFView*)pdfView;
 @end
 

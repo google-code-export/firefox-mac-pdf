@@ -39,7 +39,19 @@ static BOOL swizzled = NO;
 @end
 
 
+@interface PluginPDFView (FileInternal)
+- (void)_applyDefaults;
+@end
+
+
 @implementation PluginPDFView
+
+// TODO: this is only for 10.5 checkout 10.4 behavior
+- (void)PDFViewWillClickOnLink:(PDFView *)sender withURL:(NSURL *)URL
+{
+//  NSLog(@"PDFViewWillClickOnLink sender:%@ withURL:%@ rel=%@", sender, URL, [URL relativeString]);
+  [_plugin loadURL:[URL absoluteString]];
+}
 
 - (void)onScaleChanged:(NSNotification*)notification
 {
@@ -47,22 +59,48 @@ static BOOL swizzled = NO;
   [Preferences setFloatPreference:"scaleFactor" value:[self scaleFactor]];
 }
 
+//- (void)onAnnotationHit:(NSNotification*)notification
+//{
+//  NSLog(@"onAnnotationHit: %@", notification);
+//  PDFAnnotation* annotation = [[notification userInfo]
+//      objectForKey:@"PDFAnnotationHit"];
+//  NSLog(@" annotation: %@", annotation);
+//  if ([[annotation type] isEqualToString:@"Link"]) {
+//    PDFAnnotationLink* link = (PDFAnnotationLink*) annotation;
+//    NSLog(@" link");
+//    NSLog(@" destination: %@ url: %@", [link destination], [link URL]);
+//  }
+//}
+
 - (id)initWithPlugin:(PluginInstance*)plugin
 {
   if (self = [super init]) {
     _plugin = plugin;
     [self setDelegate:self];
-    [self setDisplayMode:[Preferences getIntPreference:"displayMode"]];
-    if ([Preferences getBoolPreference:"autoScales"]) {
-      [self setScaleFactor:1];
-      [self setAutoScales:YES];
-    } else {
-      [self setScaleFactor:[Preferences getFloatPreference:"scaleFactor"]];
-    }
     [[NSNotificationCenter defaultCenter] addObserver:self 
         selector:@selector(onScaleChanged:) name:PDFViewScaleChangedNotification object:self];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//        selector:@selector(onAnnotationHit:) name:PDFViewAnnotationHitNotification object:self];
   }
   return self;
+}
+
+- (void)_applyDefaults
+{
+  if ([Preferences getBoolPreference:"autoScales"]) {
+    [self setAutoScales:YES];
+  } else {
+    float scaleFactor = [Preferences getFloatPreference:"scaleFactor"];
+    [self setAutoScales:NO];
+    [self setScaleFactor:scaleFactor];
+  }
+  [self setDisplayMode:[Preferences getIntPreference:"displayMode"]];
+}
+
+- (void)setDocument:(PDFDocument *)doc
+{
+  [super setDocument:doc];
+  [self _applyDefaults];
 }
 
 - (void)mouseDown:(NSEvent*)theEvent
@@ -83,15 +121,28 @@ static BOOL swizzled = NO;
 - (BOOL)handleOverideKeyEquivalent:(NSEvent*)theEvent
 {
   int flags = [theEvent modifierFlags];
-  switch ([theEvent keyCode])
+  int code = [theEvent keyCode];
+  switch (code)
   {
     case 24: // CMD+'='
       [self zoomIn:self];
       return YES;
-    case 33: // CMD+SHIFT+'['
-    case 30: // CMD+SHIFT+']'
-      if ((flags & NSShiftKeyMask) && !(flags & NSAlternateKeyMask) && !(flags & NSControlKeyMask)) {
-        [_plugin advanceTab:([theEvent keyCode] == 30 ? 1 : -1)];
+    case 33: // CMD+(SHIFT)+'['
+    case 30: // CMD+(SHIFT)+']'
+      if (!(flags & NSAlternateKeyMask) && !(flags & NSControlKeyMask)) {
+        if (flags & NSShiftKeyMask) {
+          [_plugin advanceTab:(code == 30 ? 1 : -1)];
+        } else {
+          if (code == 33) {
+            if ([self canGoBack]) {
+              [self goBack:nil];
+            }
+          } else {
+            if ([self canGoForward]) {
+              [self goForward:nil];
+            }
+          }
+        }
         return YES;
       }
       break;
