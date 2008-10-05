@@ -62,7 +62,8 @@ NPError NPP_New(NPMIMEType pluginType, NPP instance, uint16 mode, int16 argc, ch
 
   // allocate the plugin
   instance->pdata = [[PluginInstance alloc] initWithService:pdfService.get()
-                                            window:window];
+                                            window:window
+                                            npp:instance];
 
   return NPERR_NO_ERROR;
 }

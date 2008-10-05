@@ -719,8 +719,6 @@
 		949DE14D0DF4FC0400922723 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = main.h; path = src/main.h; sourceTree = "<group>"; };
 		949DE14E0DF4FC0400922723 /* mozincludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mozincludes.h; path = src/mozincludes.h; sourceTree = "<group>"; };
 		949DE14F0DF4FC0400922723 /* pdfplugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = pdfplugin.mm; path = src/pdfplugin.mm; sourceTree = "<group>"; };
-		94AF61840DFE132C00BED136 /* pdfplugin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = pdfplugin.js; sourceTree = "<group>"; };
-		94AF61850DFE132C00BED136 /* pdfplugin.xul */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pdfplugin.xul; sourceTree = "<group>"; };
 		94AF61870DFE132C00BED136 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		94AF618A0DFE132C00BED136 /* prefs.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = prefs.js; sourceTree = "<group>"; };
 		94AF62240DFE151700BED136 /* libnspr4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libnspr4.dylib; path = gecko_api/lib/libnspr4.dylib; sourceTree = "<group>"; };
@@ -1584,8 +1582,6 @@
 		94AF61830DFE132C00BED136 /* content */ = {
 			isa = PBXGroup;
 			children = (
-				94AF61840DFE132C00BED136 /* pdfplugin.js */,
-				94AF61850DFE132C00BED136 /* pdfplugin.xul */,
 			);
 			path = content;
 			sourceTree = "<group>";

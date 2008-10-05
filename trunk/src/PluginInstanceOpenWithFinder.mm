@@ -129,7 +129,7 @@
 
 - (NSString *)_suggestedFilename
 {
-  NSURL* url = [NSURL URLWithString:[NSString stringWithCString:_url]];
+  NSURL* url = [NSURL URLWithString:_url];
   return [[url path] lastPathComponent];
 }
 
