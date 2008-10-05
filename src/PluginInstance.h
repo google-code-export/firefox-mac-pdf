@@ -43,6 +43,8 @@ typedef struct _SavedState {
   NSMutableArray* _searchResults;
   nsIDOMWindow* _window;
   NSString* _url;
+  NSString* _mimeType;
+  NSData* _data;
   BOOL written;
   NSString *path;
   PDFPluginShim* _shim;
@@ -55,7 +57,7 @@ typedef struct _SavedState {
 - (void)advanceHistory:(int)offset;
 - (void)attachToWindow:(NSWindow*)window at:(NSPoint)point;
 - (void)dealloc;
-- (id)initWithService:(PDFService*)pdfService window:(nsIDOMWindow*)window npp:(NPP)npp;
+- (id)initWithService:(PDFService*)pdfService window:(nsIDOMWindow*)window npp:(NPP)npp mimeType:(NSString*)mimeType;
 - (void)print;
 - (void)save;
 - (void)setFile:(const char*)filename url:(const char*)url;
@@ -69,4 +71,5 @@ typedef struct _SavedState {
 
 @interface PluginInstance (OpenWithFinder)
 - (void)openWithFinder;
+- (NSData *)convertPostScriptDataSourceToPDF:(NSData *)data;
 @end

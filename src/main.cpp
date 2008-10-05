@@ -28,7 +28,7 @@ NPError NPP_Initialize() {
 
 char *NP_GetMIMEDescription() {
   printf("NP_GetMIMEDescription called\n");
-  return "application/pdf:pdf:PDF document";
+  return "application/pdf:pdf:PDF document;application/postscript:ps:PostScript document";
 }
 
 void NPP_Shutdown(void) {

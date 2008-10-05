@@ -31,12 +31,45 @@
 
 // This includes source code from the WebPDFView.mm in the WebKit project
 
+static inline id WebCFAutorelease(CFTypeRef obj)
+{
+  if (obj)
+      CFMakeCollectable(obj);
+  [(id)obj autorelease];
+  return (id)obj;
+}
+
+
 @interface PluginInstance (FileInternal)
 - (NSString *)_path;
 - (NSString *)_temporaryPDFDirectoryPath;
 @end
 
 @implementation PluginInstance (OpenWithFinder)
+
+- (NSData *)convertPostScriptDataSourceToPDF:(NSData *)data
+{
+    // Convert PostScript to PDF using Quartz 2D API
+    // http://developer.apple.com/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_ps_convert/chapter_16_section_1.html
+
+    CGPSConverterCallbacks callbacks = { 0, 0, 0, 0, 0, 0, 0, 0 };    
+    CGPSConverterRef converter = CGPSConverterCreate(0, &callbacks, 0);
+
+    CGDataProviderRef provider = CGDataProviderCreateWithCFData((CFDataRef)data);
+
+    CFMutableDataRef result = CFDataCreateMutable(kCFAllocatorDefault, 0);
+
+    CGDataConsumerRef consumer = CGDataConsumerCreateWithCFData(result);
+
+    // Error handled by detecting zero-length 'result' in caller
+    CGPSConverterConvert(converter, provider, consumer, 0);
+
+    CFRelease(converter);
+    CFRelease(provider);
+    CFRelease(consumer);
+
+    return WebCFAutorelease(result);
+}
 
 - (void)openWithFinder
 {  
@@ -54,7 +87,7 @@
       [permissions release];
 
       [[NSFileManager defaultManager] createFileAtPath:opath 
-                                      contents:[[_pdfView document] dataRepresentation]
+                                      contents:_data
                                       attributes:fileAttributes];
       [fileAttributes release];
       written = YES;
