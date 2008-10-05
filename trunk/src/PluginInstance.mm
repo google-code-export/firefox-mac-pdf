@@ -57,13 +57,16 @@
   _shim->Release();
   _pdfService->Release();
   [_url release];
+  [_mimeType release];
+  [_data release];
   [super dealloc];
 }
 
-- (id)initWithService:(PDFService*)pdfService window:(nsIDOMWindow*)window npp:(NPP)npp;
+- (id)initWithService:(PDFService*)pdfService window:(nsIDOMWindow*)window npp:(NPP)npp mimeType:(NSString*)mimeType;
 {
   if (self = [super init]) {
     _npp = npp;
+    _mimeType = [mimeType retain];
     _pdfView = [[PluginPDFView alloc] initWithPlugin:self];
     selectionController = [[SelectionController forPDFView:_pdfView] retain];
     _pdfService = pdfService;
@@ -89,13 +92,21 @@
 
 - (void)setFile:(const char*)filename url:(const char*)url;
 {
-  // create PDF document
-  NSURL* fileURL = [NSURL fileURLWithPath:[NSString stringWithUTF8String:filename]];
-  
   [_url release]; 
   _url = [[NSString stringWithUTF8String:url] retain];
 
-  PDFDocument* document = [[[PDFDocument alloc] initWithURL:fileURL] autorelease];
+  // create PDF document
+  NSURL* fileURL = [NSURL fileURLWithPath:[NSString stringWithUTF8String:filename]];
+  _data = [[NSData dataWithContentsOfURL:fileURL] retain];
+  
+  NSData* pdfData;
+  if ([_mimeType isEqualToString:@"application/postscript"]) {
+    pdfData = [self convertPostScriptDataSourceToPDF:_data];
+  } else {
+    pdfData = _data;
+  }
+
+  PDFDocument* document = [[[PDFDocument alloc] initWithData:pdfData] autorelease];
   [document setDelegate:self];
   [_pdfView setDocument:document];
 }

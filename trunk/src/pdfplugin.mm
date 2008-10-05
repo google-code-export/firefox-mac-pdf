@@ -59,11 +59,14 @@ NPError NPP_New(NPMIMEType pluginType, NPP instance, uint16 mode, int16 argc, ch
     NSLog(@"firefox-mac-pdf: could not get PDF service");
     return NPERR_GENERIC_ERROR;
   }
+  
+  NSString* mimeType = [NSString stringWithUTF8String:pluginType];
 
   // allocate the plugin
   instance->pdata = [[PluginInstance alloc] initWithService:pdfService.get()
                                             window:window
-                                            npp:instance];
+                                            npp:instance
+                                            mimeType:mimeType];
 
   return NPERR_NO_ERROR;
 }

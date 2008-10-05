@@ -49,8 +49,6 @@ static void _applicationInfoForMIMEType(NSString *type, NSString **name, NSImage
     *name = appName;
 }
 
-@interface PluginPDFView (PluginPDFViewMenu)
-@end;
 
 @implementation PluginPDFView (PluginPDFViewMenu)
 
