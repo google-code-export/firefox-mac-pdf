@@ -34,13 +34,17 @@
 @interface PluginInstance (FileInternal)
 - (NSString *)_path;
 - (NSString *)_temporaryPDFDirectoryPath;
-- (NSString *)_suggestedFilename;
 @end
 
 @implementation PluginInstance (OpenWithFinder)
 
 - (void)openWithFinder
 {  
+  // We don't want to write the file until we have a document to write.
+  if (! [_pdfView document]) {
+    NSBeep();
+    return;
+  }
   NSString *opath = [self _path];
   if (opath) {
     if (!written) {
@@ -69,7 +73,7 @@
   if (path)
     return path;
 
-  NSString *filename = [self _suggestedFilename];
+  NSString *filename = [[[NSURL URLWithString:_url] path] lastPathComponent];
   NSFileManager *manager = [NSFileManager defaultManager]; 
   NSString *temporaryPDFDirectoryPath = [self _temporaryPDFDirectoryPath];
   
@@ -125,12 +129,6 @@
   }
   
   return _temporaryPDFDirectoryPath;
-}
-
-- (NSString *)_suggestedFilename
-{
-  NSURL* url = [NSURL URLWithString:_url];
-  return [[url path] lastPathComponent];
 }
 
 @end
