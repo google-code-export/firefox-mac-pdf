@@ -80,5 +80,3 @@ NS_IMETHODIMP PDFPluginShim::Zoom(PRInt32 arg)
   }
   return NS_OK;  
 }
-
-

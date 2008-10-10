@@ -20,7 +20,7 @@
  * THE SOFTWARE.
  */
 #import "PluginInstance.h"
-#include "main.h"
+#include "npapi.h"
 
 #include "PDFService.h"
 #include "nsCOMPtr.h"

@@ -716,8 +716,6 @@
 		949DE1470DF4FBF200922723 /* SelectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectionController.h; path = src/SelectionController.h; sourceTree = "<group>"; };
 		949DE1480DF4FBF200922723 /* SelectionController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SelectionController.mm; path = src/SelectionController.mm; sourceTree = "<group>"; };
 		949DE14C0DF4FC0400922723 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
-		949DE14D0DF4FC0400922723 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = main.h; path = src/main.h; sourceTree = "<group>"; };
-		949DE14E0DF4FC0400922723 /* mozincludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mozincludes.h; path = src/mozincludes.h; sourceTree = "<group>"; };
 		949DE14F0DF4FC0400922723 /* pdfplugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = pdfplugin.mm; path = src/pdfplugin.mm; sourceTree = "<group>"; };
 		94AF61870DFE132C00BED136 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		94AF618A0DFE132C00BED136 /* prefs.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = prefs.js; sourceTree = "<group>"; };
@@ -790,8 +788,6 @@
 			isa = PBXGroup;
 			children = (
 				949DE14C0DF4FC0400922723 /* main.cpp */,
-				949DE14D0DF4FC0400922723 /* main.h */,
-				949DE14E0DF4FC0400922723 /* mozincludes.h */,
 				949DE14F0DF4FC0400922723 /* pdfplugin.mm */,
 			);
 			name = Source;

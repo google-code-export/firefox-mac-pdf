@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include "main.h"
+#include "npupp.h"
 
 NPError NPP_Initialize() {
   printf("NPP_Initialize called\n");

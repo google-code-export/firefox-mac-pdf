@@ -19,9 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#import <Cocoa/Cocoa.h>
-#import <Quartz/Quartz.h>
-#import "PluginInstance.h"
+
+@class PluginInstance;
 
 @interface PluginPDFView : PDFView {
   PluginInstance* _plugin;

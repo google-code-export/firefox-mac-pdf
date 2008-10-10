@@ -20,6 +20,7 @@
  * THE SOFTWARE.
  */
 #import "Preferences.h"
+
 #include "xpcom-config.h"
 #include "nsIPrefBranch.h"
 #include "nsIPrefService.h"

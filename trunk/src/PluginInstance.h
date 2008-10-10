@@ -19,9 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#import <Cocoa/Cocoa.h>
-#import <Quartz/Quartz.h>
-#include "mozincludes.h";
+#include "npapi.h";
 
 class nsIDOMWindow;
 class PDFService;
