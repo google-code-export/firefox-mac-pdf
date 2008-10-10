@@ -27,6 +27,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 #import "PluginPDFView.h"
+#import "PluginInstance.h"
 
 // This is the implementation of the menu.
 // This includes source code from the WebPDFView.mm in the WebKit project
@@ -99,8 +100,8 @@ static void _applicationInfoForMIMEType(NSString *type, NSString **name, NSImage
   [menu insertItem:[self menuItemOpenWithFinder] atIndex:insertIndex];
 
   [menu insertItem:[NSMenuItem separatorItem] atIndex:insertIndex];
-  [menu insertItemWithTitle:@"Print Page..." action:@selector(doPrint:) keyEquivalent:@"" atIndex:insertIndex];
-  [menu insertItemWithTitle:@"Save Page As..." action:@selector(saveAs:) keyEquivalent:@"" atIndex:insertIndex];
+  [menu insertItemWithTitle:@"Print File..." action:@selector(doPrint:) keyEquivalent:@"" atIndex:insertIndex];
+  [menu insertItemWithTitle:@"Save File As..." action:@selector(saveAs:) keyEquivalent:@"" atIndex:insertIndex];
   
   // Swizzle the search in google
   NSEnumerator *e = [[menu itemArray] objectEnumerator];
