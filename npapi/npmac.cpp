@@ -44,8 +44,7 @@
 
 #include <Carbon/Carbon.h>
 
-#include "npapi.h"
-#include "mozincludes.h"
+#include "npupp.h"
 
 //
 // Define PLUGIN_TRACE to 1 to have the wrapper functions emit

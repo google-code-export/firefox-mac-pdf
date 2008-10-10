@@ -19,9 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#import <Cocoa/Cocoa.h>
-
-
 @interface Preferences : NSObject {
 }
 + (BOOL)getBoolPreference:(const char*)key;

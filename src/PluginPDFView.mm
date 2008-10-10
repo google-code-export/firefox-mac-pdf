@@ -20,6 +20,7 @@
  * THE SOFTWARE.
  */
 #import "PluginPDFView.h"
+#import "PluginInstance.h"
 #import "Preferences.h"
 #import "Swizzle.h"
 

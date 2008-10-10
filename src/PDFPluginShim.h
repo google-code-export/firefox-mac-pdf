@@ -35,4 +35,3 @@ private:
   ~PDFPluginShim();
   const PluginInstance* _plugin;
 };
-
