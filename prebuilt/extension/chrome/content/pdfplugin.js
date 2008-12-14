@@ -36,27 +36,19 @@ function init() {
   cmdFindAgain = document.getElementById('cmd_findAgain');
 
   // enable/disable find menu items correctly
-  var proto = nsBrowserStatusHandler.prototype;
   // this needs to be set before the plugin is loaded
-  proto.onStateChange = createStateChangeHandler(proto.onStateChange);
+  XULBrowserWindow.onStateChange = 
+      createStateChangeHandler(XULBrowserWindow.onStateChange);
 }
 
 function getPluginElement() {
   // Check if the page contains the plugin instance
   var doc = browser.contentWindow.document;
-  var html = doc.documentElement;
-  if (!(html && html.tagName == 'HTML' && html.childNodes.length == 1)) {
+  var embeds = doc.getElementsByTagName('EMBED');
+  if (!(embeds.length == 1 && mimeTypes[embeds[0].type])) {
     return null;
   }
-  var body = html.firstChild;
-  if (!(body && body.tagName == 'BODY' && body.childNodes.length == 1)) {
-    return null;
-  }
-  var embed = body.firstChild;
-  if (!(embed && embed.tagName == 'EMBED' && mimeTypes[embed.type])) {
-    return null;
-  }
-  return embed;
+  return embeds[0];
 }
 
 function createStateChangeHandler(o) {
