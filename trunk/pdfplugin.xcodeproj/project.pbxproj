@@ -1756,7 +1756,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd $SRCROOT/prebuilt/extension\nrm -f $SRCROOT/prebuilt/fx-quartz-pdf.xpi\nzip -r -D -9 -o $SRCROOT/prebuilt/fx-quartz-pdf.xpi * -x '*/.svn/*'";
+			shellScript = "cd $SRCROOT/prebuilt/extension\nrm -f $SRCROOT/prebuilt/fx-quartz-pdf.xpi\nzip -r -D -X -9 $SRCROOT/prebuilt/fx-quartz-pdf.xpi * -x '*/.svn/*'";
 		};
 /* End PBXShellScriptBuildPhase section */
 
