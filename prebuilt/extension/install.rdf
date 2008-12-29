@@ -4,20 +4,19 @@
 
   <Description about="urn:mozilla:install-manifest">
     <em:id>colesbury@gmail.com</em:id>
-    <em:name>Quartz PDF Plugin</em:name>
-    <em:version>0.9.9.6</em:version>
+    <em:name>Firefox PDF Plugin for Mac OS X</em:name>
+    <em:version>1.0</em:version>
     <em:type>2</em:type>
 
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
         <em:minVersion>3.0</em:minVersion>
-        <em:maxVersion>3.1.*</em:maxVersion>
+        <em:maxVersion>3.1b2</em:maxVersion>
       </Description>
     </em:targetApplication>
 
     <!-- Front End MetaData -->
-    <em:name>Quartz PDF Plugin</em:name>
     <em:description>Displays PDF documents in the browser.</em:description>
     <em:creator>Sam Gross</em:creator>
     <em:homepageURL>http://code.google.com/p/firefox-mac-pdf</em:homepageURL>
