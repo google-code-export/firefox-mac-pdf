@@ -22,5 +22,5 @@
 #include <Carbon/Carbon.r>
 
 resource 'STR#' (126) {
- { "Displays PDF documents in the browser.", "Quartz PDF plugin" }
+ { "Displays PDF documents in the browser.", "Firefox PDF Plugin for Mac OS X" }
 };

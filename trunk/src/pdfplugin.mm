@@ -152,7 +152,7 @@ NPError NPP_GetValue(NPP npp, NPPVariable variable, void *value) {
   // Those properties are retrieved from the resource file.
   switch (variable) {
     case NPPVpluginNameString:
-      *((char **)value) = "Quartz PDF Plugin";
+      *((char **)value) = "Firefox PDF Plugin for Mac OS X";
       break;
     case NPPVpluginDescriptionString:
       *((char **)value) = "Displays PDF documents in the browser.";
