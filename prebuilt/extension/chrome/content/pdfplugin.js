@@ -44,11 +44,15 @@ function init() {
 function getPluginElement() {
   // Check if the page contains the plugin instance
   var doc = browser.contentWindow.document;
-  var embeds = doc.getElementsByTagName('EMBED');
-  if (!(embeds.length == 1 && mimeTypes[embeds[0].type])) {
+  var body = doc.body;
+  if (!(body && body.tagName == 'BODY' && body.childNodes.length == 1)) {
     return null;
   }
-  return embeds[0];
+   var embed = body.firstChild;
+  if (!(embed && embed.tagName == 'EMBED' && mimeTypes[embed.type])) {
+    return null;
+  }
+  return embed;
 }
 
 function createStateChangeHandler(o) {
