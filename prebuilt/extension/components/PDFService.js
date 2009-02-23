@@ -109,7 +109,9 @@ PDFService.prototype = {
   
   Save: function(window, url) {
     var chromeWindow = getChromeWindowForWindow(window);
-    chromeWindow.saveURL(url,  null, null, false);
+    chromeWindow.internalSave(url, null, null, null, "application/pdf", false,
+               null, null, null, null);
+
   }
 }
 
