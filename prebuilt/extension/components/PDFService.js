@@ -125,6 +125,9 @@ function FastFindShim(chromeWindow, fastfind) {
    if (fastfind.__lookupGetter__(prop)) {
      this.__defineGetter__(prop, createDelegateGetter(chromeWindow, this.fastfind, prop));
    }
+   if (fastfind.__lookupSetter__(prop)) {
+     this.__defineSetter__(prop, createDelegateSetter(chromeWindow, this.fastfind, prop));
+   }
   }
 }
 
@@ -140,6 +143,12 @@ function createDelegateGetter(chromeWindow, fastfind, prop) {
   }
   return function() {
     return fastfind[prop];
+  }
+}
+
+function createDelegateSetter(chromeWindow, fastfind, prop) {
+  return function(val) {
+    return fastfind[prop] = val;
   }
 }
 
