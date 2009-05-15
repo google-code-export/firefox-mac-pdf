@@ -51,6 +51,7 @@
 		94AF62EC0DFE184D00BED136 /* libnspr4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AF62240DFE151700BED136 /* libnspr4.dylib */; };
 		94AF62ED0DFE184E00BED136 /* libxpcomglue_s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AF62260DFE151700BED136 /* libxpcomglue_s.a */; };
 		94AF62EE0DFE184E00BED136 /* libxpcom.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AF62250DFE151700BED136 /* libxpcom.dylib */; };
+		94CC34990FBE0A4A0097FBBF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 94CC34970FBE0A4A0097FBBF /* Localizable.strings */; };
 		94FAF61D0E96B02A008336A1 /* Swizzle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 94FAF61C0E96B02A008336A1 /* Swizzle.mm */; };
 /* End PBXBuildFile section */
 
@@ -725,6 +726,8 @@
 		94AF622B0DFE162B00BED136 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Preferences.h; path = src/Preferences.h; sourceTree = "<group>"; };
 		94AF622C0DFE162B00BED136 /* Preferences.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Preferences.mm; path = src/Preferences.mm; sourceTree = "<group>"; };
 		94CA1B940E73412900197383 /* PDFService.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = PDFService.js; sourceTree = "<group>"; };
+		94CC34980FBE0A4A0097FBBF /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		94CC349A0FBE0A720097FBBF /* German */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
 		94FAF61B0E96B02A008336A1 /* Swizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Swizzle.h; path = src/Swizzle.h; sourceTree = "<group>"; };
 		94FAF61C0E96B02A008336A1 /* Swizzle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Swizzle.mm; path = src/Swizzle.mm; sourceTree = "<group>"; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
@@ -777,6 +780,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				94CC34970FBE0A4A0097FBBF /* Localizable.strings */,
 				9455AE2E0DEB25B60059FED3 /* pdfplugin.r */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
@@ -1675,6 +1679,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */,
+				94CC34990FBE0A4A0097FBBF /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1801,6 +1806,15 @@
 				089C167EFE841241C02AAC07 /* English */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		94CC34970FBE0A4A0097FBBF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				94CC34980FBE0A4A0097FBBF /* English */,
+				94CC349A0FBE0A720097FBBF /* German */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

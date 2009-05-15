@@ -62,9 +62,12 @@ static void _applicationInfoForMIMEType(NSString *type, NSString **name, NSImage
   if (!appName)
       appName = @"Finder";
 
+  NSBundle* bundle = [NSBundle bundleForClass:[self class]];
+  NSString* openStr = NSLocalizedStringFromTableInBundle(@"Open with %@", nil, bundle, @"Open PDF with application");
+
   // To match the PDFKit style, we'll add Open with Preview even when there's no document yet to view, and
   // disable it using validateUserInterfaceItem.
-  NSString *title = [NSString stringWithFormat:@"Open with %@", appName];
+  NSString *title = [NSString stringWithFormat:openStr, appName];
   NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:title action:@selector(openWithFinder:) keyEquivalent:@""];
   if (appIcon) {
     [item setImage:appIcon];
@@ -95,13 +98,17 @@ static void _applicationInfoForMIMEType(NSString *type, NSString **name, NSImage
   NSMenu* menu = [super menuForEvent:theEvent];
   int insertIndex = [self menuInsertIndex:menu];
   
+  NSBundle* bundle = [NSBundle bundleForClass:[self class]];
+  NSString* printStr = NSLocalizedStringFromTableInBundle(@"Print File...", nil, bundle, @"Print PDF file");
+  NSString* saveStr = NSLocalizedStringFromTableInBundle(@"Save File As...", nil, bundle, @"Save PDF file");                                       
+  
   // Add the Open with Preview/Finder item
   [menu insertItem:[NSMenuItem separatorItem] atIndex:insertIndex];
   [menu insertItem:[self menuItemOpenWithFinder] atIndex:insertIndex];
 
   [menu insertItem:[NSMenuItem separatorItem] atIndex:insertIndex];
-  [menu insertItemWithTitle:@"Print File..." action:@selector(doPrint:) keyEquivalent:@"" atIndex:insertIndex];
-  [menu insertItemWithTitle:@"Save File As..." action:@selector(saveAs:) keyEquivalent:@"" atIndex:insertIndex];
+  [menu insertItemWithTitle:printStr action:@selector(doPrint:) keyEquivalent:@"" atIndex:insertIndex];
+  [menu insertItemWithTitle:saveStr action:@selector(saveAs:) keyEquivalent:@"" atIndex:insertIndex];
   
   // Swizzle the search in google
   NSEnumerator *e = [[menu itemArray] objectEnumerator];
