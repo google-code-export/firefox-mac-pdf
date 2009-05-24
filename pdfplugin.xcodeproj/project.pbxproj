@@ -80,6 +80,7 @@
 		32DBCF630370AF2F00C91783 /* pdfplugin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pdfplugin_Prefix.pch; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* pdfplugin.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pdfplugin.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		940DBD080FC7543B00654F05 /* French */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9410EA940E089F8700CA7F4A /* npmac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = npmac.cpp; sourceTree = "<group>"; };
 		9410EAB00E08A0F300CA7F4A /* npupp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = npupp.h; sourceTree = "<group>"; };
 		9410EB3D0E08B93800CA7F4A /* npruntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = npruntime.h; sourceTree = "<group>"; };
@@ -1813,6 +1814,7 @@
 			children = (
 				94CC34980FBE0A4A0097FBBF /* English */,
 				94CC349A0FBE0A720097FBBF /* German */,
+				940DBD080FC7543B00654F05 /* French */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
