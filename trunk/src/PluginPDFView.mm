@@ -51,7 +51,7 @@ static BOOL swizzled = NO;
 - (void)PDFViewWillClickOnLink:(PDFView *)sender withURL:(NSURL *)URL
 {
 //  NSLog(@"PDFViewWillClickOnLink sender:%@ withURL:%@ rel=%@", sender, URL, [URL relativeString]);
-  [_plugin loadURL:[URL absoluteString]];
+  [plugin loadURL:[URL absoluteString]];
 }
 
 - (void)onScaleChanged:(NSNotification*)notification
@@ -73,17 +73,13 @@ static BOOL swizzled = NO;
 //  }
 //}
 
-- (id)initWithPlugin:(PluginInstance*)plugin
+- (void)awakeFromNib
 {
-  if (self = [super init]) {
-    _plugin = plugin;
-    [self setDelegate:self];
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-        selector:@selector(onScaleChanged:) name:PDFViewScaleChangedNotification object:self];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//        selector:@selector(onAnnotationHit:) name:PDFViewAnnotationHitNotification object:self];
-  }
-  return self;
+  [self setDelegate:self];
+  [[NSNotificationCenter defaultCenter] addObserver:self 
+      selector:@selector(onScaleChanged:) name:PDFViewScaleChangedNotification object:self];
+// [[NSNotificationCenter defaultCenter] addObserver:self
+//    selector:@selector(onAnnotationHit:) name:PDFViewAnnotationHitNotification object:self];
 }
 
 - (void)_applyDefaults
@@ -132,7 +128,7 @@ static BOOL swizzled = NO;
     case 30: // CMD+(SHIFT)+']'
       if (!(flags & NSAlternateKeyMask) && !(flags & NSControlKeyMask)) {
         if (flags & NSShiftKeyMask) {
-          [_plugin advanceTab:(code == 30 ? 1 : -1)];
+          [plugin advanceTab:(code == 30 ? 1 : -1)];
         } else {
           if (code == 33) {
             if ([self canGoBack]) {
@@ -152,14 +148,14 @@ static BOOL swizzled = NO;
       if (!(flags & NSShiftKeyMask) && !(flags & NSControlKeyMask) && (flags & NSCommandKeyMask)) {
         int offset = ([theEvent keyCode] == 124 ? 1 : -1);
         if ((flags & NSAlternateKeyMask)) {
-          [_plugin advanceTab:offset];
+          [plugin advanceTab:offset];
         } else {
-          [_plugin advanceHistory:offset];
+          [plugin advanceHistory:offset];
         }
         return YES;
       }
       break;
-    case 13:
+    case 13: // CMD+W
       if ((flags & NSCommandKeyMask) && !(flags & NSAlternateKeyMask) && !(flags & NSControlKeyMask)
           /*&& !(flags & NSShiftKeyMask)*/) {
         [[self window] makeFirstResponder:[self superview]];

@@ -42,6 +42,7 @@
 		9455ADDB0DEA916F0059FED3 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9455ADDA0DEA916F0059FED3 /* Quartz.framework */; };
 		9455AE300DEB25F20059FED3 /* pdfplugin.r in Rez */ = {isa = PBXBuildFile; fileRef = 9455AE2E0DEB25B60059FED3 /* pdfplugin.r */; };
 		945CA6D00E9583D500202FE4 /* PluginPDFViewMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 945CA6CF0E9583D500202FE4 /* PluginPDFViewMenu.mm */; };
+		947A68720FE44A1F00301C1D /* PluginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 947A68710FE44A1F00301C1D /* PluginView.xib */; };
 		949DE1490DF4FBF200922723 /* PluginInstance.mm in Sources */ = {isa = PBXBuildFile; fileRef = 949DE1440DF4FBF200922723 /* PluginInstance.mm */; };
 		949DE14A0DF4FBF200922723 /* PluginPDFView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 949DE1460DF4FBF200922723 /* PluginPDFView.mm */; };
 		949DE14B0DF4FBF200922723 /* SelectionController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 949DE1480DF4FBF200922723 /* SelectionController.mm */; };
@@ -51,6 +52,7 @@
 		94AF62EC0DFE184D00BED136 /* libnspr4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AF62240DFE151700BED136 /* libnspr4.dylib */; };
 		94AF62ED0DFE184E00BED136 /* libxpcomglue_s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AF62260DFE151700BED136 /* libxpcomglue_s.a */; };
 		94AF62EE0DFE184E00BED136 /* libxpcom.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AF62250DFE151700BED136 /* libxpcom.dylib */; };
+		94C6AC640FE5A6DF00B426DD /* PluginProgressView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 94C6AC630FE5A6DF00B426DD /* PluginProgressView.mm */; };
 		94CC34990FBE0A4A0097FBBF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 94CC34970FBE0A4A0097FBBF /* Localizable.strings */; };
 		94FAF61D0E96B02A008336A1 /* Swizzle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 94FAF61C0E96B02A008336A1 /* Swizzle.mm */; };
 /* End PBXBuildFile section */
@@ -711,6 +713,7 @@
 		945CA94E0E95E33000202FE4 /* nsIX509CertValidity.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIX509CertValidity.idl; sourceTree = "<group>"; };
 		945CA94F0E95E33000202FE4 /* nsrootidl.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsrootidl.idl; sourceTree = "<group>"; };
 		945CA9500E95E33000202FE4 /* README.sgross */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.sgross; sourceTree = "<group>"; };
+		947A68710FE44A1F00301C1D /* PluginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PluginView.xib; sourceTree = "<group>"; };
 		949DE1430DF4FBF200922723 /* PluginInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginInstance.h; path = src/PluginInstance.h; sourceTree = "<group>"; };
 		949DE1440DF4FBF200922723 /* PluginInstance.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PluginInstance.mm; path = src/PluginInstance.mm; sourceTree = "<group>"; };
 		949DE1450DF4FBF200922723 /* PluginPDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginPDFView.h; path = src/PluginPDFView.h; sourceTree = "<group>"; };
@@ -726,6 +729,8 @@
 		94AF62260DFE151700BED136 /* libxpcomglue_s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libxpcomglue_s.a; path = gecko_api/lib/libxpcomglue_s.a; sourceTree = "<group>"; };
 		94AF622B0DFE162B00BED136 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Preferences.h; path = src/Preferences.h; sourceTree = "<group>"; };
 		94AF622C0DFE162B00BED136 /* Preferences.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Preferences.mm; path = src/Preferences.mm; sourceTree = "<group>"; };
+		94C6AC620FE5A6DF00B426DD /* PluginProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PluginProgressView.h; path = src/PluginProgressView.h; sourceTree = "<group>"; };
+		94C6AC630FE5A6DF00B426DD /* PluginProgressView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PluginProgressView.mm; path = src/PluginProgressView.mm; sourceTree = "<group>"; };
 		94CA1B940E73412900197383 /* PDFService.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = PDFService.js; sourceTree = "<group>"; };
 		94CC34980FBE0A4A0097FBBF /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		94CC349A0FBE0A720097FBBF /* German */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -764,6 +769,7 @@
 				089C167CFE841241C02AAC07 /* Resources */,
 				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
+				947A68710FE44A1F00301C1D /* PluginView.xib */,
 			);
 			name = pdfplugin;
 			sourceTree = "<group>";
@@ -1567,6 +1573,8 @@
 				94AF622C0DFE162B00BED136 /* Preferences.mm */,
 				941F8D500E98111900B39F71 /* PDFPluginShim.h */,
 				941F8D510E98111900B39F71 /* PDFPluginShim.mm */,
+				94C6AC620FE5A6DF00B426DD /* PluginProgressView.h */,
+				94C6AC630FE5A6DF00B426DD /* PluginProgressView.mm */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1681,6 +1689,7 @@
 			files = (
 				8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */,
 				94CC34990FBE0A4A0097FBBF /* Localizable.strings in Resources */,
+				947A68720FE44A1F00301C1D /* PluginView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1782,6 +1791,7 @@
 				94FAF61D0E96B02A008336A1 /* Swizzle.mm in Sources */,
 				941F8D280E980C1400B39F71 /* PluginInstanceOpenWithFinder.mm in Sources */,
 				941F8D520E98111900B39F71 /* PDFPluginShim.mm in Sources */,
+				94C6AC640FE5A6DF00B426DD /* PluginProgressView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

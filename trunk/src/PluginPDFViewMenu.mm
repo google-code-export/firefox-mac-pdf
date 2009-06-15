@@ -138,17 +138,17 @@ static void _applicationInfoForMIMEType(NSString *type, NSString **name, NSImage
 
 - (void)doPrint:(id)sender
 {
-  [_plugin print];
+  [plugin print];
 }
 
 - (void)saveAs:(id)sender
 {
-  [_plugin save];
+  [plugin save];
 }
 
 - (void)openWithFinder:(id)sender
 {
-  [_plugin openWithFinder];
+  [plugin openWithFinder];
 }
 
 @end

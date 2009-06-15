@@ -42,14 +42,35 @@
   if (view == nil || ![[view className] isEqualToString:@"ChildView"]) {
     return;
   }
-  [view addSubview:_pdfView];
+
+  [view addSubview:pdfView];
+  [pdfView setFrame:[view frame]];
+
+  if (progressView) {
+    [view addSubview:progressView positioned:NSWindowAbove relativeTo:pdfView];
+    // set the next responder to nil to prevent infinite loop
+    // due to weirdness in event handling in nsChildView.mm
+    [progressView setNextResponder:nil];
+
+    int x = ([view frame].size.width - [progressView frame].size.width) / 2;
+    int y = ([view frame].size.height - [progressView frame].size.height) / 2;
+    [progressView setFrameOrigin:NSMakePoint(x, y)];
+  }
+
   _attached = true;
 }
 
 - (void)dealloc
 {
-  [_pdfView removeFromSuperview];
-  [_pdfView release];
+  if (pdfView) {
+    [pdfView removeFromSuperview];
+    [pdfView release];
+  }
+  if (progressView) {
+    [progressView removeFromSuperview];
+    [progressView release];
+  }
+
   [selectionController release];
   [_searchResults release];
   [path release];
@@ -67,21 +88,28 @@
   if (self = [super init]) {
     _npp = npp;
     _mimeType = [mimeType retain];
-    _pdfView = [[PluginPDFView alloc] initWithPlugin:self];
-    selectionController = [[SelectionController forPDFView:_pdfView] retain];
+
+    // load nib file
+    [NSBundle loadNibNamed:@"PluginView" owner:self];
+    
+    selectionController = [[SelectionController forPDFView:pdfView] retain];
     _pdfService = pdfService;
     _pdfService->AddRef();
     _window = window;
     _shim = new PDFPluginShim(self);
     _shim->AddRef();
     _pdfService->Init(_window, _shim);
+    
+    NSBundle* bundle = [NSBundle bundleForClass:[self class]];
+    progressString = NSLocalizedStringFromTableInBundle(
+        @"Loading %@ of %@", nil, bundle, @"Loading");
   }
   return self;
 }
 
 - (void)print 
 {
-  [_pdfView printWithInfo:[NSPrintInfo sharedPrintInfo] autoRotate:YES];
+  [pdfView printWithInfo:[NSPrintInfo sharedPrintInfo] autoRotate:YES];
 }
 
 - (void)save
@@ -90,14 +118,49 @@
   _pdfService->Save(_window, urlString);
 }
 
-- (void)setFile:(const char*)filename url:(const char*)url;
+static NSString* stringFromByteSize(int size)
 {
-  [_url release]; 
-  _url = [[NSString stringWithUTF8String:url] retain];
+  double value = size;
+  if (value < 1023)
+    return [NSString stringWithFormat:@"%i bytes", size];
+  value = value / 1024;
+  if (value < 1023)
+    return [NSString stringWithFormat:@"%1.1f KB", value];
+  value = value / 1024;
+  if (value < 1023)
+    return [NSString stringWithFormat:@"%1.1f MB", value];
+  value = value / 1024;
+  return [NSString stringWithFormat:@"%1.1f GB", value];
+
+}
+
+- (void)setProgress:(int)progress total:(int)total
+{
+  if (total == 0) {
+    [progressBar setIndeterminate:true];
+    return;
+  }
+  [progressBar setMaxValue:total];
+  [progressBar setDoubleValue:progress];
+  
+  [progressText setStringValue:[NSString stringWithFormat:
+      progressString,
+      stringFromByteSize(progress),
+      stringFromByteSize(total)]];
+}
+
+- (void)setData:(NSData*)data
+{
+  if (progressView) {
+    NSLog(@"superview: %@", [progressView superview]);
+    [progressView removeFromSuperview];
+    [progressView release];
+    progressView = nil;
+  }
 
   // create PDF document
-  NSURL* fileURL = [NSURL fileURLWithPath:[NSString stringWithUTF8String:filename]];
-  _data = [[NSData dataWithContentsOfURL:fileURL] retain];
+  _data = [data retain];
+  NSLog(@"setting data: %d ...", [_data length]);
   
   NSData* pdfData;
   if ([_mimeType isEqualToString:@"application/postscript"]) {
@@ -108,12 +171,7 @@
 
   PDFDocument* document = [[[PDFDocument alloc] initWithData:pdfData] autorelease];
   [document setDelegate:self];
-  [_pdfView setDocument:document];
-}
-
-- (void)setFrameSize:(NSSize)size
-{
-  [_pdfView setFrameSize:size];
+  [pdfView setDocument:document];
 }
 
 static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
@@ -139,7 +197,10 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
   const int WRAPPED = 2;
   int ret;
 
-  PDFDocument* doc = [_pdfView document];
+  PDFDocument* doc = [pdfView document];
+  if (!doc) {
+    return FOUND;
+  }
 
   // only one search can take place at a time
   if ([doc isFinding]) {
@@ -152,7 +213,7 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
   }
 
   // see WebPDFView.mm in WebKit for general technique
-  PDFSelection* initialSelection = [[_pdfView currentSelection] copy];
+  PDFSelection* initialSelection = [[pdfView currentSelection] copy];
   PDFSelection* searchSelection = [initialSelection copy];
   
   // collapse selection to before start/end
@@ -204,7 +265,7 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
 
 - (void)findAll:(NSString*)string caseSensitive:(bool)caseSensitive
 {
-  PDFDocument* doc = [_pdfView document];
+  PDFDocument* doc = [pdfView document];
   if ([doc isFinding]) {
     [doc cancelFindString];
   }
@@ -224,11 +285,6 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
   [selectionController setHighlightedSelections:nil];
 }
 
-- (PDFView*)pdfView
-{
-  return _pdfView;
-}
-
 - (void)documentDidBeginDocumentFind:(NSNotification *)notification
 {
   [_searchResults removeAllObjects];
@@ -246,7 +302,7 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
 
 - (void)copy
 {
-  [_pdfView copy:nil];
+  [pdfView copy:nil];
 }
 
 - (void)loadURL:(NSString*)url
@@ -258,18 +314,43 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
 {
   switch (zoomArg) {
     case -1:
-      [_pdfView zoomOut:nil];
+      [pdfView zoomOut:nil];
       break;
     case 0:
-      [_pdfView setScaleFactor:1.0];
+      [pdfView setScaleFactor:1.0];
       break;
     case 1:
-      [_pdfView zoomIn:nil];
+      [pdfView zoomIn:nil];
       break;
     default:
       return NO;
   }
   return YES;
+}
+
++ (NSSet*)keyPathsForValuesAffectingFilename
+{
+  return [NSSet setWithObject:@"url"];
+}
+
+- (NSString*)filename
+{
+  if (!_url)
+    return nil;
+  return [[[NSURL URLWithString:_url] path] lastPathComponent];
+}
+
+- (void)setUrl:(NSString*)url
+{
+  [_url autorelease];
+  _url = [url retain];
+}
+
+- (NSImage*)pdfIcon
+{
+  NSImage* icon = [[NSWorkspace sharedWorkspace] iconForFileType:@"pdf"];
+  NSLog(@"scales: %d", [icon scalesWhenResized]);
+  return icon;
 }
 
 @end
