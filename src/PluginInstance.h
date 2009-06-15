@@ -26,17 +26,15 @@ class PDFService;
 class PDFPluginShim;
 
 @class SelectionController;
- 
-typedef struct _SavedState {
-  BOOL autoScales;
-  float zoom;
-  PDFDisplayMode displayMode;
-} SavedState;
 
 @interface PluginInstance : NSObject {
+  IBOutlet PDFView* pdfView;
+  IBOutlet NSView* progressView;
+  IBOutlet NSProgressIndicator* progressBar;
+  IBOutlet NSTextField* progressText;
+  NSString* progressString;
   NPP _npp;
   BOOL _attached;
-  PDFView* _pdfView;
   SelectionController* selectionController;
   NSMutableArray* _searchResults;
   nsIDOMWindow* _window;
@@ -48,23 +46,26 @@ typedef struct _SavedState {
   PDFPluginShim* _shim;
   PDFService* _pdfService;
 }
-- (void)copy;
-- (BOOL)zoom:(int)zoomArg;
 - (BOOL)attached;
 - (void)advanceTab:(int)offset;
 - (void)advanceHistory:(int)offset;
 - (void)attachToWindow:(NSWindow*)window at:(NSPoint)point;
 - (void)dealloc;
 - (id)initWithService:(PDFService*)pdfService window:(nsIDOMWindow*)window npp:(NPP)npp mimeType:(NSString*)mimeType;
-- (void)print;
+- (void)setProgress:(int)progress total:(int)total;
 - (void)save;
-- (void)setFile:(const char*)filename url:(const char*)url;
-- (void)setFrameSize:(NSSize)size;
+- (void)setData:(NSData*)data;
+- (void)loadURL:(NSString*)url;
+- (void)print;
+// model
+- (NSString*)filename;
+- (void)setUrl:(NSString*)url;
+// plugin shim methods
+- (void)copy;
 - (int)find:(NSString*)string caseSensitive:(bool)caseSensitive forwards:(bool)forwards;
 - (void)findAll:(NSString*)string caseSensitive:(bool)caseSensitive;
 - (void)removeHighlights;
-- (void)loadURL:(NSString*)url;
-- (PDFView*)pdfView;
+- (BOOL)zoom:(int)zoomArg;
 @end
 
 @interface PluginInstance (OpenWithFinder)

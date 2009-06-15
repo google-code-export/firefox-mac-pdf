@@ -75,6 +75,7 @@ NPError NPP_Destroy(NPP instance, NPSavedData** save) {
   if (instance == NULL) {
     return NPERR_INVALID_INSTANCE_ERROR;
   }
+  NSLog(@"NPP_Destroy");
   PluginInstance* plugin = (PluginInstance*) instance->pdata;
   if (plugin) {
     [plugin release];
@@ -94,35 +95,50 @@ NPError NPP_SetWindow(NPP instance, NPWindow* window) {
     int y = [browserWindow frame].size.height - (clipRect.bottom - clipRect.top) - window->y;
     [plugin attachToWindow:browserWindow at:NSMakePoint(window->x, y)];
   }
-  
-  // always set the size of the plugin
-  [plugin setFrameSize:NSMakeSize(window->width, window->height)];
   return NPERR_NO_ERROR;
 }
 
 
 NPError NPP_NewStream(NPP instance, NPMIMEType type, NPStream* stream, NPBool seekable, uint16* stype) {
-  // stream as file
-  *stype = NP_ASFILEONLY; 
+  NSLog(@"NPP_NewStream end=%d", (int) stream->end);
+  NSMutableData* data = [NSMutableData dataWithCapacity:stream->end];
+  stream->pdata = [data retain];
+
+  PluginInstance* plugin = (PluginInstance*)instance->pdata;
+  [plugin setUrl:[NSString stringWithUTF8String:stream->url]];
+
+  *stype = NP_NORMAL;
   return NPERR_NO_ERROR;
 }
 
 NPError NPP_DestroyStream(NPP instance, NPStream* stream, NPReason reason) {
+  NSLog(@"NPP_DestroyStream reason: %d", (int) reason);
+  NSMutableData* data = (NSMutableData*) stream->pdata;
+  if (reason == 0) {
+    PluginInstance* plugin = (PluginInstance*)instance->pdata;
+    [plugin setData:data];
+  }
+  [data release];
   return NPERR_NO_ERROR;
 }
 
 int32 NPP_WriteReady(NPP instance, NPStream* stream) {
-  return 0;
+  //NSLog(@"NPP_WriteReady");
+  return 2147483647;
 }
 
 int32 NPP_Write(NPP instance, NPStream* stream, int32 offset, int32 len, void* buffer) {
-  return 0;
+  //NSLog(@"NPP_Write offset=%d len=%d", offset, len);
+  NSMutableData* data = (NSMutableData*) stream->pdata;
+  [data appendBytes:buffer length:len];
+  
+  PluginInstance* plugin = (PluginInstance*)instance->pdata;
+  [plugin setProgress:offset total:stream->end];
+  
+  return len;
 }
 
 void NPP_StreamAsFile(NPP instance, NPStream* stream, const char* fname) {
-  PluginInstance* plugin = (PluginInstance*)instance->pdata;
-  const char* url = stream->url;
-  [plugin setFile:fname url:url];
 }
 
 void NPP_Print(NPP instance, NPPrint* platformPrint) {
@@ -131,16 +147,6 @@ void NPP_Print(NPP instance, NPPrint* platformPrint) {
 }
 
 int16 NPP_HandleEvent(NPP instance, void* _event) {
-  NPEvent* event = (NPEvent*) _event;
-  PluginInstance* plugin = (PluginInstance*)instance->pdata;
-  // seems to be called after plugin is created. use it to give plugin focus
-  const int updateEvt = 6; 
-  if (event->what == NPEventType_GetFocusEvent || event->what == updateEvt) {
-    // give the pdfview focus
-    NSView* view = [[plugin pdfView] documentView];
-    [[view window] makeFirstResponder:view];
-    return 1;
-  }
   return 0;
 }
 
