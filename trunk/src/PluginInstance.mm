@@ -147,6 +147,20 @@ static NSString* stringFromByteSize(int size)
       stringFromByteSize(total)]];
 }
 
+
+- (void)downloadFailed
+{
+  NSLog(@"PDF plugin download failed");
+  [progressBar setHidden:YES];
+  
+  NSBundle* bundle = [NSBundle bundleForClass:[self class]];
+  [progressText setStringValue:
+    NSLocalizedStringFromTableInBundle(
+        @"Failed", nil, bundle, @"Download failed")];
+  [progressText setFrameOrigin:NSMakePoint(51, 23)];
+  [filenameText setFrameOrigin:NSMakePoint(51, 43)];
+}
+
 - (void)setData:(NSData*)data
 {
   if (progressView) {

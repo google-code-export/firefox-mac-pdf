@@ -114,9 +114,11 @@ NPError NPP_NewStream(NPP instance, NPMIMEType type, NPStream* stream, NPBool se
 NPError NPP_DestroyStream(NPP instance, NPStream* stream, NPReason reason) {
   NSLog(@"NPP_DestroyStream reason: %d", (int) reason);
   NSMutableData* data = (NSMutableData*) stream->pdata;
+  PluginInstance* plugin = (PluginInstance*)instance->pdata;
   if (reason == 0) {
-    PluginInstance* plugin = (PluginInstance*)instance->pdata;
     [plugin setData:data];
+  } else {
+    [plugin downloadFailed];
   }
   [data release];
   return NPERR_NO_ERROR;
