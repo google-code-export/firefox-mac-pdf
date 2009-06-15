@@ -155,6 +155,12 @@ static BOOL swizzled = NO;
         return YES;
       }
       break;
+    case 48: // CTRL+TAB and CTRL+SHIFT+TAB
+      if ((flags & NSControlKeyMask) && !(flags & NSCommandKeyMask) && !(flags & NSAlternateKeyMask)) {
+        [plugin advanceTab:(flags & NSShiftKeyMask ? -1 : 1)];
+        return YES;
+      }
+      break;
     case 13: // CMD+W
       if ((flags & NSCommandKeyMask) && !(flags & NSAlternateKeyMask) && !(flags & NSControlKeyMask)
           /*&& !(flags & NSShiftKeyMask)*/) {
