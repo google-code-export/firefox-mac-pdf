@@ -102,7 +102,7 @@
     
     NSBundle* bundle = [NSBundle bundleForClass:[self class]];
     progressString = NSLocalizedStringFromTableInBundle(
-        @"Loading %@ of %@", nil, bundle, @"Loading");
+        @"Loading", nil, bundle, @"Loading PDF");
   }
   return self;
 }
@@ -120,17 +120,14 @@
 
 static NSString* stringFromByteSize(int size)
 {
-  double value = size;
+  double value = size / 1024;
   if (value < 1023)
-    return [NSString stringWithFormat:@"%i bytes", size];
+    return [NSString localizedStringWithFormat:@"%1.1f KB", value];
   value = value / 1024;
   if (value < 1023)
-    return [NSString stringWithFormat:@"%1.1f KB", value];
+    return [NSString localizedStringWithFormat:@"%1.1f MB", value];
   value = value / 1024;
-  if (value < 1023)
-    return [NSString stringWithFormat:@"%1.1f MB", value];
-  value = value / 1024;
-  return [NSString stringWithFormat:@"%1.1f GB", value];
+  return [NSString localizedStringWithFormat:@"%1.1f GB", value];
 
 }
 
@@ -143,7 +140,8 @@ static NSString* stringFromByteSize(int size)
   [progressBar setMaxValue:total];
   [progressBar setDoubleValue:progress];
   
-  [progressText setStringValue:[NSString stringWithFormat:
+  [progressText setStringValue:
+    [NSString localizedStringWithFormat:
       progressString,
       stringFromByteSize(progress),
       stringFromByteSize(total)]];
