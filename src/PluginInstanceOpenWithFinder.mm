@@ -112,7 +112,7 @@ static inline id WebCFAutorelease(CFTypeRef obj)
                                     expectedContentLength:-1
                                     textEncodingName:nil];
   NSString *filename = [urlResponse suggestedFilename];
-  [urlResponse release];
+  [urlResponse autorelease];
 
   NSFileManager *manager = [NSFileManager defaultManager]; 
   NSString *temporaryPDFDirectoryPath = [self _temporaryPDFDirectoryPath];
