@@ -59,6 +59,7 @@ class PDFPluginShim;
 - (void)setData:(NSData*)data;
 - (void)loadURL:(NSString*)url;
 - (void)print;
+- (void)requestFocus;
 // model
 - (NSString*)filename;
 - (void)setUrl:(NSString*)url;

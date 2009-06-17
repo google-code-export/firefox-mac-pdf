@@ -118,6 +118,14 @@
   _pdfService->Save(_window, urlString);
 }
 
+- (void)requestFocus
+{
+  NSLog(@"requestFocus hidden=%d", [pdfView isHiddenOrHasHiddenAncestor]);
+  if (![pdfView isHiddenOrHasHiddenAncestor]) {
+    [[pdfView window] makeFirstResponder:[pdfView documentView]];
+  }
+}
+
 static NSString* stringFromByteSize(int size)
 {
   double value = size / 1024;

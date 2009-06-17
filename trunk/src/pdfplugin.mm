@@ -149,6 +149,14 @@ void NPP_Print(NPP instance, NPPrint* platformPrint) {
 }
 
 int16 NPP_HandleEvent(NPP instance, void* _event) {
+  NPEvent* event = (NPEvent*) _event;
+  PluginInstance* plugin = (PluginInstance*)instance->pdata;
+  // seems to be called after plugin is created. use it to give plugin focus
+  const int updateEvt = 6; 
+  if (event->what == NPEventType_GetFocusEvent || event->what == updateEvt) {
+    [plugin requestFocus];
+    return 1;
+  }
   return 0;
 }
 
