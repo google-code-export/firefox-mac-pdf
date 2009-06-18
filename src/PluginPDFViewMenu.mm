@@ -62,7 +62,6 @@ static void _applicationInfoForMIMEType(NSString *type, NSString **name, NSImage
 
 - (BOOL)becomeFirstResponder
 {
-    NSLog(@"becomeFirstResponder direction: %d", [[self window] keyViewSelectionDirection]);
     // This works together with setNextKeyView to splice our PDFSubview into
     // the key loop similar to the way NSScrollView does this.
     NSWindow *window = [self window];
