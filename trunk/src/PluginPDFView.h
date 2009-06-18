@@ -22,7 +22,13 @@
 
 @class PluginInstance;
 
-@interface PluginPDFView : PDFView {
+@interface PluginPDFView : NSView {
   IBOutlet PluginInstance* plugin;
+  PDFView* pdfView;
 }
+- (PDFView*)pdfView;
+@end
+
+@interface PluginPDFView (PDFKitBundle)
+- (void)initPDFViewWithFrame:(NSRect)frame;
 @end

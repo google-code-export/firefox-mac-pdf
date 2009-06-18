@@ -8,12 +8,11 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="2"/>
 			<integer value="13"/>
+			<integer value="74"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>com.apple.pdfkit.ibplugin</string>
 			<string>com.apple.InterfaceBuilderKit</string>
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 		</object>
@@ -396,35 +395,17 @@
 				<reference key="NSSuperview"/>
 				<string key="NSClassName">PluginProgressView</string>
 			</object>
-			<object class="PDFView" id="732802314">
+			<object class="NSCustomView" id="850053619">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">18</int>
-				<object class="NSMutableSet" key="NSDragTypes">
-					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="NSArray" key="set.sortedObjects">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<string>NSFilenamesPboardType</string>
-					</object>
-				</object>
-				<string key="NSFrameSize">{633, 429}</string>
+				<int key="NSvFlags">274</int>
+				<string key="NSFrameSize">{324, 241}</string>
 				<reference key="NSSuperview"/>
-				<int key="DisplayMode">1</int>
-				<bool key="PageBreaks">YES</bool>
-				<float key="ScaleFactor">9.967742e-01</float>
-				<bool key="AutoScale">YES</bool>
+				<string key="NSClassName">PluginPDFView</string>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<object class="NSMutableArray" key="connectionRecords">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">pdfView</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="732802314"/>
-					</object>
-					<int key="connectionID">12</int>
-				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">progressView</string>
@@ -483,19 +464,27 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">plugin</string>
-						<reference key="source" ref="732802314"/>
-						<reference key="destination" ref="1001"/>
-					</object>
-					<int key="connectionID">69</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">filenameText</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="983785068"/>
 					</object>
 					<int key="connectionID">73</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">plugin</string>
+						<reference key="source" ref="850053619"/>
+						<reference key="destination" ref="1001"/>
+					</object>
+					<int key="connectionID">75</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">pluginView</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="850053619"/>
+					</object>
+					<int key="connectionID">76</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -587,8 +576,8 @@
 						<reference key="parent" ref="133783529"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">2</int>
-						<reference key="object" ref="732802314"/>
+						<int key="objectID">74</int>
+						<reference key="object" ref="850053619"/>
 						<reference key="parent" ref="1002"/>
 					</object>
 				</object>
@@ -610,10 +599,9 @@
 					<string>17.IBPluginDependency</string>
 					<string>18.IBPluginDependency</string>
 					<string>19.IBPluginDependency</string>
-					<string>2.CustomClassName</string>
-					<string>2.IBEditorWindowLastContentRect</string>
-					<string>2.IBPluginDependency</string>
 					<string>20.IBPluginDependency</string>
+					<string>74.IBEditorWindowLastContentRect</string>
+					<string>74.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -630,9 +618,8 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>PluginPDFView</string>
-					<string>{{21, 382}, {633, 429}}</string>
-					<string>com.apple.pdfkit.ibplugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>{{153, 524}, {324, 241}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 				</object>
 			</object>
@@ -656,19 +643,11 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">73</int>
+			<int key="maxID">76</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBPartialClassDescription">
-					<string key="className">PDFView</string>
-					<string key="superclassName">NSView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBUserSource</string>
-						<string key="minorKey"/>
-					</object>
-				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">PluginInstance</string>
 					<string key="superclassName">NSObject</string>
@@ -677,7 +656,7 @@
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>filenameText</string>
-							<string>pdfView</string>
+							<string>pluginView</string>
 							<string>progressBar</string>
 							<string>progressText</string>
 							<string>progressView</string>
@@ -685,7 +664,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSTextField</string>
-							<string>PDFView</string>
+							<string>PluginPDFView</string>
 							<string>NSProgressIndicator</string>
 							<string>NSTextField</string>
 							<string>NSView</string>
@@ -706,7 +685,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">PluginPDFView</string>
-					<string key="superclassName">PDFView</string>
+					<string key="superclassName">NSView</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">plugin</string>
 						<string key="NS.object.0">PluginInstance</string>
@@ -718,7 +697,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">PluginPDFView</string>
-					<string key="superclassName">PDFView</string>
+					<string key="superclassName">NSView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBUserSource</string>
 						<string key="minorKey"/>

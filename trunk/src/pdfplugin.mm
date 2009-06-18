@@ -78,6 +78,7 @@ NPError NPP_Destroy(NPP instance, NPSavedData** save) {
   NSLog(@"NPP_Destroy");
   PluginInstance* plugin = (PluginInstance*) instance->pdata;
   if (plugin) {
+    [plugin updatePreferences];
     [plugin release];
   }
   return NPERR_NO_ERROR;

@@ -22,10 +22,17 @@
 #import "PluginInstance.h"
 #import "PluginPDFView.h"
 #import "SelectionController.h"
+#import "Preferences.h"
 #import "PDFPluginShim.h"
 
 #include "PDFService.h"
 #include "nsStringAPI.h"
+
+
+@interface PluginInstance (FileInternal)
+- (void)_applyDefaults;
+@end
+
 
 @implementation PluginInstance
 
@@ -43,11 +50,13 @@
     return;
   }
 
-  [view addSubview:pdfView];
-  [pdfView setFrame:[view frame]];
+  [view addSubview:pluginView];
+  [pluginView setFrame:[view frame]];
+  [pluginView setNextResponder:[pluginView pdfView]];
+  [[pluginView pdfView] setNextResponder:nil];
 
   if (progressView) {
-    [view addSubview:progressView positioned:NSWindowAbove relativeTo:pdfView];
+    [view addSubview:progressView positioned:NSWindowAbove relativeTo:pluginView];
     // set the next responder to nil to prevent infinite loop
     // due to weirdness in event handling in nsChildView.mm
     [progressView setNextResponder:nil];
@@ -62,9 +71,9 @@
 
 - (void)dealloc
 {
-  if (pdfView) {
-    [pdfView removeFromSuperview];
-    [pdfView release];
+  if (pluginView) {
+    [pluginView removeFromSuperview];
+    [pluginView release];
   }
   if (progressView) {
     [progressView removeFromSuperview];
@@ -91,8 +100,17 @@
 
     // load nib file
     [NSBundle loadNibNamed:@"PluginView" owner:self];
+
+    // listen to scale changes
+    [[NSNotificationCenter defaultCenter] 
+        addObserver:self 
+        selector:@selector(updatePreferences)
+        name:PDFViewScaleChangedNotification
+        object:[pluginView pdfView]];
+
+    [self _applyDefaults];
     
-    selectionController = [[SelectionController forPDFView:pdfView] retain];
+    selectionController = [[SelectionController forPDFView:[pluginView pdfView]] retain];
     _pdfService = pdfService;
     _pdfService->AddRef();
     _window = window;
@@ -109,7 +127,7 @@
 
 - (void)print 
 {
-  [pdfView printWithInfo:[NSPrintInfo sharedPrintInfo] autoRotate:YES];
+  [[pluginView pdfView] printWithInfo:[NSPrintInfo sharedPrintInfo] autoRotate:YES];
 }
 
 - (void)save
@@ -120,9 +138,9 @@
 
 - (void)requestFocus
 {
-  NSLog(@"requestFocus hidden=%d", [pdfView isHiddenOrHasHiddenAncestor]);
-  if (![pdfView isHiddenOrHasHiddenAncestor]) {
-    [[pdfView window] makeFirstResponder:[pdfView documentView]];
+  NSLog(@"requestFocus hidden=%d", [pluginView isHiddenOrHasHiddenAncestor]);
+  if (![pluginView isHiddenOrHasHiddenAncestor]) {
+    [[pluginView window] makeFirstResponder:[[pluginView pdfView] documentView]];
   }
 }
 
@@ -191,7 +209,31 @@ static NSString* stringFromByteSize(int size)
 
   PDFDocument* document = [[[PDFDocument alloc] initWithData:pdfData] autorelease];
   [document setDelegate:self];
-  [pdfView setDocument:document];
+  [[pluginView pdfView] setDocument:document];
+}
+
+- (void)_applyDefaults
+{
+  NSLog(@"_applyDefaults");
+  if ([Preferences getBoolPreference:"autoScales"]) {
+    [[pluginView pdfView] setAutoScales:YES];
+  } else {
+    float scaleFactor = [Preferences getFloatPreference:"scaleFactor"];
+    [[pluginView pdfView] setAutoScales:NO];
+    [[pluginView pdfView] setScaleFactor:scaleFactor];
+  }
+  [[pluginView pdfView] setDisplayMode:[Preferences getIntPreference:"displayMode"]];
+}
+
+- (void)updatePreferences
+{
+  // don't save preferences until we actually apply them
+  if (!_data)
+    return;
+  NSLog(@"Update preferences");
+  [Preferences setBoolPreference:"autoScales" value:[[pluginView pdfView] autoScales]];
+  [Preferences setFloatPreference:"scaleFactor" value:[[pluginView pdfView] scaleFactor]];
+  [Preferences setIntPreference:"displayMode" value:[[pluginView pdfView] displayMode]];
 }
 
 static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
@@ -217,7 +259,7 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
   const int WRAPPED = 2;
   int ret;
 
-  PDFDocument* doc = [pdfView document];
+  PDFDocument* doc = [[pluginView pdfView] document];
   if (!doc) {
     return FOUND;
   }
@@ -233,7 +275,7 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
   }
 
   // see WebPDFView.mm in WebKit for general technique
-  PDFSelection* initialSelection = [[pdfView currentSelection] copy];
+  PDFSelection* initialSelection = [[[pluginView pdfView] currentSelection] copy];
   PDFSelection* searchSelection = [initialSelection copy];
   
   // collapse selection to before start/end
@@ -285,7 +327,7 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
 
 - (void)findAll:(NSString*)string caseSensitive:(bool)caseSensitive
 {
-  PDFDocument* doc = [pdfView document];
+  PDFDocument* doc = [[pluginView pdfView] document];
   if ([doc isFinding]) {
     [doc cancelFindString];
   }
@@ -322,25 +364,20 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
 
 - (void)copy
 {
-  [pdfView copy:nil];
-}
-
-- (void)loadURL:(NSString*)url
-{
-  NPN_GetURL(_npp, [url UTF8String], "_self");
+  [[pluginView pdfView] copy:nil];
 }
 
 - (BOOL)zoom:(int)zoomArg
 {
   switch (zoomArg) {
     case -1:
-      [pdfView zoomOut:nil];
+      [[pluginView pdfView] zoomOut:nil];
       break;
     case 0:
-      [pdfView setScaleFactor:1.0];
+      [[pluginView pdfView] setScaleFactor:1.0];
       break;
     case 1:
-      [pdfView zoomIn:nil];
+      [[pluginView pdfView] zoomIn:nil];
       break;
     default:
       return NO;
@@ -371,6 +408,26 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
   NSImage* icon = [[NSWorkspace sharedWorkspace] iconForFileType:@"pdf"];
   NSLog(@"scales: %d", [icon scalesWhenResized]);
   return icon;
+}
+
+// PDFView delegate methods
+
+- (void)PDFViewWillClickOnLink:(PDFView *)sender withURL:(NSURL *)url
+{
+//  NSLog(@"PDFViewWillClickOnLink sender:%@ withURL:%@ rel=%@", sender, URL, [URL relativeString]);
+  NPN_GetURL(_npp, [[url absoluteString] UTF8String], "_self");
+}
+
+// undocumented delegate methods
+
+- (void)PDFViewOpenPDFInNativeApplication:(PDFView*)sender
+{
+  [self openWithFinder];
+}
+
+- (void)PDFViewSavePDFToDownloadFolder:(PDFView*)sender
+{
+  [self save];
 }
 
 @end

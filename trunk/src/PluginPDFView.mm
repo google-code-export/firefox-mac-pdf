@@ -21,7 +21,6 @@
  */
 #import "PluginPDFView.h"
 #import "PluginInstance.h"
-#import "Preferences.h"
 #import "Swizzle.h"
 
 static BOOL retValuePerformKeyEquivalent;
@@ -40,68 +39,41 @@ static BOOL swizzled = NO;
 @end
 
 
-@interface PluginPDFView (FileInternal)
-- (void)_applyDefaults;
-@end
-
-
 @implementation PluginPDFView
 
-// TODO: this is only for 10.5 checkout 10.4 behavior
-- (void)PDFViewWillClickOnLink:(PDFView *)sender withURL:(NSURL *)URL
+- (PDFView*)pdfView
 {
-//  NSLog(@"PDFViewWillClickOnLink sender:%@ withURL:%@ rel=%@", sender, URL, [URL relativeString]);
-  [plugin loadURL:[URL absoluteString]];
+  return pdfView;
 }
 
-- (void)onScaleChanged:(NSNotification*)notification
+- (void)dealloc
 {
-  NSLog(@"scale changed");
-  [Preferences setFloatPreference:"scaleFactor" value:[self scaleFactor]];
+  [pdfView release];
+  [super dealloc];
 }
-
-//- (void)onAnnotationHit:(NSNotification*)notification
-//{
-//  NSLog(@"onAnnotationHit: %@", notification);
-//  PDFAnnotation* annotation = [[notification userInfo]
-//      objectForKey:@"PDFAnnotationHit"];
-//  NSLog(@" annotation: %@", annotation);
-//  if ([[annotation type] isEqualToString:@"Link"]) {
-//    PDFAnnotationLink* link = (PDFAnnotationLink*) annotation;
-//    NSLog(@" link");
-//    NSLog(@" destination: %@ url: %@", [link destination], [link URL]);
-//  }
-//}
 
 - (void)awakeFromNib
 {
-  [self setDelegate:self];
-  [[NSNotificationCenter defaultCenter] addObserver:self 
-      selector:@selector(onScaleChanged:) name:PDFViewScaleChangedNotification object:self];
-// [[NSNotificationCenter defaultCenter] addObserver:self
-//    selector:@selector(onAnnotationHit:) name:PDFViewAnnotationHitNotification object:self];
+  [self initPDFViewWithFrame:[self frame]];
 }
 
-- (void)_applyDefaults
+- (NSView *)hitTest:(NSPoint)point
 {
-  if ([Preferences getBoolPreference:"autoScales"]) {
-    [self setAutoScales:YES];
-  } else {
-    float scaleFactor = [Preferences getFloatPreference:"scaleFactor"];
-    [self setAutoScales:NO];
-    [self setScaleFactor:scaleFactor];
-  }
-  [self setDisplayMode:[Preferences getIntPreference:"displayMode"]];
+  // We override hit test and invert the next responder loop so that
+  // we can preview all mouse events. Our next responder is the view
+  // that would have receieved the event. We make sure the pdfView has
+  // a nil next responder to prevent an infinite loop.
+  // This is a terrible HACK. There must be a better way...
+  NSLog(@"super hitTest = %@", [super hitTest:point]);
+  [self setNextResponder:[super hitTest:point]];
+  [pdfView setNextResponder:nil];
+  return self;
 }
 
-- (void)setDocument:(PDFDocument *)doc
-{
-  [super setDocument:doc];
-  [self _applyDefaults];
-}
 
 - (void)mouseDown:(NSEvent*)theEvent
-{ 
+{
+  NSLog(@"MOUSE DOWN: %@", theEvent);
   NSResponder* firstResponder = [[[self window] firstResponder] retain];
   // pass mouse down event to parent view (to claim browser focus from other XUL elements)
   [[self superview] mouseDown:theEvent];
@@ -122,7 +94,7 @@ static BOOL swizzled = NO;
   switch (code)
   {
     case 24: // CMD+'='
-      [self zoomIn:self];
+      [pdfView zoomIn:nil];
       return YES;
     case 33: // CMD+(SHIFT)+'['
     case 30: // CMD+(SHIFT)+']'
@@ -131,12 +103,12 @@ static BOOL swizzled = NO;
           [plugin advanceTab:(code == 30 ? 1 : -1)];
         } else {
           if (code == 33) {
-            if ([self canGoBack]) {
-              [self goBack:nil];
+            if ([pdfView canGoBack]) {
+              [pdfView goBack:nil];
             }
           } else {
-            if ([self canGoForward]) {
-              [self goForward:nil];
+            if ([pdfView canGoForward]) {
+              [pdfView goForward:nil];
             }
           }
         }
@@ -175,6 +147,7 @@ static BOOL swizzled = NO;
 
 - (BOOL)performKeyEquivalent:(NSEvent*)theEvent
 {
+  NSLog(@"performKeyEquivalent");
   if (![super performKeyEquivalent:theEvent]) {
     // 'custom' key shortcuts
     if ([self handleOverideKeyEquivalent:theEvent]) {
@@ -194,10 +167,6 @@ static BOOL swizzled = NO;
         swizzled = YES;
       }
       actOnKeyEquivalent(menu, sel, theEvent);
-//      MethodSwizzle([menu class],
-//                  @selector(performKeyEquivalent:),
-//                  @selector(altPerformKeyEquivalent:));
-//      NSLog(@"retValuePerformKeyEquivalent = %d", (int) retValuePerformKeyEquivalent);
       return retValuePerformKeyEquivalent;
     } else {
       // TODO: is this ever called?
@@ -205,18 +174,6 @@ static BOOL swizzled = NO;
     }
   }
   return YES;
-}
-
-- (void)setAutoScales:(BOOL)newAuto
-{
-  [super setAutoScales:newAuto];
-  [Preferences setBoolPreference:"autoScales" value:newAuto];
-}
-
-- (void)setDisplayMode:(PDFDisplayMode)mode
-{
-  [super setDisplayMode:mode];
-  [Preferences setIntPreference:"displayMode" value:mode];
 }
 
 @end

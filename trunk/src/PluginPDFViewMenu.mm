@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2005, 2006, 2007 Apple Inc. All rights reserved.
- * Copyright (c) 2008 Samuel Gross.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -25,6 +24,10 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/*
+ * Modified by Sam Gross <colesbury@gmail.com> for use with Firefox PDF Plugin for Mac OS X.
  */
 #import "PluginPDFView.h"
 #import "PluginInstance.h"
@@ -52,6 +55,40 @@ static void _applicationInfoForMIMEType(NSString *type, NSString **name, NSImage
 
 
 @implementation PluginPDFView (PluginPDFViewMenu)
+
+- (BOOL)acceptsFirstResponder {
+    return YES;
+}
+
+- (BOOL)becomeFirstResponder
+{
+    NSLog(@"becomeFirstResponder direction: %d", [[self window] keyViewSelectionDirection]);
+    // This works together with setNextKeyView to splice our PDFSubview into
+    // the key loop similar to the way NSScrollView does this.
+    NSWindow *window = [self window];
+    id newFirstResponder = nil;
+
+    if ([window keyViewSelectionDirection] == NSSelectingPrevious) {
+        NSView *previousValidKeyView = [self previousValidKeyView];
+        if ((previousValidKeyView != self) && (previousValidKeyView != pdfView))
+            newFirstResponder = previousValidKeyView;
+    } else {
+        NSView *PDFDocumentView = [pdfView documentView];
+        if ([PDFDocumentView acceptsFirstResponder])
+            newFirstResponder = PDFDocumentView;
+    }
+
+    if (!newFirstResponder)
+        return NO;
+
+    if (![window makeFirstResponder:newFirstResponder])
+        return NO;
+
+    //[[dataSource webFrame] _clearSelectionInOtherFrames];
+
+    return YES;
+}
+
 
 - (NSMenuItem*) menuItemOpenWithFinder
 {
@@ -95,7 +132,7 @@ static void _applicationInfoForMIMEType(NSString *type, NSString **name, NSImage
 
 - (NSMenu *)menuForEvent:(NSEvent*)theEvent
 {
-  NSMenu* menu = [super menuForEvent:theEvent];
+  NSMenu* menu = [pdfView menuForEvent:theEvent];
   int insertIndex = [self menuInsertIndex:menu];
   
   NSBundle* bundle = [NSBundle bundleForClass:[self class]];
@@ -129,7 +166,7 @@ static void _applicationInfoForMIMEType(NSString *type, NSString **name, NSImage
 - (void)googleInFirefox:(id)sender {
 	//Get selection, URL encode it, add it to the google search string, and ask the OS to open that URL. 
 	//Should open a new firefox tab provided its the default browser. 
-	PDFSelection *selection = [self currentSelection];
+	PDFSelection *selection = [pdfView currentSelection];
 	NSString *escapedselection=(NSString*)CFURLCreateStringByAddingPercentEscapes(NULL,
 		(CFStringRef) [selection string], NULL, NULL, kCFStringEncodingUTF8);
 	NSString *searchurl=[NSString stringWithFormat:@"http://www.google.com/search?q=%@",escapedselection];
