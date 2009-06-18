@@ -51,9 +51,7 @@
   if (value == NULL) {
     return 1.0;
   }
-  float floatValue = [[NSString stringWithCString:value encoding:NSASCIIStringEncoding] floatValue];
-  NSLog(@"getFloat %s = %f",  key, floatValue);
-  return floatValue;
+  return [[NSString stringWithCString:value encoding:NSASCIIStringEncoding] floatValue];
 }
 
 + (int)getIntPreference:(const char*)key
@@ -82,7 +80,6 @@
   prefsService = do_GetService("@mozilla.org/preferences-service;1");
   nsCOMPtr<nsIPrefBranch> prefs;
   prefsService->GetBranch("extensions.firefox-pdf-mac.", getter_AddRefs(prefs));
-  NSLog(@"set float %s = %f", key, value);
   prefs->SetCharPref(key, [[NSString stringWithFormat:@"%f", value] cStringUsingEncoding:NSASCIIStringEncoding]);
 }
 

@@ -64,7 +64,6 @@ static BOOL swizzled = NO;
   // that would have receieved the event. We make sure the pdfView has
   // a nil next responder to prevent an infinite loop.
   // This is a terrible HACK. There must be a better way...
-  NSLog(@"super hitTest = %@", [super hitTest:point]);
   [self setNextResponder:[super hitTest:point]];
   [pdfView setNextResponder:nil];
   return self;
@@ -73,7 +72,6 @@ static BOOL swizzled = NO;
 
 - (void)mouseDown:(NSEvent*)theEvent
 {
-  NSLog(@"MOUSE DOWN: %@", theEvent);
   NSResponder* firstResponder = [[[self window] firstResponder] retain];
   // pass mouse down event to parent view (to claim browser focus from other XUL elements)
   [[self superview] mouseDown:theEvent];
@@ -147,7 +145,6 @@ static BOOL swizzled = NO;
 
 - (BOOL)performKeyEquivalent:(NSEvent*)theEvent
 {
-  NSLog(@"performKeyEquivalent");
   if (![super performKeyEquivalent:theEvent]) {
     // 'custom' key shortcuts
     if ([self handleOverideKeyEquivalent:theEvent]) {
