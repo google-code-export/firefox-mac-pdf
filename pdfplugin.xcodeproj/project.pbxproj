@@ -39,6 +39,7 @@
 		9410EA950E089F8700CA7F4A /* npmac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9410EA940E089F8700CA7F4A /* npmac.cpp */; };
 		941F8D280E980C1400B39F71 /* PluginInstanceOpenWithFinder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 941F8D270E980C1400B39F71 /* PluginInstanceOpenWithFinder.mm */; };
 		941F8D520E98111900B39F71 /* PDFPluginShim.mm in Sources */ = {isa = PBXBuildFile; fileRef = 941F8D510E98111900B39F71 /* PDFPluginShim.mm */; };
+		94484F9B0FE872760054FD12 /* PluginPDFViewPDFKitBundle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 94484F9A0FE872760054FD12 /* PluginPDFViewPDFKitBundle.mm */; };
 		9455ADDB0DEA916F0059FED3 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9455ADDA0DEA916F0059FED3 /* Quartz.framework */; };
 		9455AE300DEB25F20059FED3 /* pdfplugin.r in Rez */ = {isa = PBXBuildFile; fileRef = 9455AE2E0DEB25B60059FED3 /* pdfplugin.r */; };
 		945CA6D00E9583D500202FE4 /* PluginPDFViewMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 945CA6CF0E9583D500202FE4 /* PluginPDFViewMenu.mm */; };
@@ -506,6 +507,7 @@
 		943E1A020DFD0966002456E5 /* utilrename.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utilrename.h; sourceTree = "<group>"; };
 		943E1A030DFD0966002456E5 /* watcomfx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = watcomfx.h; sourceTree = "<group>"; };
 		943E1A040DFD0966002456E5 /* xpcom-config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "xpcom-config.h"; sourceTree = "<group>"; };
+		94484F9A0FE872760054FD12 /* PluginPDFViewPDFKitBundle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PluginPDFViewPDFKitBundle.mm; path = src/PluginPDFViewPDFKitBundle.mm; sourceTree = "<group>"; };
 		9455ADDA0DEA916F0059FED3 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
 		9455AE2C0DEB24D10059FED3 /* npapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = npapi.h; sourceTree = "<group>"; };
 		9455AE2E0DEB25B60059FED3 /* pdfplugin.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = pdfplugin.r; sourceTree = "<group>"; };
@@ -1567,6 +1569,7 @@
 				949DE1450DF4FBF200922723 /* PluginPDFView.h */,
 				949DE1460DF4FBF200922723 /* PluginPDFView.mm */,
 				945CA6CF0E9583D500202FE4 /* PluginPDFViewMenu.mm */,
+				94484F9A0FE872760054FD12 /* PluginPDFViewPDFKitBundle.mm */,
 				949DE1470DF4FBF200922723 /* SelectionController.h */,
 				949DE1480DF4FBF200922723 /* SelectionController.mm */,
 				94AF622B0DFE162B00BED136 /* Preferences.h */,
@@ -1792,6 +1795,7 @@
 				941F8D280E980C1400B39F71 /* PluginInstanceOpenWithFinder.mm in Sources */,
 				941F8D520E98111900B39F71 /* PDFPluginShim.mm in Sources */,
 				94C6AC640FE5A6DF00B426DD /* PluginProgressView.mm in Sources */,
+				94484F9B0FE872760054FD12 /* PluginPDFViewPDFKitBundle.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

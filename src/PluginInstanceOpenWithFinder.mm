@@ -74,7 +74,7 @@ static inline id WebCFAutorelease(CFTypeRef obj)
 - (void)openWithFinder
 {  
   // We don't want to write the file until we have a document to write.
-  if (! [pdfView document]) {
+  if (!_data) {
     NSBeep();
     return;
   }

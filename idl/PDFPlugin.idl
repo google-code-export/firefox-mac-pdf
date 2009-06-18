@@ -7,5 +7,5 @@ interface PDFPlugin : nsISupports
   boolean Find( in ACString str, in boolean caseSensitive, in boolean forward );
   void FindAll( in ACString str, in boolean caseSensitive );
   void RemoveHighlights();
-  void Zoom( in long arg);
+  void Zoom( in long arg );
 };
