@@ -34,6 +34,7 @@ class PDFPluginShim;
   IBOutlet NSProgressIndicator* progressBar;
   IBOutlet NSTextField* progressText;
   IBOutlet NSTextField* filenameText;
+  PDFView* pdfView;
   NSString* progressString;
   NPP _npp;
   BOOL _attached;

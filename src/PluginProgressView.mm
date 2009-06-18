@@ -49,6 +49,15 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect,
     CGContextRestoreGState(context);// 13
 }
 
+- (void)setFrame:(NSRect)frame
+{
+  NSView* superview = [self superview];
+  if (superview) {
+    frame.origin.x = MAX(0, ([superview frame].size.width - frame.size.width) / 2);
+    frame.origin.y = MAX(0, ([superview frame].size.height - frame.size.height) / 2);
+  }
+  [super setFrame:frame];
+}
 
 - (void)drawRect:(NSRect)dirty
 {
