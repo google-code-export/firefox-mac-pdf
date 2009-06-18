@@ -36,37 +36,38 @@
 
 @implementation PluginInstance
 
-- (BOOL)attached
+- (id)initWithService:(PDFService*)pdfService window:(nsIDOMWindow*)window npp:(NPP)npp mimeType:(NSString*)mimeType;
 {
-  return _attached;
-}
+  if (self = [super init]) {
+    _npp = npp;
+    _mimeType = [mimeType retain];
 
-- (void)attachToWindow:(NSWindow*)window at:(NSPoint)point
-{
-  //debugView([window contentView], 0);
-  // find the NSView at the point
-  NSView* view = [[window contentView] hitTest:NSMakePoint(point.x+1, point.y+1)];
-  if (view == nil || ![[view className] isEqualToString:@"ChildView"]) {
-    return;
+    // load nib file
+    [NSBundle loadNibNamed:@"PluginView" owner:self];
+    pdfView = [pluginView pdfView];
+
+    // listen to scale changes
+    [[NSNotificationCenter defaultCenter] 
+        addObserver:self 
+        selector:@selector(updatePreferences)
+        name:PDFViewScaleChangedNotification
+        object:pdfView];
+
+    [self _applyDefaults];
+    
+    selectionController = [[SelectionController forPDFView:pdfView] retain];
+    _pdfService = pdfService;
+    _pdfService->AddRef();
+    _window = window;
+    _shim = new PDFPluginShim(self);
+    _shim->AddRef();
+    _pdfService->Init(_window, _shim);
+    
+    NSBundle* bundle = [NSBundle bundleForClass:[self class]];
+    progressString = NSLocalizedStringFromTableInBundle(
+        @"Loading", nil, bundle, @"Loading PDF");
   }
-
-  [view addSubview:pluginView];
-  [pluginView setFrame:[view frame]];
-  [pluginView setNextResponder:[pluginView pdfView]];
-  [[pluginView pdfView] setNextResponder:nil];
-
-  if (progressView) {
-    [view addSubview:progressView positioned:NSWindowAbove relativeTo:pluginView];
-    // set the next responder to nil to prevent infinite loop
-    // due to weirdness in event handling in nsChildView.mm
-    [progressView setNextResponder:nil];
-
-    int x = ([view frame].size.width - [progressView frame].size.width) / 2;
-    int y = ([view frame].size.height - [progressView frame].size.height) / 2;
-    [progressView setFrameOrigin:NSMakePoint(x, y)];
-  }
-
-  _attached = true;
+  return self;
 }
 
 - (void)dealloc
@@ -92,42 +93,42 @@
   [super dealloc];
 }
 
-- (id)initWithService:(PDFService*)pdfService window:(nsIDOMWindow*)window npp:(NPP)npp mimeType:(NSString*)mimeType;
+- (BOOL)attached
 {
-  if (self = [super init]) {
-    _npp = npp;
-    _mimeType = [mimeType retain];
+  return _attached;
+}
 
-    // load nib file
-    [NSBundle loadNibNamed:@"PluginView" owner:self];
-
-    // listen to scale changes
-    [[NSNotificationCenter defaultCenter] 
-        addObserver:self 
-        selector:@selector(updatePreferences)
-        name:PDFViewScaleChangedNotification
-        object:[pluginView pdfView]];
-
-    [self _applyDefaults];
-    
-    selectionController = [[SelectionController forPDFView:[pluginView pdfView]] retain];
-    _pdfService = pdfService;
-    _pdfService->AddRef();
-    _window = window;
-    _shim = new PDFPluginShim(self);
-    _shim->AddRef();
-    _pdfService->Init(_window, _shim);
-    
-    NSBundle* bundle = [NSBundle bundleForClass:[self class]];
-    progressString = NSLocalizedStringFromTableInBundle(
-        @"Loading", nil, bundle, @"Loading PDF");
+- (void)attachToWindow:(NSWindow*)window at:(NSPoint)point
+{
+  // find the NSView at the point
+  NSView* view = [[window contentView] hitTest:NSMakePoint(point.x+1, point.y+1)];
+  if (view == nil || ![[view className] isEqualToString:@"ChildView"]) {
+    return;
   }
-  return self;
+
+  [view addSubview:pluginView];
+  [pluginView setFrame:[view frame]];
+  [pluginView setNextResponder:pdfView];
+  [pdfView setNextResponder:nil];
+
+  if (progressView) {
+    [view addSubview:progressView positioned:NSWindowAbove relativeTo:pluginView];
+    // set the next responder to nil to prevent infinite loop
+    // due to weirdness in event handling in nsChildView.mm
+    [progressView setNextResponder:nil];
+
+    int x = ([view frame].size.width - [progressView frame].size.width) / 2;
+    int y = ([view frame].size.height - [progressView frame].size.height) / 2;
+    [progressView setFrameOrigin:NSMakePoint(x, y)];
+//    [progressView setAutoresizingMask:NSViewMinXMargin|NSViewMaxXMargin];
+  }
+
+  _attached = true;
 }
 
 - (void)print 
 {
-  [[pluginView pdfView] printWithInfo:[NSPrintInfo sharedPrintInfo] autoRotate:YES];
+  [pdfView printWithInfo:[NSPrintInfo sharedPrintInfo] autoRotate:YES];
 }
 
 - (void)save
@@ -138,9 +139,8 @@
 
 - (void)requestFocus
 {
-  NSLog(@"requestFocus hidden=%d", [pluginView isHiddenOrHasHiddenAncestor]);
   if (![pluginView isHiddenOrHasHiddenAncestor]) {
-    [[pluginView window] makeFirstResponder:[[pluginView pdfView] documentView]];
+    [[pluginView window] makeFirstResponder:[pdfView documentView]];
   }
 }
 
@@ -178,7 +178,7 @@ static NSString* stringFromByteSize(int size)
 {
   NSLog(@"PDF plugin download failed");
   [progressBar setHidden:YES];
-  
+
   NSBundle* bundle = [NSBundle bundleForClass:[self class]];
   [progressText setStringValue:
     NSLocalizedStringFromTableInBundle(
@@ -190,7 +190,6 @@ static NSString* stringFromByteSize(int size)
 - (void)setData:(NSData*)data
 {
   if (progressView) {
-    NSLog(@"superview: %@", [progressView superview]);
     [progressView removeFromSuperview];
     [progressView release];
     progressView = nil;
@@ -198,7 +197,6 @@ static NSString* stringFromByteSize(int size)
 
   // create PDF document
   _data = [data retain];
-  NSLog(@"setting data: %d ...", [_data length]);
   
   NSData* pdfData;
   if ([_mimeType isEqualToString:@"application/postscript"]) {
@@ -209,31 +207,26 @@ static NSString* stringFromByteSize(int size)
 
   PDFDocument* document = [[[PDFDocument alloc] initWithData:pdfData] autorelease];
   [document setDelegate:self];
-  [[pluginView pdfView] setDocument:document];
+  [pdfView setDocument:document];
 }
 
 - (void)_applyDefaults
 {
-  NSLog(@"_applyDefaults");
   if ([Preferences getBoolPreference:"autoScales"]) {
-    [[pluginView pdfView] setAutoScales:YES];
+    [pdfView setAutoScales:YES];
   } else {
     float scaleFactor = [Preferences getFloatPreference:"scaleFactor"];
-    [[pluginView pdfView] setAutoScales:NO];
-    [[pluginView pdfView] setScaleFactor:scaleFactor];
+    [pdfView setAutoScales:NO];
+    [pdfView setScaleFactor:scaleFactor];
   }
-  [[pluginView pdfView] setDisplayMode:[Preferences getIntPreference:"displayMode"]];
+  [pdfView setDisplayMode:[Preferences getIntPreference:"displayMode"]];
 }
 
 - (void)updatePreferences
 {
-  // don't save preferences until we actually apply them
-  if (!_data)
-    return;
-  NSLog(@"Update preferences");
-  [Preferences setBoolPreference:"autoScales" value:[[pluginView pdfView] autoScales]];
-  [Preferences setFloatPreference:"scaleFactor" value:[[pluginView pdfView] scaleFactor]];
-  [Preferences setIntPreference:"displayMode" value:[[pluginView pdfView] displayMode]];
+  [Preferences setBoolPreference:"autoScales" value:[pdfView autoScales]];
+  [Preferences setFloatPreference:"scaleFactor" value:[pdfView scaleFactor]];
+  [Preferences setIntPreference:"displayMode" value:[pdfView displayMode]];
 }
 
 static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
@@ -259,7 +252,7 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
   const int WRAPPED = 2;
   int ret;
 
-  PDFDocument* doc = [[pluginView pdfView] document];
+  PDFDocument* doc = [pdfView document];
   if (!doc) {
     return FOUND;
   }
@@ -275,7 +268,7 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
   }
 
   // see WebPDFView.mm in WebKit for general technique
-  PDFSelection* initialSelection = [[[pluginView pdfView] currentSelection] copy];
+  PDFSelection* initialSelection = [[pdfView currentSelection] copy];
   PDFSelection* searchSelection = [initialSelection copy];
   
   // collapse selection to before start/end
@@ -327,7 +320,7 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
 
 - (void)findAll:(NSString*)string caseSensitive:(bool)caseSensitive
 {
-  PDFDocument* doc = [[pluginView pdfView] document];
+  PDFDocument* doc = [pdfView document];
   if ([doc isFinding]) {
     [doc cancelFindString];
   }
@@ -364,20 +357,20 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
 
 - (void)copy
 {
-  [[pluginView pdfView] copy:nil];
+  [pdfView copy:nil];
 }
 
 - (BOOL)zoom:(int)zoomArg
 {
   switch (zoomArg) {
     case -1:
-      [[pluginView pdfView] zoomOut:nil];
+      [pdfView zoomOut:nil];
       break;
     case 0:
-      [[pluginView pdfView] setScaleFactor:1.0];
+      [pdfView setScaleFactor:1.0];
       break;
     case 1:
-      [[pluginView pdfView] zoomIn:nil];
+      [pdfView zoomIn:nil];
       break;
     default:
       return NO;
@@ -405,16 +398,13 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
 
 - (NSImage*)pdfIcon
 {
-  NSImage* icon = [[NSWorkspace sharedWorkspace] iconForFileType:@"pdf"];
-  NSLog(@"scales: %d", [icon scalesWhenResized]);
-  return icon;
+  return [[NSWorkspace sharedWorkspace] iconForFileType:@"pdf"];
 }
 
 // PDFView delegate methods
 
 - (void)PDFViewWillClickOnLink:(PDFView *)sender withURL:(NSURL *)url
 {
-//  NSLog(@"PDFViewWillClickOnLink sender:%@ withURL:%@ rel=%@", sender, URL, [URL relativeString]);
   NPN_GetURL(_npp, [[url absoluteString] UTF8String], "_self");
 }
 
