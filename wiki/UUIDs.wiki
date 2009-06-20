@@ -11,3 +11,9 @@
 || F5D2DEFB4A15A4F8E75B7CBB8BC0D017 || i386 || 1.0.3 || addons.mozilla.org ||
 || 148E62F5C6CEFC4A6C020AD74A8CB5AD || ppc  || 1.0.3 || code.google.com ||
 || 148E62F5C6CEFC4A6C020AD74A8CB5AD || ppc  || 1.0.3 || addons.mozilla.org ||
+|| 67D0A6116551CEF589C3F9D651C8B0DA || i386 || 1.0.2 || code.google.com ||
+|| F5CB701E9BCEF94524558BACF56DDFA7 || ppc  || 1.0.2 || code.google.com ||
+|| 980E47400515125F8A7EE2478A8D8E21 || i386 || 1.0.1 || code.google.com ||
+|| 7CEBD7BE70195EA4F5072F09F32EDE1C || ppc  || 1.0.1 || code.google.com ||
+|| F672EEA16EC246414D59CB14E8BE265E || i386 || 1.0   || code.google.com ||
+|| 0017DDE37C24BB1BB044126B2C86EBC8 || ppc  || 1.0   || code.google.com ||
