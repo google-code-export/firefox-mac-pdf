@@ -62,6 +62,14 @@ static NSString* stringFromByteSize(int size)
 
 }
 
+- (void)awakeFromNib
+{
+  NSImage* image = [[NSWorkspace sharedWorkspace] iconForFileType:@"pdf"];
+  if (image) {
+    [imageView setImage:image];
+  }
+}
+
 - (void)setProgress:(int)progress total:(int)total
 {
   NSBundle* bundle = [NSBundle bundleForClass:[self class]];
@@ -92,6 +100,11 @@ static NSString* stringFromByteSize(int size)
         @"Failed", nil, bundle, @"Download failed")];
   [progressText setFrameOrigin:NSMakePoint(51, 23)];
   [filenameText setFrameOrigin:NSMakePoint(51, 43)];
+}
+
+- (void)setFilename:(NSString*)filename
+{
+  [filenameText setStringValue:filename];
 }
 
 - (void)setFrame:(NSRect)frame

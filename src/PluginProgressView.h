@@ -27,7 +27,9 @@
   IBOutlet NSProgressIndicator* progressBar;
   IBOutlet NSTextField* progressText;
   IBOutlet NSTextField* filenameText;
+  IBOutlet NSImageView* imageView;
 }
+- (void)setFilename:(NSString*)filename;
 - (void)setProgress:(int)progress total:(int)total;
 - (void)downloadFailed;
 @end
