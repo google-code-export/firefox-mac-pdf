@@ -27,15 +27,12 @@ class PDFPluginShim;
 
 @class SelectionController;
 @class PluginPDFView;
+@class PluginProgressView;
 
 @interface PluginInstance : NSObject {
   IBOutlet PluginPDFView* pluginView;
-  IBOutlet NSView* progressView;
-  IBOutlet NSProgressIndicator* progressBar;
-  IBOutlet NSTextField* progressText;
-  IBOutlet NSTextField* filenameText;
+  IBOutlet PluginProgressView* progressView;
   PDFView* pdfView;
-  NSString* progressString;
   NPP _npp;
   BOOL _attached;
   SelectionController* selectionController;
@@ -56,8 +53,8 @@ class PDFPluginShim;
 - (void)dealloc;
 - (id)initWithService:(PDFService*)pdfService window:(nsIDOMWindow*)window npp:(NPP)npp mimeType:(NSString*)mimeType;
 - (void)setProgress:(int)progress total:(int)total;
-- (void)save;
 - (void)downloadFailed;
+- (void)save;
 - (void)setData:(NSData*)data;
 //- (void)loadURL:(NSString*)url;
 - (void)print;

@@ -24,5 +24,10 @@
 
 
 @interface PluginProgressView : NSView {
+  IBOutlet NSProgressIndicator* progressBar;
+  IBOutlet NSTextField* progressText;
+  IBOutlet NSTextField* filenameText;
 }
+- (void)setProgress:(int)progress total:(int)total;
+- (void)downloadFailed;
 @end

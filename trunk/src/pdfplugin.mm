@@ -27,7 +27,7 @@
 #include "nsServiceManagerUtils.h"
 
 NPError NPP_New(NPMIMEType pluginType, NPP instance, uint16 mode, int16 argc, char* argn[], char* argv[], NPSavedData* saved) {
-  printf("NPP_New(instance=%8p,mode=%d,argc=%d)\n", instance, mode, argc);
+  NSLog(@"NPP_New(instance=%8p,mode=%d,argc=%d)\n", instance, mode, argc);
   if (instance == NULL) {
     return NPERR_INVALID_INSTANCE_ERROR;
   }
@@ -75,11 +75,12 @@ NPError NPP_Destroy(NPP instance, NPSavedData** save) {
   if (instance == NULL) {
     return NPERR_INVALID_INSTANCE_ERROR;
   }
-  NSLog(@"NPP_Destroy");
+  NSLog(@"NPP_Destroy: %d", (int) instance->pdata);
   PluginInstance* plugin = (PluginInstance*) instance->pdata;
   if (plugin) {
     [plugin updatePreferences];
     [plugin release];
+    instance->pdata = NULL;
   }
   return NPERR_NO_ERROR;
 }
@@ -131,7 +132,6 @@ int32 NPP_WriteReady(NPP instance, NPStream* stream) {
 }
 
 int32 NPP_Write(NPP instance, NPStream* stream, int32 offset, int32 len, void* buffer) {
-  //NSLog(@"NPP_Write offset=%d len=%d", offset, len);
   NSMutableData* data = (NSMutableData*) stream->pdata;
   [data appendBytes:buffer length:len];
   
