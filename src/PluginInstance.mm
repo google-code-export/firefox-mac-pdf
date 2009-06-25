@@ -21,13 +21,13 @@
  */
 #import "PluginInstance.h"
 #import "PluginPDFView.h"
+#import "PluginProgressView.h"
 #import "SelectionController.h"
 #import "Preferences.h"
 #import "PDFPluginShim.h"
 
 #include "PDFService.h"
 #include "nsStringAPI.h"
-
 
 @interface PluginInstance (FileInternal)
 - (void)_applyDefaults;
@@ -62,10 +62,6 @@
     _shim = new PDFPluginShim(self);
     _shim->AddRef();
     _pdfService->Init(_window, _shim);
-    
-    NSBundle* bundle = [NSBundle bundleForClass:[self class]];
-    progressString = NSLocalizedStringFromTableInBundle(
-        @"Loading", nil, bundle, @"Loading PDF");
   }
   return self;
 }
@@ -107,7 +103,7 @@
   }
 
   [view addSubview:pluginView];
-  [pluginView setFrame:[view frame]];
+  [pluginView setFrameSize:[view frame].size];
   [pluginView setNextResponder:pdfView];
   [pdfView setNextResponder:nil];
 
@@ -120,7 +116,6 @@
     int x = ([view frame].size.width - [progressView frame].size.width) / 2;
     int y = ([view frame].size.height - [progressView frame].size.height) / 2;
     [progressView setFrameOrigin:NSMakePoint(x, y)];
-//    [progressView setAutoresizingMask:NSViewMinXMargin|NSViewMaxXMargin];
   }
 
   _attached = true;
@@ -144,47 +139,19 @@
   }
 }
 
-static NSString* stringFromByteSize(int size)
-{
-  double value = size / 1024;
-  if (value < 1023)
-    return [NSString localizedStringWithFormat:@"%1.1f KB", value];
-  value = value / 1024;
-  if (value < 1023)
-    return [NSString localizedStringWithFormat:@"%1.1f MB", value];
-  value = value / 1024;
-  return [NSString localizedStringWithFormat:@"%1.1f GB", value];
-
-}
-
 - (void)setProgress:(int)progress total:(int)total
 {
-  if (total == 0) {
-    [progressBar setIndeterminate:true];
-    return;
+  if (progressView) {
+    [progressView setProgress:progress total:total];
   }
-  [progressBar setMaxValue:total];
-  [progressBar setDoubleValue:progress];
-  
-  [progressText setStringValue:
-    [NSString localizedStringWithFormat:
-      progressString,
-      stringFromByteSize(progress),
-      stringFromByteSize(total)]];
 }
-
 
 - (void)downloadFailed
 {
   NSLog(@"PDF plugin download failed");
-  [progressBar setHidden:YES];
-
-  NSBundle* bundle = [NSBundle bundleForClass:[self class]];
-  [progressText setStringValue:
-    NSLocalizedStringFromTableInBundle(
-        @"Failed", nil, bundle, @"Download failed")];
-  [progressText setFrameOrigin:NSMakePoint(51, 23)];
-  [filenameText setFrameOrigin:NSMakePoint(51, 43)];
+  if (progressView) {
+    [progressView downloadFailed];
+  }
 }
 
 - (void)setData:(NSData*)data

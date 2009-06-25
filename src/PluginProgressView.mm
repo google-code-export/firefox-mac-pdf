@@ -49,6 +49,51 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect,
     CGContextRestoreGState(context);// 13
 }
 
+static NSString* stringFromByteSize(int size)
+{
+  double value = size / 1024;
+  if (value < 1023)
+    return [NSString localizedStringWithFormat:@"%1.1f KB", value];
+  value = value / 1024;
+  if (value < 1023)
+    return [NSString localizedStringWithFormat:@"%1.1f MB", value];
+  value = value / 1024;
+  return [NSString localizedStringWithFormat:@"%1.1f GB", value];
+
+}
+
+- (void)setProgress:(int)progress total:(int)total
+{
+  NSBundle* bundle = [NSBundle bundleForClass:[self class]];
+  NSString* progressString = NSLocalizedStringFromTableInBundle(
+      @"Loading", nil, bundle, @"Loading PDF");
+
+  if (total == 0) {
+    [progressBar setIndeterminate:true];
+    return;
+  }
+  [progressBar setMaxValue:total];
+  [progressBar setDoubleValue:progress];
+  
+  [progressText setStringValue:
+    [NSString localizedStringWithFormat:
+      progressString,
+      stringFromByteSize(progress),
+      stringFromByteSize(total)]];
+}
+
+- (void)downloadFailed
+{
+  [progressBar setHidden:YES];
+
+  NSBundle* bundle = [NSBundle bundleForClass:[self class]];
+  [progressText setStringValue:
+    NSLocalizedStringFromTableInBundle(
+        @"Failed", nil, bundle, @"Download failed")];
+  [progressText setFrameOrigin:NSMakePoint(51, 23)];
+  [filenameText setFrameOrigin:NSMakePoint(51, 43)];
+}
+
 - (void)setFrame:(NSRect)frame
 {
   NSView* superview = [self superview];
