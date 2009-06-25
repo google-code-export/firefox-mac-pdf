@@ -60,9 +60,6 @@ class PDFPluginShim;
 - (void)print;
 - (void)requestFocus;
 - (void)updatePreferences;
-// model
-- (NSString*)filename;
-- (void)setUrl:(NSString*)url;
 // plugin shim methods
 - (void)copy;
 - (int)find:(NSString*)string caseSensitive:(bool)caseSensitive forwards:(bool)forwards;

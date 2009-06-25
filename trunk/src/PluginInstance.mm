@@ -345,27 +345,14 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
   return YES;
 }
 
-+ (NSSet*)keyPathsForValuesAffectingFilename
-{
-  return [NSSet setWithObject:@"url"];
-}
-
-- (NSString*)filename
-{
-  if (!_url)
-    return nil;
-  return [[[NSURL URLWithString:_url] path] lastPathComponent];
-}
-
 - (void)setUrl:(NSString*)url
 {
   [_url autorelease];
   _url = [url retain];
-}
-
-- (NSImage*)pdfIcon
-{
-  return [[NSWorkspace sharedWorkspace] iconForFileType:@"pdf"];
+  if (progressView && url) {
+    NSString* filename = [[[NSURL URLWithString:url] path] lastPathComponent];
+    [progressView setFilename:filename];
+  }
 }
 
 // PDFView delegate methods
