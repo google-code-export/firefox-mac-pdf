@@ -97,24 +97,24 @@
 - (void)attachToWindow:(NSWindow*)window at:(NSPoint)point
 {
   // find the NSView at the point
-  NSView* view = [[window contentView] hitTest:NSMakePoint(point.x+1, point.y+1)];
-  if (view == nil || ![[view className] isEqualToString:@"ChildView"]) {
+  parentView = [[window contentView] hitTest:NSMakePoint(point.x+1, point.y+1)];
+  if (parentView == nil || ![[parentView className] isEqualToString:@"ChildView"]) {
     return;
   }
 
-  [view addSubview:pluginView];
-  [pluginView setFrameSize:[view frame].size];
+  [parentView addSubview:pluginView];
+  [pluginView setFrameSize:[parentView frame].size];
   [pluginView setNextResponder:pdfView];
   [pdfView setNextResponder:nil];
 
   if (progressView) {
-    [view addSubview:progressView positioned:NSWindowAbove relativeTo:pluginView];
+    [parentView addSubview:progressView positioned:NSWindowAbove relativeTo:pluginView];
     // set the next responder to nil to prevent infinite loop
     // due to weirdness in event handling in nsChildView.mm
     [progressView setNextResponder:nil];
 
-    int x = ([view frame].size.width - [progressView frame].size.width) / 2;
-    int y = ([view frame].size.height - [progressView frame].size.height) / 2;
+    int x = ([parentView frame].size.width - [progressView frame].size.width) / 2;
+    int y = ([parentView frame].size.height - [progressView frame].size.height) / 2;
     [progressView setFrameOrigin:NSMakePoint(x, y)];
   }
 
@@ -352,6 +352,21 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
   if (progressView && url) {
     NSString* filename = [[[NSURL URLWithString:url] path] lastPathComponent];
     [progressView setFilename:filename];
+  }
+}
+
+- (void)setVisible:(bool)visible
+{
+  if ([pluginView inLiveResize]) {
+    return;
+  }
+  if (pluginView && _attached) {
+    if (visible && ![pluginView superview]) {
+      [pluginView setFrameSize:[parentView frame].size];
+      [parentView addSubview:pluginView positioned:NSWindowBelow relativeTo:nil];
+    } else if (!visible) {
+      [pluginView removeFromSuperviewWithoutNeedingDisplay];
+    }
   }
 }
 
