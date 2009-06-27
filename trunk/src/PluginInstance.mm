@@ -364,10 +364,11 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
     if (visible && ![pluginView superview]) {
       [pluginView setFrameSize:[parentView frame].size];
       [parentView addSubview:pluginView positioned:NSWindowBelow relativeTo:nil];
-    } else if (!visible) {
+    } else if (!visible && [pluginView isHiddenOrHasHiddenAncestor]) {
       [pluginView removeFromSuperviewWithoutNeedingDisplay];
     }
   }
+
 }
 
 // PDFView delegate methods
