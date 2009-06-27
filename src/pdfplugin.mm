@@ -97,6 +97,9 @@ NPError NPP_SetWindow(NPP instance, NPWindow* window) {
     int y = [browserWindow frame].size.height - (clipRect.bottom - clipRect.top) - window->y;
     [plugin attachToWindow:browserWindow at:NSMakePoint(window->x, y)];
   }
+  if ([plugin attached]) {
+    [plugin setVisible:visible];
+  }
   return NPERR_NO_ERROR;
 }
 
