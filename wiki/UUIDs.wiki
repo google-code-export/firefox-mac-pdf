@@ -1,4 +1,6 @@
 || *UUID* || *Architecture* || *Version* || *Source* ||
+|| 05B9312AB15A1AA55D0BEF957116939F || i386 || 1.1.1 || ||
+|| A51F6938E0152C0BE64B7A2EA7C7783C || ppc  || 1.1.1 || ||
 || E148C63E88EC433A628EBED8DA9F8874 || i386 || 1.1   || code.google.com ||
 || E148C63E88EC433A628EBED8DA9F8874 || i386 || 1.1   || addons.mozilla.org ||
 || 7D1072F94E88AC5C7C4E4FB0A3A6ED6A || ppc  || 1.1   || code.google.com ||
@@ -17,3 +19,5 @@
 || 7CEBD7BE70195EA4F5072F09F32EDE1C || ppc  || 1.0.1 || code.google.com ||
 || F672EEA16EC246414D59CB14E8BE265E || i386 || 1.0   || code.google.com ||
 || 0017DDE37C24BB1BB044126B2C86EBC8 || ppc  || 1.0   || code.google.com ||
+
+_dwarfdump -u pdfplugin_
