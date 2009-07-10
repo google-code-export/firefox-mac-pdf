@@ -1,0 +1,4 @@
+== PDFs open in external application ==
+  # Open Firefox and chose Firefox->Preferences... from the menu bar
+  # Select the "Applications" tab
+  # Make sure that the "Portable Document Formant" content type is set to "Use Firefox PDF Plugin..."
