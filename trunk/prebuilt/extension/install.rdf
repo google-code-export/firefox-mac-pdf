@@ -2,10 +2,17 @@
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 
+  <!--
+     Copyright (c) 2009 Sam Gross. Licensed under the MIT License; see 
+     http://www.opensource.org/licenses/mit-license.php for details.
+    
+     Full source code at http://code.google.com/p/firefox-mac-pdf/
+    -->
+
   <Description about="urn:mozilla:install-manifest">
     <em:id>colesbury@gmail.com</em:id>
     <em:name>Firefox PDF Plugin for Mac OS X</em:name>
-    <em:version>1.1.1</em:version>
+    <em:version>1.1.2</em:version>
     <em:type>2</em:type>
 
     <em:targetApplication>
