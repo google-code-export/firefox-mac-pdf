@@ -24,6 +24,7 @@
 var browser;
 var cmdFind;
 var cmdFindAgain;
+var cmdFindPrevious;
 
 var mimeTypes = {
  "application/pdf" : true,
@@ -34,6 +35,7 @@ function init() {
   browser = document.getElementById('content');
   cmdFind = document.getElementById('cmd_find');
   cmdFindAgain = document.getElementById('cmd_findAgain');
+  cmdFindPrevious = document.getElementById('cmd_findPrevious');
 
   // enable/disable find menu items correctly
   // this needs to be set before the plugin is loaded
@@ -63,6 +65,7 @@ function createStateChangeHandler(o) {
     if (getPluginElement()) {
       cmdFind.removeAttribute('disabled');
       cmdFindAgain.removeAttribute('disabled');
+      cmdFindPrevious.removeAttribute('disabled');
     }
   }
 }

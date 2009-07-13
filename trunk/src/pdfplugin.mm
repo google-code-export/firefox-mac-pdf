@@ -85,21 +85,41 @@ NPError NPP_Destroy(NPP instance, NPSavedData** save) {
   return NPERR_NO_ERROR;
 }
 
-NPError NPP_SetWindow(NPP instance, NPWindow* window) {
-  PluginInstance* plugin = (PluginInstance*)instance->pdata;
-  
+
+bool getVisible(NPWindow*) __attribute ((__noinline__));
+bool getVisible(NPWindow* window) {
   NPRect clipRect = window->clipRect;
-  bool visible = (clipRect.top != clipRect.bottom && clipRect.left != clipRect.right);
+  return (clipRect.top != clipRect.bottom && clipRect.left != clipRect.right);
+}
+
+void maybeAttach(PluginInstance*, NPWindow*) __attribute ((__noinline__));
+void maybeAttach(PluginInstance* plugin, NPWindow* window) {
   // attach the plugin if it's not attached and is visible
-  if (visible && ![plugin attached]) {
+  NPRect clipRect = window->clipRect;
+  if (![plugin attached]) {
     NP_CGContext* npContext = (NP_CGContext*) window->window;
     NSWindow* browserWindow = [[[NSWindow alloc] initWithWindowRef:npContext->window] autorelease];
     int y = [browserWindow frame].size.height - (clipRect.bottom - clipRect.top) - window->y;
     [plugin attachToWindow:browserWindow at:NSMakePoint(window->x, y)];
   }
+}
+
+void maybeSetVisible(PluginInstance*, bool) __attribute ((__noinline__));
+void maybeSetVisible(PluginInstance* plugin, bool visible) {
   if ([plugin attached]) {
     [plugin setVisible:visible];
   }
+}
+
+NPError NPP_SetWindow(NPP instance, NPWindow* window) {
+  PluginInstance* plugin = (PluginInstance*)instance->pdata;
+  
+  bool visible = getVisible(window);
+  if (visible) {
+    maybeAttach(plugin, window);
+  }
+  maybeSetVisible(plugin, visible);
+
   return NPERR_NO_ERROR;
 }
 
