@@ -76,7 +76,7 @@
     [progressView removeFromSuperview];
     [progressView release];
   }
-
+  [parentView release];
   [selectionController release];
   [_searchResults release];
   [path release];
@@ -97,10 +97,11 @@
 - (void)attachToWindow:(NSWindow*)window at:(NSPoint)point
 {
   // find the NSView at the point
-  parentView = [[window contentView] hitTest:NSMakePoint(point.x+1, point.y+1)];
-  if (parentView == nil || ![[parentView className] isEqualToString:@"ChildView"]) {
+  NSView* hitView = [[window contentView] hitTest:NSMakePoint(point.x+1, point.y+1)];
+  if (hitView == nil || ![[hitView className] isEqualToString:@"ChildView"]) {
     return;
   }
+  parentView = [hitView retain];
 
   [parentView addSubview:pluginView];
   [pluginView setFrameSize:[parentView frame].size];
