@@ -9,8 +9,8 @@
 
 
 ===System Requirements===
-  * Firefox 3.0 or 3.5
-  * Mac OS X 10.4 or 10.5
+  * Firefox 3.0 or later
+  * Requires Mac OS X v. 10.4 or later
 
 === Troubleshooting ===
 Having trouble viewing PDFs? Check the tips on the [Troubleshooting] page.
