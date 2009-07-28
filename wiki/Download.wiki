@@ -1,0 +1,1 @@
+==Extension: [http://scripts.mit.edu/~sgross/fx-quartz-pdf-1.1.2.xpi Add PDF plugin to Firefox (Mac OS X)]==
