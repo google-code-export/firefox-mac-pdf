@@ -1,1 +1,13 @@
-==Extension: [http://scripts.mit.edu/~sgross/fx-quartz-pdf-1.1.2.xpi Add PDF plugin to Firefox (Mac OS X)]==
+==[http://scripts.mit.edu/~sgross/fx-quartz-pdf-1.1.2.xpi Add PDF plugin to Firefox (Mac OS X)]==
+
+----
+
+==Install Instructions==
+  # Click the "Add PDF plugin" link above
+  # Click "Allow" from the drop-down infobar
+  # Click the "Install" button from the popup menu
+
+
+===System Requirements===
+  * Firefox 3.0 or 3.5
+  * Mac OS X 10.4 or 10.5
