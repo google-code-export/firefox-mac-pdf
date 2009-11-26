@@ -6,9 +6,9 @@ interface nsIDOMWindow;
 [scriptable, uuid(862827b0-98ac-4b68-a0c9-4ccd8ff35a02)]
 interface PDFService : nsISupports
 {
-  void AdvanceTab( in nsIDOMWindow window, in long offset );
-  void GoHistory( in nsIDOMWindow window, in long direction );
-  void Init( in nsIDOMWindow window, in PDFPlugin plugin );
-  void CleanUp ( in PDFPlugin plugin );
-  void Save (in nsIDOMWindow window, in ACString url );
+  void AdvanceTab( in ACString plugin_id, in long offset );
+  void GoHistory( in ACString plugin_id, in long direction );
+  void Init( in ACString plugin_id, in PDFPlugin plugin );
+  void CleanUp ( in ACString plugin_id );
+  void Save (in ACString plugin_id, in ACString url );
 };
