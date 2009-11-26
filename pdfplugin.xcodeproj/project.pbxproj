@@ -712,6 +712,7 @@
 		945CA94E0E95E33000202FE4 /* nsIX509CertValidity.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsIX509CertValidity.idl; sourceTree = "<group>"; };
 		945CA94F0E95E33000202FE4 /* nsrootidl.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nsrootidl.idl; sourceTree = "<group>"; };
 		945CA9500E95E33000202FE4 /* README.sgross */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.sgross; sourceTree = "<group>"; };
+		946A366510BF44070004E84A /* Japanese */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
 		947A68710FE44A1F00301C1D /* PluginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PluginView.xib; sourceTree = "<group>"; };
 		948646E310B2484C00D02216 /* npfunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = npfunctions.h; sourceTree = "<group>"; };
 		948646E410B2484C00D02216 /* nptypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nptypes.h; sourceTree = "<group>"; };
@@ -1673,6 +1674,12 @@
 			buildConfigurationList = 1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "pdfplugin" */;
 			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 089C166AFE841209C02AAC07 /* pdfplugin */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1827,6 +1834,7 @@
 				94CC34980FBE0A4A0097FBBF /* English */,
 				94CC349A0FBE0A720097FBBF /* German */,
 				940DBD080FC7543B00654F05 /* French */,
+				946A366510BF44070004E84A /* Japanese */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
