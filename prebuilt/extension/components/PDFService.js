@@ -21,30 +21,73 @@
  */
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
-function getChromeWindowForWindow(window) {
+function findPluginWithId(window, plugin_id) {
+  var embeds = window.document.embeds;
+  
+  if (embeds.length == 1) {
+    if (embeds[0].wrappedJSObject.plugin_id == plugin_id) {
+      return window;
+    }
+  }
+  
+  var frames = window.frames;
+  for (var i = 0; i < frames.length; ++i) {
+    var found = findPluginWithId(frames[i], plugin_id);
+    if (found) {
+      return found;
+    }
+  }
+
+  return null;
+}
+
+function getWindowForPluginId(plugin_id) {
+  var console = Components.classes["@mozilla.org/consoleservice;1"].
+     getService(Components.interfaces.nsIConsoleService);
+
   var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].
       getService(Components.interfaces.nsIWindowMediator);
   var enumerator = wm.getEnumerator("navigator:browser");
+
   while(enumerator.hasMoreElements()) {
     var chromeWindow = enumerator.getNext();
-    var tabBrowser = chromeWindow.gBrowser;
-    if (tabBrowser.getBrowserForDocument(window.top.document) != null) {
-      return chromeWindow;
+    var browsers = chromeWindow.gBrowser.browsers;
+
+    for (var i = 0; i < browsers.length; ++i) {
+      var window = browsers[i].contentWindow;
+      var found = findPluginWithId(window, plugin_id);
+      if (found) {
+        return {window:found, chromeWindow:chromeWindow};
+      }
+    }
+  }
+
+  return null;
+}
+
+function getChromeWindowForPluginId(plugin_id) {
+  for (var i = 0; i < plugins.length; i++) {
+    if (plugins[i].plugin_id == plugin_id) {
+      return plugins[i].chromeWindow;
     }
   }
   return null;
 }
 
-function getTabBrowserForWindow(window) {
-  var chromeWindow = getChromeWindowForWindow(window);
+function getTabBrowserForWindow(plugin_id) {
+  var chromeWindow = getChromeWindowForPluginId(plugin_id);
   return chromeWindow && chromeWindow.gBrowser;
 }
+
 function getPluginShim(chromeWindow) {
+  var window = chromeWindow.gBrowser.contentWindow;
+
   for (var i = 0; i < plugins.length; i++) {
     if (plugins[i].window == chromeWindow.gBrowser.contentWindow) {
       return plugins[i].plugin;
     }
   }
+
   return null;
 }
 
@@ -59,13 +102,13 @@ PDFService.prototype = {
   contractID: "@sgross.mit.edu/pdfservice;1",
   QueryInterface: XPCOMUtils.generateQI([Components.interfaces.PDFService]),
   
-  AdvanceTab: function(window, offset) {
-    var browser = getTabBrowserForWindow(window);
+  AdvanceTab: function(plugin_id, offset) {
+    var browser = getTabBrowserForWindow(plugin_id);
     browser.mTabContainer.advanceSelectedTab(offset, true);
   },
   
-  GoHistory: function(window, dir) {
-    var browser = getTabBrowserForWindow(window);
+  GoHistory: function(plugin_id, dir) {
+    var browser = getTabBrowserForWindow(plugin_id);
     if (dir == -1) {
       browser.goBack();
     } else {
@@ -73,9 +116,18 @@ PDFService.prototype = {
     }
   },
   
-  Init: function(window, plugin) {
-    plugins.push({window:window, plugin:plugin});
-    var chromeWindow = getChromeWindowForWindow(window);
+  Init: function(plugin_id, plugin) {
+    var obj = getWindowForPluginId(plugin_id);
+    
+    if (obj == null) {
+      return;
+    }
+    
+    var window = obj.window;
+    var chromeWindow = obj.chromeWindow;
+    
+    plugins.push({plugin_id:plugin_id, plugin:plugin, window:window, chromeWindow:chromeWindow});
+
     if (!chromeWindow.edu_mit_sgross_pdfplugin_swizzled) {
       var browser = chromeWindow.gBrowser;
       browser._fastFind = new FastFindShim(chromeWindow, browser._fastFind);
@@ -97,18 +149,18 @@ PDFService.prototype = {
     }
   },
   
-  CleanUp: function(plugin) {
+  CleanUp: function(plugin_id) {
     for (var i = 0; i < plugins.length; i++) {
-      var pair = plugins[i];
-      if (pair.plugin == plugin) {
+      var obj = plugins[i];
+      if (obj.plugin_id == plugin_id) {
         plugins = plugins.slice(0, i).concat(plugins.slice(i+1, plugins.length));
         return;
       }
     }
   },
   
-  Save: function(window, url) {
-    var chromeWindow = getChromeWindowForWindow(window);
+  Save: function(plugin_id, url) {
+    var chromeWindow = getChromeWindowForPluginId(plugin_id);
     chromeWindow.internalSave(url, null, null, null, "application/pdf", false,
                null, null, null, null);
 

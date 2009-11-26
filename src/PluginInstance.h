@@ -21,7 +21,6 @@
  */
 #include "npapi.h";
 
-class nsIDOMWindow;
 class PDFService;
 class PDFPluginShim;
 
@@ -38,7 +37,7 @@ class PDFPluginShim;
   BOOL _attached;
   SelectionController* selectionController;
   NSMutableArray* _searchResults;
-  nsIDOMWindow* _window;
+  NSString* _plugin_id;
   NSString* _url;
   NSString* _mimeType;
   NSData* _data;
@@ -52,7 +51,7 @@ class PDFPluginShim;
 - (void)advanceHistory:(int)offset;
 - (void)attachToWindow:(NSWindow*)window at:(NSPoint)point;
 - (void)dealloc;
-- (id)initWithService:(PDFService*)pdfService window:(nsIDOMWindow*)window npp:(NPP)npp mimeType:(NSString*)mimeType;
+- (id)initWithService:(PDFService*)pdfService plugin_id:(NSString*)plugin_id npp:(NPP)npp mimeType:(NSString*)mimeType;
 - (void)setProgress:(int)progress total:(int)total;
 - (void)downloadFailed;
 - (void)save;

@@ -29,6 +29,10 @@
 #include "PDFService.h"
 #include "nsStringAPI.h"
 
+#ifndef NSAppKitVersionNumber10_4
+#define NSAppKitVersionNumber10_4 824
+#endif
+
 @interface PluginInstance (FileInternal)
 - (void)_applyDefaults;
 @end
@@ -36,7 +40,7 @@
 
 @implementation PluginInstance
 
-- (id)initWithService:(PDFService*)pdfService window:(nsIDOMWindow*)window npp:(NPP)npp mimeType:(NSString*)mimeType;
+- (id)initWithService:(PDFService*)pdfService plugin_id:(NSString*)plugin_id npp:(NPP)npp mimeType:(NSString*)mimeType;
 {
   if (self = [super init]) {
     _npp = npp;
@@ -58,16 +62,19 @@
     selectionController = [[SelectionController forPDFView:pdfView] retain];
     _pdfService = pdfService;
     _pdfService->AddRef();
-    _window = window;
+    _plugin_id = [plugin_id retain];
     _shim = new PDFPluginShim(self);
     _shim->AddRef();
-    _pdfService->Init(_window, _shim);
+    nsCAutoString idString([_plugin_id UTF8String]);
+    _pdfService->Init(idString, _shim);
   }
   return self;
 }
 
 - (void)dealloc
 {
+  nsCAutoString idString([_plugin_id UTF8String]);
+  
   if (pluginView) {
     [pluginView removeFromSuperview];
     [pluginView release];
@@ -80,9 +87,10 @@
   [selectionController release];
   [_searchResults release];
   [path release];
-  _pdfService->CleanUp(_shim);
+  _pdfService->CleanUp(idString);
   _shim->Release();
   _pdfService->Release();
+  [_plugin_id release];
   [_url release];
   [_mimeType release];
   [_data release];
@@ -129,8 +137,9 @@
 
 - (void)save
 {
+  nsCAutoString idString([_plugin_id UTF8String]);
   nsCAutoString urlString([_url UTF8String]);
-  _pdfService->Save(_window, urlString);
+  _pdfService->Save(idString, urlString);
 }
 
 - (void)requestFocus
@@ -180,18 +189,32 @@
 
 - (void)_applyDefaults
 {
-  if ([Preferences getBoolPreference:"autoScales"]) {
-    [pdfView setAutoScales:YES];
+  bool autoScales = [Preferences getBoolPreference:"autoScales"];
+  int displayMode = [Preferences getIntPreference:"displayMode"];
+  
+  [pdfView setAutoScales:autoScales];
+    
+  if (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_4) {
+    [pdfView setScaleFactor:1.0];
   } else {
-    float scaleFactor = [Preferences getFloatPreference:"scaleFactor"];
-    [pdfView setAutoScales:NO];
-    [pdfView setScaleFactor:scaleFactor];
+    if (!autoScales) {
+      float scaleFactor = [Preferences getFloatPreference:"scaleFactor"];
+      [pdfView setScaleFactor:scaleFactor];
+    }
   }
-  [pdfView setDisplayMode:[Preferences getIntPreference:"displayMode"]];
+  
+  [pdfView setDisplayMode:displayMode];
 }
 
 - (void)updatePreferences
 {
+  if ([pdfView scaleFactor] == 20.0) {
+    // Mac OS 10.4 has a bug relating to saving the zoom level that manifest
+    // itself as zoom=20 and autoScales=false. I don't know the cause, but this
+    // seems to work around the issue.
+    return;
+  }
+
   [Preferences setBoolPreference:"autoScales" value:[pdfView autoScales]];
   [Preferences setFloatPreference:"scaleFactor" value:[pdfView scaleFactor]];
   [Preferences setIntPreference:"displayMode" value:[pdfView displayMode]];
@@ -278,12 +301,14 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
 
 - (void)advanceTab:(int)offset
 {
-  _pdfService->AdvanceTab(_window, offset);
+  nsCAutoString idString([_plugin_id UTF8String]);
+  _pdfService->AdvanceTab(idString, offset);
 }
 
 - (void)advanceHistory:(int)offset
 {
-  _pdfService->GoHistory(_window, offset);
+  nsCAutoString idString([_plugin_id UTF8String]);
+  _pdfService->GoHistory(idString, offset);
 }
 
 - (void)findAll:(NSString*)string caseSensitive:(bool)caseSensitive

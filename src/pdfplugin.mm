@@ -21,37 +21,45 @@
  */
 #import "PluginInstance.h"
 #include "npapi.h"
+#include "npruntime.h"
 
 #include "PDFService.h"
 #include "nsCOMPtr.h"
 #include "nsServiceManagerUtils.h"
 
-NPError NPP_New(NPMIMEType pluginType, NPP instance, uint16 mode, int16 argc, char* argn[], char* argv[], NPSavedData* saved) {
-  NSLog(@"NPP_New(instance=%8p,mode=%d,argc=%d)\n", instance, mode, argc);
-  if (instance == NULL) {
+
+NPError NPP_Initialize() {
+  printf("NPP_Initialize called\n");
+  return NPERR_NO_ERROR;
+}
+
+char *NPP_GetMIMEDescription() {
+  printf("NP_GetMIMEDescription called\n");
+  return "application/pdf:pdf:PDF document;application/postscript:ps:PostScript document";
+}
+
+void NPP_Shutdown() {
+}
+
+NPError NPP_New(NPMIMEType pluginType, NPP npp, uint16 mode, int16 argc, char* argn[], char* argv[], NPSavedData* saved) {
+  NSLog(@"NPP_New(npp=%8p,mode=%d,argc=%d)\n", npp, mode, argc);
+  if (npp == NULL) {
     return NPERR_INVALID_INSTANCE_ERROR;
   }
   
   // Check if the browser supports the CoreGraphics drawing model
   NPBool supportsCoreGraphics = FALSE;
-  NPError err = NPN_GetValue(instance, NPNVsupportsCoreGraphicsBool, &supportsCoreGraphics);
+  NPError err = NPN_GetValue(npp, NPNVsupportsCoreGraphicsBool, &supportsCoreGraphics);
   if (err != NPERR_NO_ERROR || !supportsCoreGraphics) {
     NSLog(@"firefox-mac-pdf: does not support core graphics");
     return NPERR_INCOMPATIBLE_VERSION_ERROR;
   }
   
   // Set the drawing model
-  err = NPN_SetValue(instance, NPPVpluginDrawingModel, (void*) NPDrawingModelCoreGraphics);
+  err = NPN_SetValue(npp, NPPVpluginDrawingModel, (void*) NPDrawingModelCoreGraphics);
   if (err != NPERR_NO_ERROR) {
     NSLog(@"firefox-mac-pdf: does not support drawing model");
     return NPERR_INCOMPATIBLE_VERSION_ERROR;
-  }
-  
-  nsIDOMWindow* window;
-  err = NPN_GetValue(instance, NPNVDOMWindow, &window);
-  if (err != NPERR_NO_ERROR) {
-    NSLog(@"firefox-mac-pdf: could not get DOM window");
-    return NPERR_GENERIC_ERROR;
   }
   
   nsCOMPtr<PDFService> pdfService(do_GetService("@sgross.mit.edu/pdfservice;1"));
@@ -60,14 +68,32 @@ NPError NPP_New(NPMIMEType pluginType, NPP instance, uint16 mode, int16 argc, ch
     return NPERR_GENERIC_ERROR;
   }
   
+  NPObject* pluginElement;
+  err = NPN_GetValue(npp, NPNVPluginElementNPObject, &pluginElement);
+  if (err != NPERR_NO_ERROR) {
+    NSLog(@"firefox-mac-pdf: could not get PluginElement object");
+    return NPERR_GENERIC_ERROR;
+  }
+  
+  NPIdentifier idName = NPN_GetStringIdentifier("plugin_id");
+  NPVariant idValue;
+  NSString* pluginId = [NSString stringWithFormat:@"%x%x%x%x", arc4random(), 
+                            arc4random(), arc4random(), arc4random()];
+  STRINGZ_TO_NPVARIANT([pluginId cString], idValue);
+  if (!NPN_SetProperty(npp, pluginElement, idName, &idValue)) {
+    NSLog(@"firefox-mac-pdf: could not set plugin_id");
+    return NPERR_GENERIC_ERROR;
+  }
+
+  
   NSString* mimeType = [NSString stringWithUTF8String:pluginType];
 
   // allocate the plugin
-  instance->pdata = [[PluginInstance alloc] initWithService:pdfService.get()
-                                            window:window
-                                            npp:instance
+  npp->pdata = [[PluginInstance alloc] initWithService:pdfService.get()
+                                            plugin_id:pluginId
+                                            npp:npp
                                             mimeType:mimeType];
-
+  
   return NPERR_NO_ERROR;
 }
 
