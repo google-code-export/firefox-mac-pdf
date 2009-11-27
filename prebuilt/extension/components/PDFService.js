@@ -159,6 +159,11 @@ PDFService.prototype = {
     }
   },
   
+  FindPrevious: function(plugin_id) {
+      var chromeWindow = getChromeWindowForPluginId(plugin_id);
+      chromeWindow.gFindBar.onFindAgainCommand(true);
+  },
+  
   Save: function(plugin_id, url) {
     var chromeWindow = getChromeWindowForPluginId(plugin_id);
     chromeWindow.internalSave(url, null, null, null, "application/pdf", false,
