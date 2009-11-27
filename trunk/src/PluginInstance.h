@@ -54,6 +54,7 @@ class PDFPluginShim;
 - (id)initWithService:(PDFService*)pdfService plugin_id:(NSString*)plugin_id npp:(NPP)npp mimeType:(NSString*)mimeType;
 - (void)setProgress:(int)progress total:(int)total;
 - (void)downloadFailed;
+- (void)findPrevious;
 - (void)save;
 - (void)setData:(NSData*)data;
 - (void)setUrl:(NSString*)url;

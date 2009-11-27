@@ -268,8 +268,8 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
     [searchSelection extendSelectionAtStart:1];
     [searchSelection extendSelectionAtEnd:-length];
   } else {
-    [searchSelection extendSelectionAtStart:-length];
     [searchSelection extendSelectionAtEnd:1];
+    [searchSelection extendSelectionAtStart:-length];
   }
     
   int options = 0;
@@ -309,6 +309,12 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
 {
   nsCAutoString idString([_plugin_id UTF8String]);
   _pdfService->GoHistory(idString, offset);
+}
+
+- (void)findPrevious
+{
+  nsCAutoString idString([_plugin_id UTF8String]);
+  _pdfService->FindPrevious(idString);
 }
 
 - (void)findAll:(NSString*)string caseSensitive:(bool)caseSensitive

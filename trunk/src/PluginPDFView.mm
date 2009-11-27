@@ -139,6 +139,13 @@ static BOOL swizzled = NO;
         return YES;
       }
       break;
+    case 5: // CMD+SHIFT+G
+      if ((flags & NSCommandKeyMask) && !(flags & NSAlternateKeyMask) && !(flags & NSControlKeyMask)
+          && (flags & NSShiftKeyMask)) {
+        [plugin findPrevious];
+        return YES;
+      }
+      break;
   }
   return NO;
 }
