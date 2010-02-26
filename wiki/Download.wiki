@@ -9,7 +9,7 @@
 
 
 ===System Requirements===
-  * Firefox 3.0 or later
+  * Firefox 3.6 or later
   * Requires Mac OS X v. 10.4 or later
 
 === Troubleshooting ===
