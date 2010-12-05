@@ -1,3 +1,7 @@
 content pdfplugin chrome/content/
 skin pdfplugin classic/1.0 chrome/skin/
 overlay chrome://browser/content/browser.xul chrome://pdfplugin/content/pdfplugin.xul
+component {862827b0-98ac-4b68-a0c9-4ccd8ff35a02} components/PDFService.js
+contract @sgross.mit.edu/pdfservice;1 {862827b0-98ac-4b68-a0c9-4ccd8ff35a02}
+interfaces components/PluginInstall.xpt
+interfaces components/PDFService.xpt
