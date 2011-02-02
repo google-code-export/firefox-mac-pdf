@@ -57,127 +57,66 @@ static BOOL swizzled = NO;
   [self initPDFViewWithFrame:[self frame]];
 }
 
-- (NSView *)hitTest:(NSPoint)point
+- (void)keyDown:(NSEvent*)theEvent
 {
-  // We override hit test and invert the next responder loop so that
-  // we can preview all mouse events. Our next responder is the view
-  // that would have receieved the event. We make sure the pdfView has
-  // a nil next responder to prevent an infinite loop.
-  // This is a terrible HACK. There must be a better way...
-  [self setNextResponder:[super hitTest:point]];
-  [pdfView setNextResponder:nil];
-  return self;
-}
-
-
-- (void)mouseDown:(NSEvent*)theEvent
-{
-  NSResponder* firstResponder = [[[self window] firstResponder] retain];
-  // pass mouse down event to parent view (to claim browser focus from other XUL elements)
-  [[self superview] mouseDown:theEvent];
-  // reclaim focus
-  [[self window] makeFirstResponder:firstResponder];
-  // process event
-  [super mouseDown:theEvent];
-  [firstResponder release];
-  
-  // used by SelectionController
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"mouseDown" object:self];  
-}
-
-- (BOOL)handleOverideKeyEquivalent:(NSEvent*)theEvent
-{
-  int flags = [theEvent modifierFlags];
-  int code = [theEvent keyCode];
-  switch (code)
-  {
-    case 24: // CMD+'='
-      [pdfView zoomIn:nil];
-      return YES;
-    case 33: // CMD+(SHIFT)+'['
-    case 30: // CMD+(SHIFT)+']'
-      if (!(flags & NSAlternateKeyMask) && !(flags & NSControlKeyMask)) {
-        if (flags & NSShiftKeyMask) {
-          [plugin advanceTab:(code == 30 ? 1 : -1)];
-        } else {
-          if (code == 33) {
-            if ([pdfView canGoBack]) {
-              [pdfView goBack:nil];
-            }
-          } else {
-            if ([pdfView canGoForward]) {
-              [pdfView goForward:nil];
-            }
-          }
-        }
-        return YES;
-      }
+  NSLog(@"keyDown: %d", [theEvent keyCode]);
+  /*
+   Here we have to redefine all key bindings, users expect to work in a PDFView.
+   Probably still incomplete.
+   */
+  switch ([theEvent keyCode]) {
+    case 0x31: // Space
+    case 0x7C: // Right
+      [pdfView scrollPageDown:nil];
       break;
-    case 123: // CMD+ALT+<LEFT>
-    case 124: // CMD+ALT+<RIGHT>
-      if (!(flags & NSShiftKeyMask) && !(flags & NSControlKeyMask) && (flags & NSCommandKeyMask)) {
-        int offset = ([theEvent keyCode] == 124 ? 1 : -1);
-        if ((flags & NSAlternateKeyMask)) {
-          [plugin advanceTab:offset];
-        } else {
-          [plugin advanceHistory:offset];
-        }
-        return YES;
-      }
+    //case 0x33: // Backspace (most people will use this for "Go Back")
+    case 0x7B: // Left
+      [pdfView scrollPageUp:nil];
       break;
-    case 48: // CTRL+TAB and CTRL+SHIFT+TAB
-      if ((flags & NSControlKeyMask) && !(flags & NSCommandKeyMask) && !(flags & NSAlternateKeyMask)) {
-        [plugin advanceTab:(flags & NSShiftKeyMask ? -1 : 1)];
-        return YES;
-      }
+    case 0x7D: // Down
+      [pdfView scrollLineDown:nil];
       break;
-    case 13: // CMD+W
-      if ((flags & NSCommandKeyMask) && !(flags & NSAlternateKeyMask) && !(flags & NSControlKeyMask)
-          /*&& !(flags & NSShiftKeyMask)*/) {
-        [[self window] makeFirstResponder:[self superview]];
-        [[self superview] performKeyEquivalent:theEvent];
-        return YES;
-      }
+    case 0x7E: // Up
+      [pdfView scrollLineUp:nil];
       break;
-    case 5: // CMD+SHIFT+G
-      if ((flags & NSCommandKeyMask) && !(flags & NSAlternateKeyMask) && !(flags & NSControlKeyMask)
-          && (flags & NSShiftKeyMask)) {
-        [plugin findPrevious];
-        return YES;
-      }
-      break;
+    default:
+      [[[self superview] superview] keyDown:theEvent];
   }
-  return NO;
 }
 
 - (BOOL)performKeyEquivalent:(NSEvent*)theEvent
 {
-  if (![super performKeyEquivalent:theEvent]) {
-    // 'custom' key shortcuts
-    if ([self handleOverideKeyEquivalent:theEvent]) {
+  NSLog(@"PluginPDFView performKeyEquivalent");
+  switch ([theEvent keyCode])
+  {
+    case 24: // CMD+'='
+      [pdfView zoomIn:nil];
       return YES;
-    }
-    // run the menu accelerators (shortcuts)
-    NSMenu* menu = [NSApp mainMenu];
-    // see nsChildView.mm:performKeyEquivalent 
-    SEL sel = @selector(actOnKeyEquivalent:);
-    if ([[menu class] instancesRespondToSelector:sel]) {
-      void (*actOnKeyEquivalent)(id, SEL, NSEvent*);
-      actOnKeyEquivalent = (void (*)(id, SEL, NSEvent*))[[menu class] instanceMethodForSelector:sel];
-      if (!swizzled) {
-        MethodSwizzle([menu class],
+    case 27: // CMD+'-'
+      [pdfView zoomOut:nil];
+      return YES;
+  }
+  return NO;
+  
+  // run the menu accelerators (shortcuts)
+  NSMenu* menu = [NSApp mainMenu];
+  // see nsChildView.mm:performKeyEquivalent 
+  SEL sel = @selector(actOnKeyEquivalent:);
+  if ([[menu class] instancesRespondToSelector:sel]) {
+    void (*actOnKeyEquivalent)(id, SEL, NSEvent*);
+    actOnKeyEquivalent = (void (*)(id, SEL, NSEvent*))[[menu class] instanceMethodForSelector:sel];
+    if (!swizzled) {
+      MethodSwizzle([menu class],
                     @selector(performKeyEquivalent:),
                     @selector(altPerformKeyEquivalent:));
-        swizzled = YES;
-      }
-      actOnKeyEquivalent(menu, sel, theEvent);
-      return retValuePerformKeyEquivalent;
-    } else {
-      // TODO: is this ever called?
-      return [[NSApp mainMenu] performKeyEquivalent:theEvent];
+      swizzled = YES;
     }
+    actOnKeyEquivalent(menu, sel, theEvent);
+    return retValuePerformKeyEquivalent;
+  } else {
+    // TODO: is this ever called?
+    return [[NSApp mainMenu] performKeyEquivalent:theEvent];
   }
-  return YES;
 }
 
 @end

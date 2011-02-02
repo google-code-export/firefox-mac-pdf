@@ -6,6 +6,7 @@ interface nsIDOMWindow;
 [scriptable, uuid(862827b0-98ac-4b68-a0c9-4ccd8ff35a02)]
 interface PDFService : nsISupports
 {
+  void SayHi( in ACString msg );
   void AdvanceTab( in ACString plugin_id, in long offset );
   void GoHistory( in ACString plugin_id, in long direction );
   void FindPrevious( in ACString plugin_id );

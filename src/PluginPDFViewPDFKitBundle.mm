@@ -33,6 +33,36 @@
 
 extern "C" NSString *_NSPathForSystemFramework(NSString *framework);
 
+/*
+ This is a category for PDFView to prevent it from handling keystrokes by itself.
+ That means no scrolling etc., if we want that we'll have to implement it by hand.
+ But it's necessary to have Firefox keybindings (and those implemented by other extensions)
+ handled correctly.
+ */
+@interface PDFView (NoFocus)
+- (void)keyDown:(NSEvent*)theEvent;
+- (BOOL)performKeyEquivalent:(NSEvent*)theEvent;
+@end
+
+@implementation PDFView (NoFocus)
+
+/*
+ We forward all keyDown and performKeyEquivalent events down to the PluginPDFView.
+ That superview-chain will be quite fragile when the view layout changes, it
+ should be closely monitored.
+ */
+- (void)keyDown:(NSEvent*)theEvent
+{
+  [[[[self superview] superview] superview] keyDown:theEvent];
+}
+- (BOOL)performKeyEquivalent:(NSEvent*)theEvent
+{
+  return [[[[self superview] superview] superview] performKeyEquivalent:theEvent];
+}
+
+@end
+
+
 @interface PluginPDFView (FileInternal)
 + (Class)_PDFPreviewViewClass;
 + (Class)_PDFViewClass;
