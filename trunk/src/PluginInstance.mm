@@ -66,7 +66,12 @@
     _shim = new PDFPluginShim(self);
     _shim->AddRef();
     nsCAutoString idString([_plugin_id UTF8String]);
-    _pdfService->Init(idString, _shim);
+    NSLog(@"CALLING PDF SERVICE INIT");
+    nsresult r = _pdfService->Init(idString, NULL);
+    NSLog(@"RESULT: %d ", (int)r);
+    nsCAutoString msg("sam");
+    r = _pdfService->SayHi(msg);
+    NSLog(@"RESULT: %d ", (int)r);
   }
   return self;
 }
@@ -144,9 +149,9 @@
 
 - (void)requestFocus
 {
-  if (![pluginView isHiddenOrHasHiddenAncestor]) {
-    [[pluginView window] makeFirstResponder:[pdfView documentView]];
-  }
+//  if (![pluginView isHiddenOrHasHiddenAncestor]) {
+//    [[pluginView window] makeFirstResponder:[pdfView documentView]];
+//  }
 }
 
 - (void)setProgress:(int)progress total:(int)total
@@ -238,6 +243,7 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
 
 - (int)find:(NSString*)string caseSensitive:(bool)caseSensitive forwards:(bool)forwards
 {
+  NSLog(@"FIND: %s", string);
   const int FOUND = 0;
   const int NOT_FOUND = 1;
   const int WRAPPED = 2;

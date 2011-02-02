@@ -636,8 +636,8 @@ NP_GetEntryPoints(NPPluginFuncs* pluginFuncs)
         err = NPERR_INVALID_FUNCTABLE_ERROR;
   
     if (err == NPERR_NO_ERROR) {
-        if (pluginFuncs->size < sizeof(NPPluginFuncs))      
-            err = NPERR_INVALID_FUNCTABLE_ERROR;
+        //if (pluginFuncs->size < sizeof(NPPluginFuncs))      
+        //    err = NPERR_INVALID_FUNCTABLE_ERROR;
     }
     
     if (err == NPERR_NO_ERROR) {
@@ -666,9 +666,10 @@ NP_GetEntryPoints(NPPluginFuncs* pluginFuncs)
         // seem to be true.
         pluginFuncs->getvalue   = (NPP_GetValueProcPtr)(NP_GetValue);
 
+        printf("initialize...\n");
         err = NPP_Initialize();
     }
-    
+    printf("err=%d\n", err);
     return err;
 }
 

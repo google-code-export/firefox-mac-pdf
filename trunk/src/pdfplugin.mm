@@ -62,6 +62,21 @@ NPError NPP_New(NPMIMEType pluginType, NPP npp, uint16 mode, int16 argc, char* a
     return NPERR_INCOMPATIBLE_VERSION_ERROR;
   }
   
+  // select the Carbon event model
+  // I'm not absolutely sure that this is necessary, but the documentation
+  // suggests that the Cocoa event model is used by default in 64-bit plugins,
+  // which will definitely not work for this plugin.
+  // The problem with the Cocoa event model is that there is no way to get the
+  // browser's NSWindow or NSView, which we need to attach the PDFView
+  NPBool supportsCarbonEvents = false;
+  if (NPN_GetValue(npp, NPNVsupportsCarbonBool, &supportsCarbonEvents) == NPERR_NO_ERROR && supportsCarbonEvents) {
+    NPN_SetValue(npp, NPPVpluginEventModel, (void*)NPEventModelCarbon);
+  } else {
+    printf("Carbon event model not supported, can't create a plugin instance.\n");
+    return NPERR_INCOMPATIBLE_VERSION_ERROR;
+  }
+
+  
   nsCOMPtr<PDFService> pdfService(do_GetService("@sgross.mit.edu/pdfservice;1"));
   if (!pdfService) {
     NSLog(@"firefox-mac-pdf: could not get PDF service");
@@ -85,7 +100,6 @@ NPError NPP_New(NPMIMEType pluginType, NPP npp, uint16 mode, int16 argc, char* a
     return NPERR_GENERIC_ERROR;
   }
 
-  
   NSString* mimeType = [NSString stringWithUTF8String:pluginType];
 
   // allocate the plugin
@@ -123,6 +137,7 @@ void maybeAttach(PluginInstance* plugin, NPWindow* window) {
   // attach the plugin if it's not attached and is visible
   NPRect clipRect = window->clipRect;
   if (![plugin attached]) {
+    NSLog(@"Would attach");
     NP_CGContext* npContext = (NP_CGContext*) window->window;
     NSWindow* browserWindow = [[[NSWindow alloc] initWithWindowRef:npContext->window] autorelease];
     int y = [browserWindow frame].size.height - (clipRect.bottom - clipRect.top) - window->y;
@@ -203,10 +218,10 @@ int16 NPP_HandleEvent(NPP instance, void* _event) {
   PluginInstance* plugin = (PluginInstance*)instance->pdata;
   // seems to be called after plugin is created. use it to give plugin focus
   const int updateEvt = 6; 
-  if (event->what == NPEventType_GetFocusEvent || event->what == updateEvt) {
-    [plugin requestFocus];
-    return 1;
-  }
+//  if (event->what == NPEventType_GetFocusEvent || event->what == updateEvt) {
+//    [plugin requestFocus];
+//    return 1;
+//  }
   return 0;
 }
 

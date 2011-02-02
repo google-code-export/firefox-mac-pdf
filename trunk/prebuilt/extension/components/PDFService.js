@@ -20,6 +20,13 @@
  * THE SOFTWARE.
  */
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
+var consoleservice = Components.classes["@mozilla.org/consoleservice;1"].
+     getService(Components.interfaces.nsIConsoleService);
+function log(message) {
+  consoleservice.logStringMessage(message);
+}
+log("HELLO WORLD");
+var mylog = log;
 
 function findPluginWithId(window, plugin_id) {
   var embeds = window.document.embeds;
@@ -115,11 +122,17 @@ PDFService.prototype = {
       browser.goForward();
     }
   },
+  SayHi:function(msg) {
+    log("HELLO: " + msg);
+  },
   
   Init: function(plugin_id, plugin) {
+    mylog("Init");
+    log("Init");
     var obj = getWindowForPluginId(plugin_id);
     
     if (obj == null) {
+      log("Init: obj is null");
       return;
     }
     
@@ -147,6 +160,7 @@ PDFService.prototype = {
 
       chromeWindow.edu_mit_sgross_pdfplugin_swizzled = true;
     }
+    return;
   },
   
   CleanUp: function(plugin_id) {
@@ -297,7 +311,8 @@ var components = [PDFService];
 * XPCOMUtils.generateNSGetFactory was introduced in Mozilla 2 (Firefox 4).
 * XPCOMUtils.generateNSGetModule is for Mozilla 1.9.2 (Firefox 3.6).
 */
-if (XPCOMUtils.generateNSGetFactory)
-    var NSGetFactory = XPCOMUtils.generateNSGetFactory(components);
-else
-    var NSGetModule = XPCOMUtils.generateNSGetModule(components);
+//if (XPCOMUtils.generateNSGetFactory)
+var NSGetFactory = XPCOMUtils.generateNSGetFactory(components);
+//else
+//    var NSGetModule = XPCOMUtils.generateNSGetModule(components);
+log("FACTORY: " + NSGetFactory);
