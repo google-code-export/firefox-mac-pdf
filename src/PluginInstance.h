@@ -47,8 +47,6 @@ class PDFPluginShim;
   PDFService* _pdfService;
 }
 - (BOOL)attached;
-- (void)advanceTab:(int)offset;
-- (void)advanceHistory:(int)offset;
 - (void)attachToWindow:(NSWindow*)window at:(NSPoint)point;
 - (void)dealloc;
 - (id)initWithService:(PDFService*)pdfService plugin_id:(NSString*)plugin_id npp:(NPP)npp mimeType:(NSString*)mimeType;
@@ -59,7 +57,6 @@ class PDFPluginShim;
 - (void)setData:(NSData*)data;
 - (void)setUrl:(NSString*)url;
 - (void)setVisible:(bool)visible;
-//- (void)loadURL:(NSString*)url;
 - (void)print;
 - (void)requestFocus;
 - (void)updatePreferences;

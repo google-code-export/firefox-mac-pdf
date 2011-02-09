@@ -463,11 +463,11 @@ NP_GetPluginVersion(void)
  *  - Netscape uses the return value to identify when an object instance
  *    of this plugin should be created.
  */
-char *
-NP_GetMIMEDescription(void)
-{
-    return NPP_GetMIMEDescription();
-}
+//char *
+//NP_GetMIMEDescription(void)
+//{
+//    return NPP_GetMIMEDescription();
+//}
 
 /*
  * NP_GetValue [optional]
@@ -666,10 +666,8 @@ NP_GetEntryPoints(NPPluginFuncs* pluginFuncs)
         // seem to be true.
         pluginFuncs->getvalue   = (NPP_GetValueProcPtr)(NP_GetValue);
 
-        printf("initialize...\n");
         err = NPP_Initialize();
     }
-    printf("err=%d\n", err);
     return err;
 }
 

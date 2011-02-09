@@ -66,12 +66,10 @@
     _shim = new PDFPluginShim(self);
     _shim->AddRef();
     nsCAutoString idString([_plugin_id UTF8String]);
-    NSLog(@"CALLING PDF SERVICE INIT");
-    nsresult r = _pdfService->Init(idString, NULL);
-    NSLog(@"RESULT: %d ", (int)r);
-    nsCAutoString msg("sam");
-    r = _pdfService->SayHi(msg);
-    NSLog(@"RESULT: %d ", (int)r);
+    nsresult r = _pdfService->Init(idString, _shim);
+    if (r < 0) {
+        NSLog(@"PDFService Init failed: %d", (int) r);
+    }
   }
   return self;
 }
@@ -243,7 +241,6 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
 
 - (int)find:(NSString*)string caseSensitive:(bool)caseSensitive forwards:(bool)forwards
 {
-  NSLog(@"FIND: %s", string);
   const int FOUND = 0;
   const int NOT_FOUND = 1;
   const int WRAPPED = 2;
@@ -303,18 +300,6 @@ static bool selectionsAreEqual(PDFSelection* sel1, PDFSelection* sel2)
   // scroll to the selection
   [selectionController setCurrentSelection:result];
   return ret;
-}
-
-- (void)advanceTab:(int)offset
-{
-  nsCAutoString idString([_plugin_id UTF8String]);
-  _pdfService->AdvanceTab(idString, offset);
-}
-
-- (void)advanceHistory:(int)offset
-{
-  nsCAutoString idString([_plugin_id UTF8String]);
-  _pdfService->GoHistory(idString, offset);
 }
 
 - (void)findPrevious

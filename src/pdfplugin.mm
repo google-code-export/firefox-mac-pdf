@@ -29,13 +29,7 @@
 
 
 NPError NPP_Initialize() {
-  printf("NPP_Initialize called\n");
   return NPERR_NO_ERROR;
-}
-
-char *NPP_GetMIMEDescription() {
-  printf("NP_GetMIMEDescription called\n");
-  return "application/pdf:pdf:PDF document;application/postscript:ps:PostScript document";
 }
 
 void NPP_Shutdown() {
@@ -94,7 +88,7 @@ NPError NPP_New(NPMIMEType pluginType, NPP npp, uint16 mode, int16 argc, char* a
   NPVariant idValue;
   NSString* pluginId = [NSString stringWithFormat:@"%x%x%x%x", arc4random(), 
                             arc4random(), arc4random(), arc4random()];
-  STRINGZ_TO_NPVARIANT([pluginId cString], idValue);
+  STRINGZ_TO_NPVARIANT([pluginId cStringUsingEncoding:NSASCIIStringEncoding], idValue);
   if (!NPN_SetProperty(npp, pluginElement, idName, &idValue)) {
     NSLog(@"firefox-mac-pdf: could not set plugin_id");
     return NPERR_GENERIC_ERROR;
@@ -115,7 +109,7 @@ NPError NPP_Destroy(NPP instance, NPSavedData** save) {
   if (instance == NULL) {
     return NPERR_INVALID_INSTANCE_ERROR;
   }
-  NSLog(@"NPP_Destroy: %d", (int) instance->pdata);
+//  NSLog(@"NPP_Destroy: %d", (int) instance->pdata);
   PluginInstance* plugin = (PluginInstance*) instance->pdata;
   if (plugin) {
     [plugin updatePreferences];
@@ -137,7 +131,6 @@ void maybeAttach(PluginInstance* plugin, NPWindow* window) {
   // attach the plugin if it's not attached and is visible
   NPRect clipRect = window->clipRect;
   if (![plugin attached]) {
-    NSLog(@"Would attach");
     NP_CGContext* npContext = (NP_CGContext*) window->window;
     NSWindow* browserWindow = [[[NSWindow alloc] initWithWindowRef:npContext->window] autorelease];
     int y = [browserWindow frame].size.height - (clipRect.bottom - clipRect.top) - window->y;
@@ -166,7 +159,7 @@ NPError NPP_SetWindow(NPP instance, NPWindow* window) {
 
 
 NPError NPP_NewStream(NPP instance, NPMIMEType type, NPStream* stream, NPBool seekable, uint16* stype) {
-  NSLog(@"NPP_NewStream end=%d", (int) stream->end);
+//  NSLog(@"NPP_NewStream end=%d", (int) stream->end);
   NSMutableData* data = [NSMutableData dataWithCapacity:stream->end];
   stream->pdata = [data retain];
 
@@ -178,7 +171,7 @@ NPError NPP_NewStream(NPP instance, NPMIMEType type, NPStream* stream, NPBool se
 }
 
 NPError NPP_DestroyStream(NPP instance, NPStream* stream, NPReason reason) {
-  NSLog(@"NPP_DestroyStream reason: %d", (int) reason);
+//  NSLog(@"NPP_DestroyStream reason: %d", (int) reason);
   NSMutableData* data = (NSMutableData*) stream->pdata;
   PluginInstance* plugin = (PluginInstance*)instance->pdata;
   if (reason == 0) {
@@ -214,10 +207,10 @@ void NPP_Print(NPP instance, NPPrint* platformPrint) {
 }
 
 int16 NPP_HandleEvent(NPP instance, void* _event) {
-  NPEvent* event = (NPEvent*) _event;
-  PluginInstance* plugin = (PluginInstance*)instance->pdata;
-  // seems to be called after plugin is created. use it to give plugin focus
-  const int updateEvt = 6; 
+//  NPEvent* event = (NPEvent*) _event;
+//  PluginInstance* plugin = (PluginInstance*)instance->pdata;
+//  // seems to be called after plugin is created. use it to give plugin focus
+//  const int updateEvt = 6; 
 //  if (event->what == NPEventType_GetFocusEvent || event->what == updateEvt) {
 //    [plugin requestFocus];
 //    return 1;
@@ -229,21 +222,9 @@ void NPP_URLNotify(NPP instance, const char* url, NPReason reason, void* notifyD
 }
 
 NPError NPP_GetValue(NPP npp, NPPVariable variable, void *value) {
-  // I don't think NPP_GetValue is ever called with NPPVpluginNameString or NPPVpluginDescriptionString.
-  // Those properties are retrieved from the resource file.
-  switch (variable) {
-    case NPPVpluginNameString:
-      *((char **)value) = "Firefox PDF Plugin for Mac OS X";
-      break;
-    case NPPVpluginDescriptionString:
-      *((char **)value) = "Displays PDF documents in the browser.";
-      break;
-    default:
-      return NPERR_GENERIC_ERROR;
-  }
-  return NPERR_NO_ERROR;
+  return NPERR_GENERIC_ERROR;
 }
 
 NPError NPP_SetValue(NPP instance, NPNVariable variable, void *value) {
-  return NPERR_NO_ERROR;
+  return NPERR_GENERIC_ERROR;
 }
