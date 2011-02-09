@@ -54,7 +54,6 @@
 		94AF62EE0DFE184E00BED136 /* libxpcom.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AF62250DFE151700BED136 /* libxpcom.dylib */; };
 		94C6AC640FE5A6DF00B426DD /* PluginProgressView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 94C6AC630FE5A6DF00B426DD /* PluginProgressView.mm */; };
 		94CC34990FBE0A4A0097FBBF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 94CC34970FBE0A4A0097FBBF /* Localizable.strings */; };
-		94FAF61D0E96B02A008336A1 /* Swizzle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 94FAF61C0E96B02A008336A1 /* Swizzle.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -736,8 +735,6 @@
 		94CA1B940E73412900197383 /* PDFService.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = PDFService.js; sourceTree = "<group>"; };
 		94CC34980FBE0A4A0097FBBF /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		94CC349A0FBE0A720097FBBF /* German */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
-		94FAF61B0E96B02A008336A1 /* Swizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Swizzle.h; path = src/Swizzle.h; sourceTree = "<group>"; };
-		94FAF61C0E96B02A008336A1 /* Swizzle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Swizzle.mm; path = src/Swizzle.mm; sourceTree = "<group>"; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -1561,8 +1558,6 @@
 		948363390DEB643000E610F2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				94FAF61B0E96B02A008336A1 /* Swizzle.h */,
-				94FAF61C0E96B02A008336A1 /* Swizzle.mm */,
 				949DE1430DF4FBF200922723 /* PluginInstance.h */,
 				949DE1440DF4FBF200922723 /* PluginInstance.mm */,
 				941F8D270E980C1400B39F71 /* PluginInstanceOpenWithFinder.mm */,
@@ -1796,7 +1791,6 @@
 				949DE1510DF4FC0400922723 /* pdfplugin.mm in Sources */,
 				94AF622D0DFE162B00BED136 /* Preferences.mm in Sources */,
 				945CA6D00E9583D500202FE4 /* PluginPDFViewMenu.mm in Sources */,
-				94FAF61D0E96B02A008336A1 /* Swizzle.mm in Sources */,
 				941F8D280E980C1400B39F71 /* PluginInstanceOpenWithFinder.mm in Sources */,
 				941F8D520E98111900B39F71 /* PDFPluginShim.mm in Sources */,
 				94C6AC640FE5A6DF00B426DD /* PluginProgressView.mm in Sources */,
@@ -1919,10 +1913,7 @@
 		1DEB914008733D840010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = i386;
 				DEPLOYMENT_LOCATION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

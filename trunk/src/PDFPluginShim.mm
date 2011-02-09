@@ -44,24 +44,26 @@ NS_IMETHODIMP PDFPluginShim::Copy()
 }
 
 /* boolean Find (in ACString str, in boolean caseSensitive, in boolean forward); */
-NS_IMETHODIMP PDFPluginShim::Find(const nsACString & str, PRBool caseSensitive, PRBool forward, PRBool *_retval)
+NS_IMETHODIMP PDFPluginShim::Find(const nsAString & str, PRBool caseSensitive, PRBool forward, PRBool *_retval)
 {
-  const char* data; // not null terminated
-  PRUint32 len = NS_CStringGetData(str, &data);
-  NSString* nsString = [NSString stringWithCString:data length:len];
+  char* data = ToNewUTF8String(str);
+  NSString* nsString = [NSString stringWithUTF8String:data];
+  NS_Free(data);
   
   *_retval = [_plugin find:nsString caseSensitive:caseSensitive forwards:forward];
+
   return NS_OK;
 }
 
 /* boolean FindAll (in ACString str, in boolean caseSensitive); */
-NS_IMETHODIMP PDFPluginShim::FindAll(const nsACString & str, PRBool caseSensitive)
+NS_IMETHODIMP PDFPluginShim::FindAll(const nsAString & str, PRBool caseSensitive)
 {
-  const char* data; // not null terminated
-  PRUint32 len = NS_CStringGetData(str, &data);
-  NSString* nsString = [NSString stringWithCString:data length:len];
+  char* data = ToNewUTF8String(str);
+  NSString* nsString = [NSString stringWithUTF8String:data];
+  NS_Free(data);
 
   [_plugin findAll:nsString caseSensitive:caseSensitive];
+  
   return NS_OK;
 }
 

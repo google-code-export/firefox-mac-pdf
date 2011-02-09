@@ -21,10 +21,8 @@
  */
 #import "PluginPDFView.h"
 #import "PluginInstance.h"
-#import "Swizzle.h"
 
 static BOOL retValuePerformKeyEquivalent;
-static BOOL swizzled = NO;
 
 @interface NSMenu (PDFAltMethod)
 - (BOOL)altPerformKeyEquivalent:(NSEvent*)theEvent;
@@ -57,9 +55,8 @@ static BOOL swizzled = NO;
   [self initPDFViewWithFrame:[self frame]];
 }
 
-- (void)keyDown:(NSEvent*)theEvent
+- (BOOL)handleCommonKeyEvents:(NSEvent*)theEvent
 {
-  NSLog(@"keyDown: %d", [theEvent keyCode]);
   /*
    Here we have to redefine all key bindings, users expect to work in a PDFView.
    Probably still incomplete.
@@ -68,25 +65,32 @@ static BOOL swizzled = NO;
     case 0x31: // Space
     case 0x7C: // Right
       [pdfView scrollPageDown:nil];
-      break;
+      return YES;
     //case 0x33: // Backspace (most people will use this for "Go Back")
     case 0x7B: // Left
       [pdfView scrollPageUp:nil];
-      break;
+      return YES;
     case 0x7D: // Down
       [pdfView scrollLineDown:nil];
-      break;
+      return YES;
     case 0x7E: // Up
       [pdfView scrollLineUp:nil];
-      break;
-    default:
-      [[[self superview] superview] keyDown:theEvent];
+      return YES;
+  }
+  return NO;
+}
+
+- (void)keyDown:(NSEvent*)theEvent
+{
+//  NSLog(@"keyDown: %d", [theEvent keyCode]);
+  if (![self handleCommonKeyEvents:theEvent]) {
+    [[[self superview] superview] keyDown:theEvent];
   }
 }
 
 - (BOOL)performKeyEquivalent:(NSEvent*)theEvent
 {
-  NSLog(@"PluginPDFView performKeyEquivalent");
+//  NSLog(@"PluginPDFView performKeyEquivalent: %d", [theEvent keyCode]);
   switch ([theEvent keyCode])
   {
     case 24: // CMD+'='
@@ -95,28 +99,11 @@ static BOOL swizzled = NO;
     case 27: // CMD+'-'
       [pdfView zoomOut:nil];
       return YES;
+    case 8: // CMD+'c'
+      [pdfView copy:nil];
+      return YES;
   }
-  return NO;
-  
-  // run the menu accelerators (shortcuts)
-  NSMenu* menu = [NSApp mainMenu];
-  // see nsChildView.mm:performKeyEquivalent 
-  SEL sel = @selector(actOnKeyEquivalent:);
-  if ([[menu class] instancesRespondToSelector:sel]) {
-    void (*actOnKeyEquivalent)(id, SEL, NSEvent*);
-    actOnKeyEquivalent = (void (*)(id, SEL, NSEvent*))[[menu class] instanceMethodForSelector:sel];
-    if (!swizzled) {
-      MethodSwizzle([menu class],
-                    @selector(performKeyEquivalent:),
-                    @selector(altPerformKeyEquivalent:));
-      swizzled = YES;
-    }
-    actOnKeyEquivalent(menu, sel, theEvent);
-    return retValuePerformKeyEquivalent;
-  } else {
-    // TODO: is this ever called?
-    return [[NSApp mainMenu] performKeyEquivalent:theEvent];
-  }
+  return [self handleCommonKeyEvents:theEvent];
 }
 
 @end
