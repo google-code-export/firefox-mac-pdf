@@ -7,7 +7,7 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *f
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
  *
@@ -54,6 +54,34 @@ static BOOL retValuePerformKeyEquivalent;
 {
   [self initPDFViewWithFrame:[self frame]];
 }
+
+- (NSView *)hitTest:(NSPoint)point
+ {
+  // We override hit test and invert the next responder loop so that
+  // we can preview all mouse events. Our next responder is the view
+  // that would have receieved the event. We make sure the pdfView has
+  // a nil next responder to prevent an infinite loop.
+  // This is a terrible HACK. There must be a better way...
+  [self setNextResponder:[super hitTest:point]];
+  [pdfView setNextResponder:nil];
+  return self;
+}
+
+- (void)mouseDown:(NSEvent*)theEvent
+{
+  NSResponder* firstResponder = [[[self window] firstResponder] retain];
+  // pass mouse down event to parent view (to claim browser focus from other XUL elements)
+  [[self superview] mouseDown:theEvent];
+  // reclaim focus
+  [[self window] makeFirstResponder:firstResponder];
+  // process event
+  [super mouseDown:theEvent];
+  [firstResponder release];
+  
+  // used by SelectionController
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"mouseDown" object:self];  
+}
+
 
 - (BOOL)handleCommonKeyEvents:(NSEvent*)theEvent
 {
