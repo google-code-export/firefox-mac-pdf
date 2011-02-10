@@ -18,7 +18,7 @@
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-        <em:minVersion>3.5</em:minVersion>
+        <em:minVersion>4.0b10</em:minVersion>
         <em:maxVersion>4.0.*</em:maxVersion>
       </Description>
     </em:targetApplication>
@@ -30,7 +30,6 @@
     <em:iconURL>chrome://pdfplugin/skin/icon.png</em:iconURL>
 
     <em:targetPlatform>Darwin_x86-gcc3</em:targetPlatform>
-    <em:targetPlatform>Darwin_ppc-gcc3</em:targetPlatform>
     <em:updateURL>http://firefox-mac-pdf.googlecode.com/svn/trunk/update.rdf</em:updateURL>
     <em:updateKey>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDMpJhxSkSBnCtYfAZl6xPQbCslk7bIRXZI2H15Et5hJqA0URd1EVJ0+G9UXZKJeZyBbl5Px8d0uKGyz+m1IFx4JAYjLl2u3k+b2f4HGfzKEMHieq2Dt/rmHmBdTAJ17pVVAT4K15ICtNDGLCYSQFUIhMuxysb9VzM/f5yqjcfOZQIDAQAB</em:updateKey>
   </Description>
