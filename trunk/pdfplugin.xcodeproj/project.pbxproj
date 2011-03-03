@@ -40,7 +40,6 @@
 		941F8D520E98111900B39F71 /* PDFPluginShim.mm in Sources */ = {isa = PBXBuildFile; fileRef = 941F8D510E98111900B39F71 /* PDFPluginShim.mm */; };
 		94484F9B0FE872760054FD12 /* PluginPDFViewPDFKitBundle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 94484F9A0FE872760054FD12 /* PluginPDFViewPDFKitBundle.mm */; };
 		9455ADDB0DEA916F0059FED3 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9455ADDA0DEA916F0059FED3 /* Quartz.framework */; };
-		9455AE300DEB25F20059FED3 /* pdfplugin.r in Rez */ = {isa = PBXBuildFile; fileRef = 9455AE2E0DEB25B60059FED3 /* pdfplugin.r */; };
 		945CA6D00E9583D500202FE4 /* PluginPDFViewMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 945CA6CF0E9583D500202FE4 /* PluginPDFViewMenu.mm */; };
 		947A68720FE44A1F00301C1D /* PluginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 947A68710FE44A1F00301C1D /* PluginView.xib */; };
 		9486477910B24E4D00D02216 /* npunix.c in Sources */ = {isa = PBXBuildFile; fileRef = 9486477810B24E4D00D02216 /* npunix.c */; };
@@ -506,7 +505,6 @@
 		94484F9A0FE872760054FD12 /* PluginPDFViewPDFKitBundle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PluginPDFViewPDFKitBundle.mm; path = src/PluginPDFViewPDFKitBundle.mm; sourceTree = "<group>"; };
 		9455ADDA0DEA916F0059FED3 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
 		9455AE2C0DEB24D10059FED3 /* npapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = npapi.h; sourceTree = "<group>"; };
-		9455AE2E0DEB25B60059FED3 /* pdfplugin.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; path = pdfplugin.r; sourceTree = "<group>"; };
 		945ABD250E8F457400FC83E6 /* PDFPlugin.idl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PDFPlugin.idl; sourceTree = "<group>"; };
 		945CA6CF0E9583D500202FE4 /* PluginPDFViewMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PluginPDFViewMenu.mm; path = src/PluginPDFViewMenu.mm; sourceTree = "<group>"; };
 		945CA8860E95E33000202FE4 /* regxpcom */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = regxpcom; sourceTree = "<group>"; };
@@ -787,7 +785,6 @@
 			isa = PBXGroup;
 			children = (
 				94CC34970FBE0A4A0097FBBF /* Localizable.strings */,
-				9455AE2E0DEB25B60059FED3 /* pdfplugin.r */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 			);
@@ -1649,7 +1646,6 @@
 				94276FC80E7324BB0005E3E9 /* Compile Typelib */,
 				8D5B49B1048680CD000E48DA /* Sources */,
 				8D5B49B3048680CD000E48DA /* Frameworks */,
-				9455AE350DEB25FF0059FED3 /* Rez */,
 			);
 			buildRules = (
 			);
@@ -1699,17 +1695,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXRezBuildPhase section */
-		9455AE350DEB25FF0059FED3 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9455AE300DEB25F20059FED3 /* pdfplugin.r in Rez */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXRezBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		9415EE3F0DECEBC000DB1334 /* ShellScript */ = {
